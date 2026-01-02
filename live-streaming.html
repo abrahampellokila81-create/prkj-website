@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Streaming - GRII Pusat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER (Copy dari index.html, pastikan class="active" di <li><a href="live-streaming.html" class="active">) -->
+     <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                </div>
+                <div class="logo-text">
+                    <h1>PRKJ</h1>
+                    <p>Persekutuan Rohani Kristen Jakarta</p>
+                </div>
+            </div>
+            
+             <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li class="dropdown">
+                        <a href="profil.html"><i class="fas fa-church"></i> Profil & Sejarah <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="visi.html"><i class="fas fa-eye"></i> Visi</a></li>
+                            <li><a href="misi.html"><i class="fas fa-bullseye"></i> Misi</a></li>
+                            <li><a href="sejarah.html"><i class="fas fa-history"></i> Sejarah & Pendiri</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="live-streaming.html"><i class="fas fa-video"></i> Kegiatan & Pelayanan </a></li>
+                    <li class="dropdown">
+                        <a href="ruang-belajar.html"><i class="fas fa-book"></i> Ruang Belajar <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sd.html"><i class="fas fa-book"></i> SD</a></li>
+                            <li><a href="smp.html"><i class="fas fa-book"></i> SMP</a></li>
+                            <li><a href="sma.html"><i class="fas fa-book"></i> SMA</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="toko.html"><i class="fas fa-store"></i> Toko</a></li>
+                    <li class="dropdown">
+                        <a href="dokumentasi.html"><i class="fas fa-images"></i> Dokumentasi & Informasi <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="dokumentasi-paskah.html"><i class="fas fa-cross"></i> Paskah</a></li>
+                            <li><a href="dokumentasi-natal.html"><i class="fas fa-star"></i> Natal</a></li>
+                            <li><a href="dokumentasi-seminar.html"><i class="fas fa-chalkboard-teacher"></i> Seminar</a></li>
+                            <li><a href="dokumentasi-retret.html"><i class="fas fa-pray"></i> Retret</a></li>
+                            <li><a href="kontak.html"><i class="fas fa-address-book"></i> Kontak & Lokasi</a></li>
+                            <li><a href="keuangan.html"><i class="fas fa-donate"></i> Informasi Keuangan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- PAGE HEADER -->
+    <section class="page-header" style="background: linear-gradient(rgba(26, 77, 143, 0.8), rgba(26, 77, 143, 0.9)), url('images/slider4.jpg'); background-size: cover; background-position: center; padding: 100px 0; text-align: center; color: white;">
+        <div class="container">
+            <h1 style="font-size: 3rem; margin-bottom: 20px;">Kegiatan & Pelayanan </h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Saksikan Kegiatan dan Pelayanan PRK JAKARTA</p>
+        </div>
+    </section>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb" style="background-color: var(--light-gray); padding: 15px 0;">
+        <div class="container">
+            <span style="color: var(--gray);">
+                <a href="index.html" style="color: var(--primary);">Beranda</a> 
+                <i class="fas fa-chevron-right" style="margin: 0 10px; font-size: 0.8rem;"></i> 
+                Live Streaming
+            </span>
+        </div>
+    </div>
+
+    <!-- Pelayanan -->
+   <section class="activities" id="activities">
+        <div class="container">
+            <h2 class="section-title">Pelayanan Kami</h2>
+            <div class="activity-cards">
+                <!-- Card 1 -->
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-church"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>Kebaktian & Kebangunan Rohani</h3>
+                        <p>Ibadah rutin dan kebangunan rohani yang disesuaikan untuk masing-masing kelompok usia, dari SD hingga SMA/SMK.</p>
+                    </div>
+                    <div class="activities-image">
+                        <img src="images/prk-7.jpg" alt="Kebaktian Rohani">
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-hands-praying"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>Pembinaan Iman</h3>
+                        <p>Program pembinaan iman yang sistematis melalui pemahaman Alkitab, doa, dan penerapan nilai-nilai Kristiani dalam kehidupan sehari-hari.</p>
+                    </div>
+                    <div class="activities-image">
+                        <img src="images/prk-15.jpg" alt="Pembinaan Iman">
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-campground"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>Retreat & Perkemahan Rohani</h3>
+                        <p>Kegiatan retreat dan perkemahan rohani yang menyenangkan untuk memperdalam hubungan dengan Tuhan dan sesama.</p>
+                    </div>
+                    <div class="activities-image">
+                        <img src="images/prk-9.jpg" alt="Retreat Rohani">
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>Seminar & Workshop</h3>
+                        <p>Seminar dan workshop tentang berbagai topik yang relevan dengan kehidupan pelajar dan orang tua Kristen.</p>
+                    </div>
+                    <div class="activities-image">
+                        <img src="images/prk-17.jpeg" alt="seminar & workshop">
+                    </div>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>Perayaan Natal & Paskah</h3>
+                        <p>Perayaan hari raya Natal dan Paskah dengan konsep yang kreatif dan bermakna bagi seluruh anggota persekutuan.</p>
+                    </div>
+                    <div class="activities-image">
+                        <img src="images/prk-8.jpg" alt="Perayaan Natal">
+                    </div>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="activity-card">
+                    <div class="activity-icon">
+                        <i class="fas fa-people-group"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h3>Komunitas Orang Tua</h3>
+                        <p>Dukungan dan pembinaan bagi orang tua dalam mendidik anak-anak secara rohani dan mendukung pertumbuhan iman keluarga.</p>
+                    </div>
+                    <div class="activities-image">
+                        <img src="images/prk-18.jpeg" alt="Komunitas Orang Tua">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communities Section -->
+    <section class="communities" id="communities">
+        <div class="container">
+            <h2 class="section-title">Komunitas Kami</h2>
+            <div class="community-cards">
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>PRK Anak (SD)</h3>
+                    <p>Untuk pelajar Sekolah Dasar (kelas 1-6) dengan pendekatan pembelajaran yang menyenangkan dan interaktif.</p>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>PRK Remaja (SMP)</h3>
+                    <p>Untuk pelajar Sekolah Menengah Pertama dengan pembinaan yang relevan dengan masa transisi remaja.</p>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>PRK Pemuda (SMA/SMK)</h3>
+                    <p>Untuk pelajar Sekolah Menengah Atas/Kejuruan dengan pendekatan yang membangun karakter dan kepemimpinan.</p>
+                </div>
+                
+                <div class="community-card">
+                    <div class="community-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Komunitas Orang Tua</h3>
+                    <p>Untuk orang tua/wali pelajar yang ingin saling mendukung dalam pembinaan rohani anak-anak.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events" id="events">
+        <div class="container">
+            <h2 class="section-title">Kegiatan Mendatang</h2>
+            <div class="event-list">
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="day"></div>
+                        <div class="month">MARET</div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Seminar</h3>
+                        <p>Retreat rohani selama 2 hari 1 malam di Bogor. Tema: "Menjadi Garam dan Terang di Dunia Digital".</p>
+                        <p><i class="far fa-clock"></i> 09.00 - 17.00 | <i class="fas fa-map-marker-alt"></i> Villa Bogor Indah</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="day"></div>
+                        <div class="month">Agustus</div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Seminar Orang Tua</h3>
+                        <p>Bagaimana mengasuh anak dengan prinsip Kristiani di tengah tantangan dunia digital. Gratis untuk anggota.</p>
+                        <p><i class="far fa-clock"></i> 13.00 - 16.00 | <i class="fas fa-map-marker-alt"></i> Gedung Serbaguna PRK Jakarta</p>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <div class="day"></div>
+                        <div class="month">Oktober</div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Seminar</h3>
+                        <p>Ibadah khusus anak SD dengan cerita Alkitab kreatif, permainan, dan aktivitas menyenangkan.</p>
+                        <p><i class="far fa-clock"></i> 10.00 - 12.00 | <i class="fas fa-map-marker-alt"></i> Aula Anak PRK Jakarta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (Copy dari index.html) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                        <h3>PRKJ</h3>
+                        <p>Persekutuan Rohani Kristen Jakarta </p>
+                    </div>
+                    <p class="footer-description">
+                        Persekutuan Rohani Kristen Jakarta (PRKJ)  berkomitmen untuk memberitakan Injil dan mengajarkan pengajaran Reformed yang alkitabiah.
+                    </p>
+                    <div class="social-icons">
+                <a href="https://www.youtube.com/@prkjakarta" 
+                   target="_blank"
+                   class="social-icon youtube"> 
+                   <i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/prkjakarta_/" 
+                   target="_blank"
+                   class="social-icon instagram">
+                   <i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@prk_jakarta?_t=ZS-8ykxIkLQEXR&_r=1"
+                   target="_blank"
+                   class="social-icon tiktok">
+                   <i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/share/1GanxxhL1K/"   
+                   target="_blank"
+                   class="social-icon facebook">
+                   <i class="fab fa-facebook"></i></a>
+            </div>
+                </div>
+                
+                 <div class="footer-col">
+                    <h4>Kontak Kami</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Jl Percetakan Negara II, Jakarta Pusat</li>
+                        <li><i class="fas fa-phone"></i> (62) 812-1558-3683</li>
+                        <li><i class="fas fa-envelope"></i> info@prk-website.com</li>
+                        <li><i class="fas fa-clock"></i> Kantor: Senin-Jumat, 07:00-23:59 WIB</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Tautan Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="live-streaming.html"><i class="fas fa-chevron-right"></i> Kegiatan & Pelayanan </a></li>
+                        <li><a href="ruang-belajar.html"><i class="fas fa-chevron-right"></i> Ruang Belajar</a></li>
+                        <li><a href="toko.html"><i class="fas fa-chevron-right"></i> Toko PRK JAKARTA </a></li>
+                        <li><a href="dokumentasi.html"><i class="fas fa-chevron-right"></i> Dokumentasi</a></li>
+                    </ul>
+                </div>
+                
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2024 PRK JAKARTA - Persekutuan Rohani Kristen Jakarta. Semua hak dilindungi.</p>
+                </div>
+                <div class="footer-menu">
+                    <a href="profil.html">Tentang Kami</a>
+                    <a href="kontak.html">Kontak</a>
+                    <a href="#">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

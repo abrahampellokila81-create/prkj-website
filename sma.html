@@ -1,0 +1,4865 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRKJ - Ruang Belajar SMA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a237e;
+            --primary-light: #283593;
+            --primary-dark: #0d1450;
+            --secondary: #ff4081;
+            --secondary-dark: #e91e63;
+            --success: #00c853;
+            --warning: #ff9100;
+            --danger: #ff1744;
+            --info: #00b8d4;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #eceff1;
+            --purple: #7b1fa2;
+            --pink: #e91e63;
+            --orange: #ff5722;
+            --teal: #009688;
+            --cyan: #00bcd4;
+            --indigo: #3f51b5;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #1a237e, #283593);
+            --gradient-secondary: linear-gradient(135deg, #ff4081, #e91e63);
+            --gradient-success: linear-gradient(135deg, #00c853, #009688);
+            --gradient-warning: linear-gradient(135deg, #ff9100, #ff5722);
+            --gradient-danger: linear-gradient(135deg, #ff1744, #d50000);
+            --gradient-info: linear-gradient(135deg, #00b8d4, #2979ff);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #f5f7fb;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif', serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .nav-logo-text h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0;
+        }
+
+        .nav-logo-text p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation Menu */
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            color: white;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: var(--shadow-lg);
+            border-radius: var(--border-radius);
+            padding: 10px 0;
+            display: none;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu li {
+            width: 100%;
+        }
+
+        .dropdown-menu a {
+            color: var(--dark);
+            padding: 10px 20px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--light);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .page-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .logo-text p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .user-class {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--gradient-secondary);
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+        }
+
+        .btn-warning {
+            background: var(--gradient-warning);
+        }
+
+        .btn-danger {
+            background: var(--gradient-danger);
+        }
+
+        .btn-info {
+            background: var(--gradient-info);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            padding: 40px 0;
+            min-height: 100vh;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #ff4081 0%, #1a237e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .welcome-banner h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .welcome-banner p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .progress-summary {
+            margin-top: 20px;
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            min-width: 150px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* Kelas Section */
+        .kelas-section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .section-title i {
+            color: var(--secondary);
+        }
+
+        /* Kelas Grid */
+        .kelas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .kelas-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .kelas-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .kelas-header {
+            padding: 25px;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .kelas-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .kelas-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .kelas-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .kelas-body {
+            padding: 25px;
+        }
+
+        .mapel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .mapel-tag {
+            background: var(--light-gray);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        /* Mapel tags for SMA - jurusan dan umum */
+        .mapel-tag.mtk { background: #e3f2fd; color: #1565c0; }
+        .mapel-tag.fisika { background: #fce4ec; color: #c2185b; }
+        .mapel-tag.kimia { background: #e8f5e9; color: #2e7d32; }
+        .mapel-tag.biologi { background: #fff3e0; color: #ef6c00; }
+        .mapel-tag.ekonomi { background: #e0f7fa; color: #006064; }
+        .mapel-tag.sosiologi { background: #f3e5f5; color: #7b1fa2; }
+        .mapel-tag.sejarah { background: #fff8e1; color: #ff8f00; }
+        .mapel-tag.geografi { background: #e8f5e9; color: #1b5e20; }
+        .mapel-tag.bindo { background: #fff3e0; color: #ff6f00; }
+        .mapel-tag.bing { background: #fce4ec; color: #ad1457; }
+        .mapel-tag.agama { background: #f3e5f5; color: #6a1b9a; }
+        .mapel-tag.pkn { background: #e0f2f1; color: #004d40; }
+        .mapel-tag.seni { background: #fff3e0; color: #ff8f00; }
+        .mapel-tag.pjok { background: #e8f5e9; color: #1b5e20; }
+        .mapel-tag.informatika { background: #e3f2fd; color: #0d47a1; }
+
+        .kelas-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-gray);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stat {
+            text-align: center;
+            flex: 1;
+            min-width: 60px;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 3px;
+        }
+
+        /* Ujian Section */
+        .ujian-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .ujian-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .ujian-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .ujian-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .ujian-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .ujian-tag.un { background: #e3f2fd; color: #1565c0; }
+        .ujian-tag.uts { background: #fff3e0; color: #ef6c00; }
+        .ujian-tag.uas { background: #e8f5e9; color: #2e7d32; }
+        .ujian-tag.ptn { background: #f3e5f5; color: #7b1fa2; }
+        .ujian-tag.penilaian { background: #e0f7fa; color: #006064; }
+
+        /* Progress Section */
+        .progress-section {
+            margin: 40px 0;
+        }
+
+        .progress-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--light-gray);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            background: var(--gradient-primary);
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        /* Video Pembelajaran Section */
+        .video-pembelajaran {
+            margin: 40px 0;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff4081 0%, #1a237e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-thumbnail .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .video-card:hover .play-btn {
+            background: var(--primary);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .video-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .video-tag.kelas {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .video-tag.mtk { background: #e3f2fd; color: #1565c0; }
+        .video-tag.fisika { background: #fce4ec; color: #c2185b; }
+        .video-tag.kimia { background: #e8f5e9; color: #2e7d32; }
+        .video-tag.biologi { background: #fff3e0; color: #ef6c00; }
+        .video-tag.ekonomi { background: #e0f7fa; color: #006064; }
+        .video-tag.sosiologi { background: #f3e5f5; color: #7b1fa2; }
+        .video-tag.sejarah { background: #fff8e1; color: #ff8f00; }
+        .video-tag.geografi { background: #e8f5e9; color: #1b5e20; }
+        .video-tag.bindo { background: #fff3e0; color: #ff6f00; }
+        .video-tag.bing { background: #fce4ec; color: #ad1457; }
+        .video-tag.agama { background: #f3e5f5; color: #6a1b9a; }
+        .video-tag.pkn { background: #e0f2f1; color: #004d40; }
+        .video-tag.seni { background: #fff3e0; color: #ff8f00; }
+        .video-tag.informatika { background: #e3f2fd; color: #0d47a1; }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .no-videos {
+            text-align: center;
+            padding: 40px;
+            color: var(--gray);
+            grid-column: 1 / -1;
+        }
+
+        .no-videos i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--light-gray);
+        }
+
+        /* Flashcard Section */
+        .flashcard-container {
+            perspective: 1000px;
+            height: 400px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .flashcard-front {
+            background: linear-gradient(135deg, #ff4081 0%, #1a237e 100%);
+            color: white;
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, #9b59b6 0%, #283593 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-content {
+            text-align: center;
+        }
+
+        .flashcard-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .flashcard-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .flashcard-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 1200px;
+            margin: 50px auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 25px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        /* Tab System */
+        .tab-container {
+            margin-bottom: 30px;
+        }
+
+        .tab-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            background: var(--light-gray);
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* Soal Section */
+        .soal-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--light-gray);
+            font-family: 'Poppins', sans-serif;
+            min-width: 200px;
+            background: white;
+        }
+
+        .soal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .soal-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .soal-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .soal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .soal-type {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .soal-type.pg { background: var(--success); }
+        .soal-type.uraian { background: var(--warning); }
+        .soal-type.essay { background: var(--danger); }
+
+        .soal-jumlah {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .soal-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .soal-action {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+            display: none;
+        }
+
+        .upload-section {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .upload-zone {
+            border: 2px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-zone:hover {
+            background: rgba(26, 35, 126, 0.05);
+        }
+
+        .upload-zone i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .file-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .file-icon.pdf { background: #f44336; }
+        .file-icon.word { background: #2196f3; }
+        .file-icon.ppt { background: #ff9800; }
+        .file-icon.excel { background: #4caf50; }
+        .file-icon.image { background: #9c27b0; }
+        .file-icon.video { background: #00bcd4; }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .footer-logo p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer-description {
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .footer-links i {
+            width: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .footer-menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .footer-menu a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition);
+        }
+
+        .footer-menu a:hover {
+            color: white;
+        }
+
+        /* Mapel Grid for Modal */
+        .mapel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .mapel-grid button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-align: center;
+            height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .mapel-grid button:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mapel-grid i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .mapel-grid span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .mapel-grid small {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-top: 3px;
+        }
+
+        /* Video Admin Preview */
+        .video-preview-thumbnail {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .video-preview-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-admin-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        /* Form row styling */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Quiz Modal */
+        .quiz-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .quiz-container {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .quiz-header {
+            padding: 25px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        .quiz-timer {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .quiz-body {
+            padding: 30px;
+            min-height: 400px;
+        }
+
+        .question-number {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            background: var(--light);
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option:hover {
+            background: #e9ecef;
+        }
+
+        .option.selected {
+            background: #e3f2fd;
+            border-color: var(--primary);
+        }
+
+        .option.correct {
+            background: #d4edda;
+            border-color: var(--success);
+        }
+
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: var(--danger);
+        }
+
+        .option-letter {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .quiz-progress {
+            background: var(--light-gray);
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Results Modal */
+        .results-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 4000;
+            overflow-y: auto;
+        }
+
+        .results-container {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .results-header {
+            padding: 30px;
+            text-align: center;
+            background: var(--gradient-success);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .results-header h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .results-score {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .results-body {
+            padding: 30px;
+        }
+
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            background: var(--light);
+        }
+
+        .stat-card.correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .stat-card.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .results-details {
+            margin-top: 30px;
+        }
+
+        .result-item {
+            padding: 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .result-item.correct {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .result-item.incorrect {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .result-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .result-status.correct {
+            background: var(--success);
+            color: white;
+        }
+
+        .result-status.incorrect {
+            background: var(--danger);
+            color: white;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Add New Question Modal Styles */
+        .add-question-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            overflow-y: auto;
+        }
+
+        .add-question-container {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .add-question-header {
+            padding: 25px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-question-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .option-group {
+            background: var(--light);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+        }
+
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .correct-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        /* Question List in Admin */
+        .question-list {
+            margin-top: 30px;
+        }
+
+        .question-item {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .question-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .question-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .question-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .question-preview {
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+        }
+
+        .question-preview h5 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .option-preview {
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid var(--light-gray);
+        }
+
+        .option-preview.correct {
+            border-left-color: var(--success);
+            background: #d4edda;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .kelas-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .soal-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .ujian-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .kelas-stats {
+                gap: 8px;
+            }
+            
+            .stat {
+                min-width: 55px;
+            }
+            
+            .stat-value {
+                font-size: 1.1rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .mobile-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .page-header .container {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .user-menu {
+                justify-content: center;
+            }
+            
+            .welcome-banner h2 {
+                font-size: 1.8rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 20px auto;
+            }
+            
+            .flashcard-container {
+                height: 350px;
+            }
+            
+            .flashcard-front, .flashcard-back {
+                padding: 25px;
+            }
+            
+            .soal-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-select {
+                width: 100%;
+            }
+            
+            .mapel-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .kelas-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-menu {
+                flex-direction: column;
+            }
+            
+            .flashcard-container {
+                height: 300px;
+            }
+            
+            .ujian-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-stats {
+                flex-direction: column;
+            }
+            
+            .stat-box {
+                width: 100%;
+            }
+            
+            .kelas-stats {
+                flex-wrap: wrap;
+            }
+            
+            .stat {
+                min-width: 45px;
+            }
+            
+            .mapel-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="nav-header">
+        <div class="container">
+            <div class="nav-logo-container">
+                <div class="nav-logo">
+                    <i class="fas fa-church"></i>
+                </div>
+                <div class="nav-logo-text">
+                    <h1>PRKJ</h1>
+                    <p>Persekutuan Rohani Kristen Jakarta</p>
+                </div>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li class="dropdown">
+                        <a href="profil.html"><i class="fas fa-church"></i> Profil & Sejarah <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="visi.html"><i class="fas fa-eye"></i> Visi</a></li>
+                            <li><a href="misi.html"><i class="fas fa-bullseye"></i> Misi</a></li>
+                            <li><a href="sejarah.html"><i class="fas fa-history"></i> Sejarah & Pendiri</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="live-streaming.html"><i class="fas fa-video"></i> Kegiatan & Pelayanan</a></li>
+                    <li class="dropdown">
+                        <a href="ruang-belajar.html"><i class="fas fa-book"></i> Ruang Belajar <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sd.html"><i class="fas fa-book"></i> SD</a></li>
+                            <li><a href="smp.html"><i class="fas fa-book"></i> SMP</a></li>
+                            <li><a href="sma.html" class="active"><i class="fas fa-book"></i> SMA</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="toko.html"><i class="fas fa-store"></i> Toko</a></li>
+                    <li class="dropdown">
+                        <a href="dokumentasi.html"><i class="fas fa-images"></i> Dokumentasi & Informasi<i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="dokumentasi-paskah.html"><i class="fas fa-cross"></i> Paskah</a></li>
+                            <li><a href="dokumentasi-natal.html"><i class="fas fa-star"></i> Natal</a></li>
+                            <li><a href="dokumentasi-seminar.html"><i class="fas fa-chalkboard-teacher"></i> Seminar</a></li>
+                            <li><a href="dokumentasi-retret.html"><i class="fas fa-pray"></i> Retret</a></li>
+                            <li><a href="kontak.html"><i class="fas fa-address-book"></i> Kontak & Lokasi</a></li>
+                            <li><a href="keuangan.html"><i class="fas fa-donate"></i> Informasi Keuangan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">🎓</div>
+                <div class="logo-text">
+                    <h1>Ruang Belajar SMA</h1>
+                    <p>Platform Pembelajaran SMA Kelas 10-12 (Kurikulum Merdeka)</p>
+                </div>
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <div class="user-name">Halo!</div>
+                </div>
+                <button class="btn btn-secondary btn-small" onclick="toggleAdminPanel()">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+                <button class="btn btn-outline btn-small">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard -->
+    <main class="dashboard">
+        <div class="container">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <h2>Halo! 🚀</h2>
+                <p>Tingkatkan kemampuan akademik dengan materi SMA kelas 10-12, persiapan UTBK, dan pembelajaran berbasis Kurikulum Merdeka.</p>
+                <div class="progress-summary">
+                    <div class="progress-stats">
+                        
+                        
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelas Grid -->
+            <section class="kelas-section">
+                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Pilih Kelas & Jurusan</h2>
+                <div class="kelas-grid">
+                    <!-- Kelas 10 -->
+                    <div class="kelas-card" onclick="openMateriModal('Kelas 10')">
+                        <div class="kelas-header">
+                            <span class="kelas-badge">SMA Kelas 10</span>
+                            <h3>Kelas 10 SMA</h3>
+                            <p>Usia 15-16 Tahun</p>
+                        </div>
+                        <div class="kelas-body">
+                            <div class="mapel-list">
+                                <span class="mapel-tag mtk">Matematika</span>
+                                <span class="mapel-tag fisika">Fisika</span>
+                                <span class="mapel-tag kimia">Kimia</span>
+                                <span class="mapel-tag biologi">Biologi</span>
+                                <span class="mapel-tag bindo">Bahasa Indonesia</span>
+                                <span class="mapel-tag bing">Bahasa Inggris</span>
+                                <span class="mapel-tag agama">Agama Kristen</span>
+                            </div>
+                            <p>Materi transisi SMP ke SMA dengan penjurasan awal dan konsep dasar.</p>
+                            <div class="kelas-stats">
+                                <div class="stat">
+                                    <div class="stat-value" id="mtk-kelas10-count">85</div>
+                                    <div class="stat-label">Video</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="soal-kelas10-count">220</div>
+                                    <div class="stat-label">Soal</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="materi-kelas10-count">32</div>
+                                    <div class="stat-label">Materi</div>
+                                </div>
+                            </div>
+                            <div class="soal-action">
+                                <button class="btn btn-small" onclick="startQuiz('mtk-kelas-10', 'Matematika Kelas 10')">
+                                    <i class="fas fa-calculator"></i> MTK
+                                </button>
+                                <button class="btn btn-small btn-success" onclick="startQuiz('fisika-kelas-10', 'Fisika Kelas 10')">
+                                    <i class="fas fa-atom"></i> Fisika
+                                </button>
+                                <button class="btn btn-small btn-warning" onclick="startQuiz('kimia-kelas-10', 'Kimia Kelas 10')">
+                                    <i class="fas fa-flask"></i> Kimia
+                                </button>
+                                <button class="btn btn-outline btn-small" onclick="showAllMapelButtons(10)">
+                                    <i class="fas fa-ellipsis-h"></i> Semua Mapel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kelas 11 IPA -->
+                    <div class="kelas-card" onclick="openMateriModal('Kelas 11 IPA')">
+                        <div class="kelas-header">
+                            <span class="kelas-badge">SMA Kelas 11</span>
+                            <h3>Kelas 11 IPA</h3>
+                            <p>Jurusan IPA/MIPA</p>
+                        </div>
+                        <div class="kelas-body">
+                            <div class="mapel-list">
+                                <span class="mapel-tag mtk">Matematika</span>
+                                <span class="mapel-tag fisika">Fisika</span>
+                                <span class="mapel-tag kimia">Kimia</span>
+                                <span class="mapel-tag biologi">Biologi</span>
+                                <span class="mapel-tag informatika">Informatika</span>
+                                <span class="mapel-tag bing">Bahasa Inggris</span>
+                                <span class="mapel-tag pkn">PPKn</span>
+                                <span class="mapel-tag agama">Agama Kristen</span>
+                            </div>
+                            <p>Pendalaman materi jurusan IPA untuk persiapan UTBK dan OSN.</p>
+                            <div class="kelas-stats">
+                                <div class="stat">
+                                    <div class="stat-value" id="mtk-kelas11ipa-count">92</div>
+                                    <div class="stat-label">Video</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="soal-kelas11ipa-count">280</div>
+                                    <div class="stat-label">Soal</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="materi-kelas11ipa-count">38</div>
+                                    <div class="stat-label">Materi</div>
+                                </div>
+                            </div>
+                            <div class="soal-action">
+                                <button class="btn btn-small" onclick="startQuiz('mtk-kelas-11-ipa', 'Matematika IPA Kelas 11')">
+                                    <i class="fas fa-calculator"></i> MTK
+                                </button>
+                                <button class="btn btn-small btn-success" onclick="startQuiz('fisika-kelas-11-ipa', 'Fisika Kelas 11')">
+                                    <i class="fas fa-atom"></i> Fisika
+                                </button>
+                                <button class="btn btn-small btn-warning" onclick="startQuiz('kimia-kelas-11-ipa', 'Kimia Kelas 11')">
+                                    <i class="fas fa-flask"></i> Kimia
+                                </button>
+                                <button class="btn btn-outline btn-small" onclick="showAllMapelButtons(11, 'ipa')">
+                                    <i class="fas fa-ellipsis-h"></i> Semua Mapel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kelas 11 IPS -->
+                    <div class="kelas-card" onclick="openMateriModal('Kelas 11 IPS')">
+                        <div class="kelas-header">
+                            <span class="kelas-badge">SMA Kelas 11</span>
+                            <h3>Kelas 11 IPS</h3>
+                            <p>Jurusan IPS</p>
+                        </div>
+                        <div class="kelas-body">
+                            <div class="mapel-list">
+                                <span class="mapel-tag ekonomi">Ekonomi</span>
+                                <span class="mapel-tag sosiologi">Sosiologi</span>
+                                <span class="mapel-tag sejarah">Sejarah</span>
+                                <span class="mapel-tag geografi">Geografi</span>
+                                <span class="mapel-tag mtk">Matematika</span>
+                                <span class="mapel-tag bindo">Bahasa Indonesia</span>
+                                <span class="mapel-tag bing">Bahasa Inggris</span>
+                                <span class="mapel-tag agama">Agama Kristen</span>
+                            </div>
+                            <p>Pendalaman materi jurusan IPS untuk persiapan UTBK dan studi lanjut.</p>
+                            <div class="kelas-stats">
+                                <div class="stat">
+                                    <div class="stat-value" id="mtk-kelas11ips-count">78</div>
+                                    <div class="stat-label">Video</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="soal-kelas11ips-count">250</div>
+                                    <div class="stat-label">Soal</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="materi-kelas11ips-count">35</div>
+                                    <div class="stat-label">Materi</div>
+                                </div>
+                            </div>
+                            <div class="soal-action">
+                                <button class="btn btn-small" onclick="startQuiz('ekonomi-kelas-11-ips', 'Ekonomi Kelas 11')">
+                                    <i class="fas fa-chart-line"></i> Ekonomi
+                                </button>
+                                <button class="btn btn-small btn-success" onclick="startQuiz('sosiologi-kelas-11-ips', 'Sosiologi Kelas 11')">
+                                    <i class="fas fa-users"></i> Sosiologi
+                                </button>
+                                <button class="btn btn-small btn-warning" onclick="startQuiz('sejarah-kelas-11-ips', 'Sejarah Kelas 11')">
+                                    <i class="fas fa-history"></i> Sejarah
+                                </button>
+                                <button class="btn btn-outline btn-small" onclick="showAllMapelButtons(11, 'ips')">
+                                    <i class="fas fa-ellipsis-h"></i> Semua Mapel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kelas 12 -->
+                    <div class="kelas-card" onclick="openMateriModal('Kelas 12')">
+                        <div class="kelas-header">
+                            <span class="kelas-badge">SMA Kelas 12</span>
+                            <h3>Kelas 12 SMA</h3>
+                            <p>Persiapan UTBK & SBMPTN</p>
+                        </div>
+                        <div class="kelas-body">
+                            <div class="mapel-list">
+                                <span class="mapel-tag mtk">Matematika</span>
+                                <span class="mapel-tag fisika">Fisika</span>
+                                <span class="mapel-tag kimia">Kimia</span>
+                                <span class="mapel-tag bindo">Bahasa Indonesia</span>
+                                <span class="mapel-tag bing">Bahasa Inggris</span>
+                                <span class="mapel-tag pkn">PPKn</span>
+                                <span class="mapel-tag sejarah">Sejarah</span>
+                                <span class="mapel-tag agama">Agama Kristen</span>
+                            </div>
+                            <p>Fokus persiapan UTBK, SBMPTN, dan ujian akhir sekolah.</p>
+                            <div class="kelas-stats">
+                                <div class="stat">
+                                    <div class="stat-value" id="mtk-kelas12-count">105</div>
+                                    <div class="stat-label">Video</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="soal-kelas12-count">350</div>
+                                    <div class="stat-label">Soal</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-value" id="materi-kelas12-count">42</div>
+                                    <div class="stat-label">Materi</div>
+                                </div>
+                            </div>
+                            <div class="soal-action">
+                                <button class="btn btn-small" onclick="startQuiz('mtk-kelas-12', 'Matematika Kelas 12')">
+                                    <i class="fas fa-calculator"></i> MTK
+                                </button>
+                                <button class="btn btn-small btn-success" onclick="startQuiz('fisika-kelas-12', 'Fisika Kelas 12')">
+                                    <i class="fas fa-atom"></i> Fisika
+                                </button>
+                                <button class="btn btn-small btn-warning" onclick="startQuiz('bindo-kelas-12', 'Bahasa Indonesia Kelas 12')">
+                                    <i class="fas fa-book"></i> B.Indo
+                                </button>
+                                <button class="btn btn-outline btn-small" onclick="showAllMapelButtons(12)">
+                                    <i class="fas fa-ellipsis-h"></i> Semua Mapel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ujian Section -->
+            <section class="ujian-section">
+                <h2 class="section-title"><i class="fas fa-file-alt"></i> Latihan Ujian SMA & UTBK</h2>
+                <p>Persiapkan diri menghadapi UTBK-SBMPTN, Ujian Sekolah, dan seleksi masuk PTN dengan latihan soal terstruktur.</p>
+                
+                <div class="ujian-grid">
+                    <div class="ujian-card">
+                        <span class="ujian-tag ptn">UTBK-SBMPTN</span>
+                        <h4>Latihan UTBK 2024</h4>
+                        <p>Simulasi UTBK lengkap TPS, TKA Saintek, dan TKA Soshum.</p>
+                        <div class="soal-action">
+                            <button class="btn btn-small" onclick="startQuiz('utbk-2024', 'UTBK 2024')">Mulai Latihan</button>
+                            <button class="btn btn-outline btn-small">Download</button>
+                        </div>
+                    </div>
+                    
+                    <div class="ujian-card">
+                        <span class="ujian-tag un">Ujian Sekolah</span>
+                        <h4>Ujian Sekolah SMA</h4>
+                        <p>Bank soal Ujian Sekolah semua mata pelajaran kelas 12.</p>
+                        <div class="soal-action">
+                            <button class="btn btn-small" onclick="startQuiz('us-sma', 'Ujian Sekolah SMA')">Mulai Latihan</button>
+                            <button class="btn btn-outline btn-small">Download</button>
+                        </div>
+                    </div>
+                    
+                    <div class="ujian-card">
+                        <span class="ujian-tag penilaian">Penilaian Harian</span>
+                        <h4>Kuis Harian Kelas 10-12</h4>
+                        <p>Kuis harian untuk semua mata pelajaran dan jurusan.</p>
+                        <div class="soal-action">
+                            <button class="btn btn-small" onclick="startQuiz('harian-sma', 'Kuis Harian SMA')">Mulai Latihan</button>
+                            <button class="btn btn-outline btn-small">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section class="progress-section">
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> Progress Belajar Sari</h2>
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h4>Matematika Peminatan Kelas 11</h4>
+                        <span>78%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 78%"></div>
+                    </div>
+                    <p>Trigonometri, kalkulus dasar, statistika inferensial</p>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h4>Fisika Kelas 11</h4>
+                        <span>72%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 72%"></div>
+                    </div>
+                    <p>Mekanika, termodinamika, gelombang, optika</p>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h4>Kimia Kelas 11</h4>
+                        <span>65%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <p>Stoikiometri, termokimia, kesetimbangan kimia, elektrokimia</p>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <h4>TPS UTBK (TPA + Bahasa)</h4>
+                        <span>82%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 82%"></div>
+                    </div>
+                    <p>Penalaran umum, kuantitatif, pemahaman bacaan, pengetahuan umum</p>
+                </div>
+            </section>
+
+            <!-- Video Pembelajaran Section -->
+            <section class="video-pembelajaran">
+                <h2 class="section-title"><i class="fas fa-video"></i> Video Pembelajaran SMA</h2>
+                <p class="section-subtitle">Belajar materi SMA dengan video pembelajaran interaktif dari guru-guru berpengalaman.</p>
+                
+                <div class="tab-container">
+                    <div class="tab-menu">
+                        <button class="tab-btn active" onclick="switchVideoTab('semua')">Semua Video</button>
+                        <button class="tab-btn" onclick="switchVideoTab('kelas10')">Kelas 10</button>
+                        <button class="tab-btn" onclick="switchVideoTab('kelas11ipa')">Kelas 11 IPA</button>
+                        <button class="tab-btn" onclick="switchVideoTab('kelas11ips')">Kelas 11 IPS</button>
+                        <button class="tab-btn" onclick="switchVideoTab('kelas12')">Kelas 12</button>
+                    </div>
+                    
+                    <!-- Filter by Subject -->
+                    <div class="filter-section" style="margin: 20px 0;">
+                        <select class="filter-select" id="videoMapelFilter" onchange="filterVideosByMapel()">
+                            <option value="">Semua Mata Pelajaran</option>
+                            <option value="mtk">Matematika</option>
+                            <option value="fisika">Fisika</option>
+                            <option value="kimia">Kimia</option>
+                            <option value="biologi">Biologi</option>
+                            <option value="ekonomi">Ekonomi</option>
+                            <option value="sosiologi">Sosiologi</option>
+                            <option value="sejarah">Sejarah</option>
+                            <option value="geografi">Geografi</option>
+                            <option value="bindo">Bahasa Indonesia</option>
+                            <option value="bing">Bahasa Inggris</option>
+                            <option value="agama">Agama Kristen</option>
+                            <option value="pkn">PPKn</option>
+                            <option value="informatika">Informatika</option>
+                        </select>
+                    </div>
+                    
+                    <!-- All Videos Tab -->
+                    <div class="tab-content active" id="semuaTab">
+                        <div class="video-grid" id="allVideosGrid">
+                            <!-- Videos will be loaded by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Grade 10 Tab -->
+                    <div class="tab-content" id="kelas10Tab">
+                        <div class="video-grid" id="kelas10VideosGrid">
+                            <!-- Videos will be loaded by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Grade 11 IPA Tab -->
+                    <div class="tab-content" id="kelas11ipaTab">
+                        <div class="video-grid" id="kelas11ipaVideosGrid">
+                            <!-- Videos will be loaded by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Grade 11 IPS Tab -->
+                    <div class="tab-content" id="kelas11ipsTab">
+                        <div class="video-grid" id="kelas11ipsVideosGrid">
+                            <!-- Videos will be loaded by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Grade 12 Tab -->
+                    <div class="tab-content" id="kelas12Tab">
+                        <div class="video-grid" id="kelas12VideosGrid">
+                            <!-- Videos will be loaded by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Flashcard Section -->
+            <section class="kelas-section">
+                <h2 class="section-title"><i class="fas fa-layer-group"></i> Flashcard Belajar SMA & UTBK</h2>
+                <div class="flashcard-container">
+                    <div class="flashcard" id="flashcard" onclick="flipCard()">
+                        <div class="flashcard-front">
+                            <div class="flashcard-content">
+                                <h3>Apa hukum Newton pertama?</h3>
+                                <p>Klik kartu untuk melihat jawaban</p>
+                                <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+                                    <i class="fas fa-lightbulb"></i> Tips: Hafalkan dengan contoh aplikasi sehari-hari
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="flashcard-content">
+                                <h3>Jawaban:</h3>
+                                <p><strong>Hukum Inersia</strong></p>
+                                <p style="margin-top: 20px; font-size: 1rem;">"Setiap benda akan tetap diam atau bergerak lurus beraturan kecuali ada gaya yang bekerja padanya."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard-nav">
+                    <button class="btn btn-small" onclick="prevCard()"><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                    <button class="btn btn-secondary btn-small" onclick="nextCard()">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <span id="cardCounter">Kartu 1 dari 10</span>
+                </div>
+            </section>
+
+            <!-- Modal Pilihan Mata Pelajaran -->
+            <div id="mapelModal" class="modal">
+                <div class="modal-content" style="max-width: 700px;">
+                    <div class="modal-header">
+                        <h3>Pilih Mata Pelajaran</h3>
+                        <button class="close-modal" onclick="closeMapelModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="mapelModalContent">
+                            <!-- Buttons will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Panel (Hidden by Default) -->
+            <div id="adminPanel" class="admin-panel">
+                <h2 class="section-title"><i class="fas fa-user-shield"></i> Panel Admin SMA</h2>
+                
+                <!-- Soal Management Section -->
+                <div class="upload-section">
+                    <h3><i class="fas fa-plus-circle"></i> Tambah Soal Baru</h3>
+                    
+                    <div class="soal-controls" style="margin-top: 20px;">
+                        <select class="filter-select" id="mapelSelect">
+                            <option value="">Pilih Mata Pelajaran</option>
+                            <option value="mtk">Matematika</option>
+                            <option value="fisika">Fisika</option>
+                            <option value="kimia">Kimia</option>
+                            <option value="biologi">Biologi</option>
+                            <option value="ekonomi">Ekonomi</option>
+                            <option value="sosiologi">Sosiologi</option>
+                            <option value="sejarah">Sejarah</option>
+                            <option value="geografi">Geografi</option>
+                            <option value="bindo">Bahasa Indonesia</option>
+                            <option value="bing">Bahasa Inggris</option>
+                            <option value="agama">Agama Kristen</option>
+                            <option value="pkn">PPKn</option>
+                            <option value="informatika">Informatika</option>
+                        </select>
+                        
+                        <select class="filter-select" id="kelasSelect">
+                            <option value="">Pilih Kelas & Jurusan</option>
+                            <option value="10">Kelas 10</option>
+                            <option value="11-ipa">Kelas 11 IPA</option>
+                            <option value="11-ips">Kelas 11 IPS</option>
+                            <option value="12">Kelas 12</option>
+                        </select>
+                        
+                        <select class="filter-select" id="tipeSoalSelect">
+                            <option value="">Tipe Soal</option>
+                            <option value="pg">Pilihan Ganda</option>
+                            <option value="uraian">Uraian</option>
+                            <option value="essay">Essay</option>
+                            <option value="praktek">Praktek</option>
+                        </select>
+                        
+                        <button class="btn btn-success" onclick="openAddQuestionModal()">
+                            <i class="fas fa-plus"></i> Tambah Soal Baru
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Question List -->
+                <div class="question-list" id="questionList">
+                    <!-- Questions will be displayed here -->
+                </div>
+                
+                <!-- Video Management Section -->
+                <div class="upload-section" style="margin-top: 40px;">
+                    <h3><i class="fas fa-video"></i> Kelola Video Pembelajaran</h3>
+                    
+                    <div class="soal-controls" style="margin-top: 20px;">
+                        <select class="filter-select" id="filterVideoKelas">
+                            <option value="">Semua Kelas</option>
+                            <option value="10">Kelas 10</option>
+                            <option value="11-ipa">Kelas 11 IPA</option>
+                            <option value="11-ips">Kelas 11 IPS</option>
+                            <option value="12">Kelas 12</option>
+                        </select>
+                        
+                        <select class="filter-select" id="filterVideoMapel">
+                            <option value="">Semua Mata Pelajaran</option>
+                            <option value="mtk">Matematika</option>
+                            <option value="fisika">Fisika</option>
+                            <option value="kimia">Kimia</option>
+                            <option value="biologi">Biologi</option>
+                            <option value="ekonomi">Ekonomi</option>
+                            <option value="sosiologi">Sosiologi</option>
+                            <option value="sejarah">Sejarah</option>
+                            <option value="geografi">Geografi</option>
+                            <option value="bindo">Bahasa Indonesia</option>
+                            <option value="bing">Bahasa Inggris</option>
+                            <option value="agama">Agama Kristen</option>
+                            <option value="pkn">PPKn</option>
+                            <option value="informatika">Informatika</option>
+                        </select>
+                        
+                        <button class="btn btn-info" onclick="openAddVideoModal()">
+                            <i class="fas fa-plus"></i> Tambah Video Baru
+                        </button>
+                    </div>
+                    
+                    <!-- Video List -->
+                    <div class="question-list" id="videoList" style="margin-top: 20px;">
+                        <!-- Videos will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Question Modal -->
+    <div id="addQuestionModal" class="add-question-modal">
+        <div class="add-question-container">
+            <div class="add-question-header">
+                <h3>Tambah Soal Baru</h3>
+                <button class="close-modal" onclick="closeAddQuestionModal()">&times;</button>
+            </div>
+            <div class="add-question-body">
+                <form id="questionForm">
+                    <div class="form-group">
+                        <label class="form-label">Kelas & Jurusan</label>
+                        <select class="form-select" id="formKelas" required>
+                            <option value="">Pilih Kelas & Jurusan</option>
+                            <option value="10">Kelas 10</option>
+                            <option value="11-ipa">Kelas 11 IPA</option>
+                            <option value="11-ips">Kelas 11 IPS</option>
+                            <option value="12">Kelas 12</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Mata Pelajaran</label>
+                        <select class="form-select" id="formMapel" required>
+                            <option value="">Pilih Mata Pelajaran</option>
+                            <option value="mtk">Matematika</option>
+                            <option value="fisika">Fisika</option>
+                            <option value="kimia">Kimia</option>
+                            <option value="biologi">Biologi</option>
+                            <option value="ekonomi">Ekonomi</option>
+                            <option value="sosiologi">Sosiologi</option>
+                            <option value="sejarah">Sejarah</option>
+                            <option value="geografi">Geografi</option>
+                            <option value="bindo">Bahasa Indonesia</option>
+                            <option value="bing">Bahasa Inggris</option>
+                            <option value="agama">Agama Kristen</option>
+                            <option value="pkn">PPKn</option>
+                            <option value="informatika">Informatika</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tipe Soal</label>
+                        <select class="form-select" id="formTipe" required>
+                            <option value="pg">Pilihan Ganda</option>
+                            <option value="uraian">Uraian</option>
+                            <option value="essay">Essay</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Pertanyaan</label>
+                        <textarea class="form-textarea" id="formQuestion" 
+                                  placeholder="Masukkan pertanyaan di sini..." required></textarea>
+                    </div>
+
+                    <!-- Options for Multiple Choice -->
+                    <div id="optionsSection">
+                        <div class="form-group">
+                            <label class="form-label">Pilihan Jawaban</label>
+                            
+                            <div class="option-group" id="optionA">
+                                <div class="option-header">
+                                    <strong>Pilihan A</strong>
+                                    <div class="correct-option">
+                                        <input type="radio" name="correctOption" value="0" id="correctA">
+                                        <label for="correctA">Jawaban Benar</label>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-input option-input" 
+                                       placeholder="Masukkan pilihan A" data-index="0" required>
+                            </div>
+
+                            <div class="option-group" id="optionB">
+                                <div class="option-header">
+                                    <strong>Pilihan B</strong>
+                                    <div class="correct-option">
+                                        <input type="radio" name="correctOption" value="1" id="correctB">
+                                        <label for="correctB">Jawaban Benar</label>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-input option-input" 
+                                       placeholder="Masukkan pilihan B" data-index="1" required>
+                            </div>
+
+                            <div class="option-group" id="optionC">
+                                <div class="option-header">
+                                    <strong>Pilihan C</strong>
+                                    <div class="correct-option">
+                                        <input type="radio" name="correctOption" value="2" id="correctC">
+                                        <label for="correctC">Jawaban Benar</label>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-input option-input" 
+                                       placeholder="Masukkan pilihan C" data-index="2" required>
+                            </div>
+
+                            <div class="option-group" id="optionD">
+                                <div class="option-header">
+                                    <strong>Pilihan D</strong>
+                                    <div class="correct-option">
+                                        <input type="radio" name="correctOption" value="3" id="correctD">
+                                        <label for="correctD">Jawaban Benar</label>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-input option-input" 
+                                       placeholder="Masukkan pilihan D" data-index="3" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Penjelasan (Opsional)</label>
+                        <textarea class="form-textarea" id="formExplanation" 
+                                  placeholder="Masukkan penjelasan jawaban..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tingkat Kesulitan</label>
+                        <select class="form-select" id="formDifficulty">
+                            <option value="mudah">Mudah</option>
+                            <option value="sedang" selected>Sedang</option>
+                            <option value="sulit">Sulit</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="closeAddQuestionModal()">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Simpan Soal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Video Modal - Diperbarui untuk URL YouTube -->
+    <div id="addVideoModal" class="add-question-modal">
+        <div class="add-question-container">
+            <div class="add-question-header">
+                <h3>Tambah Video Pembelajaran Baru</h3>
+                <button class="close-modal" onclick="closeAddVideoModal()">&times;</button>
+            </div>
+            <div class="add-question-body">
+                <form id="videoForm">
+                    <div class="form-group">
+                        <label class="form-label">Judul Video</label>
+                        <input type="text" class="form-input" id="videoTitle" required placeholder="Masukkan judul video...">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Deskripsi Video</label>
+                        <textarea class="form-textarea" id="videoDescription" placeholder="Masukkan deskripsi video..." rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Link YouTube Video</label>
+                        <input type="url" class="form-input" id="videoYoutubeUrl" required 
+                               placeholder="Contoh: https://www.youtube.com/watch?v=VIDEO_ID">
+                        <small style="color: var(--gray); margin-top: 5px; display: block;">
+                            <i class="fas fa-info-circle"></i> Masukkan link lengkap video YouTube. Contoh: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                        </small>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Kelas & Jurusan</label>
+                            <select class="form-select" id="videoKelas" required>
+                                <option value="">Pilih Kelas & Jurusan</option>
+                                <option value="10">Kelas 10</option>
+                                <option value="11-ipa">Kelas 11 IPA</option>
+                                <option value="11-ips">Kelas 11 IPS</option>
+                                <option value="12">Kelas 12</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Mata Pelajaran</label>
+                            <select class="form-select" id="videoMapel" required>
+                                <option value="">Pilih Mata Pelajaran</option>
+                                <option value="mtk">Matematika</option>
+                                <option value="fisika">Fisika</option>
+                                <option value="kimia">Kimia</option>
+                                <option value="biologi">Biologi</option>
+                                <option value="ekonomi">Ekonomi</option>
+                                <option value="sosiologi">Sosiologi</option>
+                                <option value="sejarah">Sejarah</option>
+                                <option value="geografi">Geografi</option>
+                                <option value="bindo">Bahasa Indonesia</option>
+                                <option value="bing">Bahasa Inggris</option>
+                                <option value="agama">Agama Kristen</option>
+                                <option value="pkn">PPKn</option>
+                                <option value="informatika">Informatika</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Durasi Video (MM:SS)</label>
+                            <input type="text" class="form-input" id="videoDuration" required placeholder="Contoh: 10:25">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Tanggal Upload</label>
+                            <input type="text" class="form-input" id="videoDate" required placeholder="Contoh: 2 minggu lalu">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Jumlah View</label>
+                        <input type="text" class="form-input" id="videoViews" required placeholder="Contoh: 125K">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="closeAddVideoModal()">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Simpan Video
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="quiz-modal">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h3 id="quizTitle">Latihan Matematika</h3>
+                <div class="quiz-timer" id="quizTimer">30:00</div>
+                <button class="close-modal" onclick="closeQuiz()">&times;</button>
+            </div>
+            <div class="quiz-body">
+                <div class="quiz-progress">
+                    <div class="quiz-progress-fill" id="quizProgress"></div>
+                </div>
+                <div class="question-number" id="questionNumber">Soal 1 dari 10</div>
+                <div class="question-text" id="questionText">
+                    Berapakah hasil turunan dari f(x) = 3x² + 2x - 5?
+                </div>
+                <div class="optionsContainer" id="optionsContainer">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+                <div class="quiz-navigation">
+                    <button class="btn btn-outline" onclick="prevQuestion()" id="prevBtn">
+                        <i class="fas fa-arrow-left"></i> Sebelumnya
+                    </button>
+                    <button class="btn btn-secondary" onclick="nextQuestion()" id="nextBtn">
+                        Selanjutnya <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-success" onclick="submitQuiz()" id="submitBtn" style="display: none;">
+                        <i class="fas fa-paper-plane"></i> Kumpulkan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="resultsModal" class="results-modal">
+        <div class="results-container">
+            <div class="results-header">
+                <h3>Selesai!</h3>
+                <div class="results-score" id="finalScore">0</div>
+                <p id="scoreMessage">Kerja bagus!</p>
+            </div>
+            <div class="results-body">
+                <div class="results-stats">
+                    <div class="stat-card correct">
+                        <div class="stat-value" id="correctCount">0</div>
+                        <div class="stat-label">Benar</div>
+                    </div>
+                    <div class="stat-card incorrect">
+                        <div class="stat-value" id="incorrectCount">0</div>
+                        <div class="stat-label">Salah</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalQuestions">0</div>
+                        <div class="stat-label">Total Soal</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="timeTaken">0</div>
+                        <div class="stat-label">Waktu (detik)</div>
+                    </div>
+                </div>
+                
+                <h4 style="margin-bottom: 15px;">Detail Jawaban:</h4>
+                <div class="results-details" id="resultsDetails">
+                    <!-- Results will be inserted here -->
+                </div>
+                
+                <div class="results-actions">
+                    <button class="btn btn-secondary" onclick="retakeQuiz()">
+                        <i class="fas fa-redo"></i> Ulangi
+                    </button>
+                    <button class="btn btn-success" onclick="closeResults()">
+                        <i class="fas fa-check"></i> Selesai
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- FOOTER -->
+     <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                        <h3>PRKJ</h3>
+                        <p>Persekutuan Rohani Kristen Jakarta </p>
+                    </div>
+                    <p class="footer-description">
+                        Persekutuan Rohani Kristen Jakarta (PRKJ) berkomitmen untuk memberitakan Injil dan mengajarkan pengajaran yang alkitabiah.
+                    </p>
+                    <div class="social-icons">
+                <a href="https://www.youtube.com/@prkjakarta" 
+                   target="_blank"
+                   class="social-icon youtube"> 
+                   <i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/prkjakarta_/" 
+                   target="_blank"
+                   class="social-icon instagram">
+                   <i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@prk_jakarta?_t=ZS-8ykxIkLQEXR&_r=1"
+                   target="_blank"
+                   class="social-icon tiktok">
+                   <i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/share/1GanxxhL1K/"   
+                   target="_blank"
+                   class="social-icon facebook">
+                   <i class="fab fa-facebook"></i></a>
+            </div>
+                </div>
+                
+                 <div class="footer-col">
+                    <h4>Kontak Kami</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Jl Percetakan Negara II, Jakarta Pusat</li>
+                        <li><i class="fas fa-phone"></i> (62) 812-1558-3683</li>
+                        <li><i class="fas fa-envelope"></i> info@prk-website.com</li>
+                        <li><i class="fas fa-clock"></i> Kantor: Senin-Jumat, 07:00-23:59 WIB</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Tautan Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="live-streaming.html"><i class="fas fa-chevron-right"></i> Kegiatan & Pelayanan </a></li>
+                        <li><a href="ruang-belajar.html"><i class="fas fa-chevron-right"></i> Ruang Belajar</a></li>
+                        <li><a href="toko.html"><i class="fas fa-chevron-right"></i> Toko PRK JAKARTA </a></li>
+                        <li><a href="dokumentasi.html"><i class="fas fa-chevron-right"></i> Dokumentasi</a></li>
+                    </ul>
+                </div>
+                
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 PRK JAKARTA - Persekutuan Rohani Kristen Jakarta. Semua hak dilindungi.</p>
+                </div>
+                <div class="footer-menu">
+                    <a href="profil.html">Tentang Kami</a>
+                    <a href="kontak.html">Kontak</a>
+                    <a href="#">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Local Storage Keys
+        const STORAGE_KEY = 'prkj_questions_sma';
+        const SCORE_STORAGE_KEY = 'prkj_user_scores_sma';
+        const VIDEO_STORAGE_KEY = 'prkj_videos_sma';
+
+        // Quiz System Variables
+        let currentQuiz = null;
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let score = 0;
+        let startTime = null;
+        let timerInterval = null;
+        let timeLeft = 600; // 10 minutes for testing
+
+        // Mapel names for display
+        const mapelNames = {
+            'mtk': 'Matematika',
+            'fisika': 'Fisika',
+            'kimia': 'Kimia',
+            'biologi': 'Biologi',
+            'ekonomi': 'Ekonomi',
+            'sosiologi': 'Sosiologi',
+            'sejarah': 'Sejarah',
+            'geografi': 'Geografi',
+            'bindo': 'Bahasa Indonesia',
+            'bing': 'Bahasa Inggris',
+            'agama': 'Agama Kristen',
+            'pkn': 'PPKn',
+            'informatika': 'Informatika'
+        };
+
+        // Initialize questions database from localStorage or use default
+        let quizDatabase = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+            // Kelas 10 - MATEMATIKA
+            'mtk-kelas-10': {
+                title: 'Matematika Kelas 10 SMA',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Berapakah hasil dari (2x - 3)²?',
+                        options: ['4x² - 12x + 9', '4x² - 6x + 9', '4x² - 12x - 9', '2x² - 12x + 9'],
+                        correct: 0,
+                        explanation: '(2x - 3)² = (2x)² - 2(2x)(3) + 3² = 4x² - 12x + 9'
+                    },
+                    {
+                        id: 2,
+                        question: 'Berapakah nilai dari sin 30°?',
+                        options: ['0.5', '0.707', '0.866', '1'],
+                        correct: 0,
+                        explanation: 'sin 30° = 1/2 = 0.5'
+                    },
+                    {
+                        id: 3,
+                        question: 'Jika 2x + 5 = 15, maka x = ?',
+                        options: ['5', '10', '7.5', '20'],
+                        correct: 0,
+                        explanation: '2x + 5 = 15 → 2x = 10 → x = 5'
+                    }
+                ]
+            },
+            // Kelas 10 - FISIKA
+            'fisika-kelas-10': {
+                title: 'Fisika Kelas 10 SMA',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Apa satuan SI untuk gaya?',
+                        options: ['Newton', 'Joule', 'Pascal', 'Watt'],
+                        correct: 0,
+                        explanation: 'Newton adalah satuan SI untuk gaya'
+                    },
+                    {
+                        id: 2,
+                        question: 'Rumus untuk gaya adalah?',
+                        options: ['F = m × a', 'F = m × g', 'F = p × A', 'F = k × x'],
+                        correct: 0,
+                        explanation: 'Hukum Newton II: F = massa × percepatan'
+                    }
+                ]
+            },
+            // Kelas 10 - KIMIA
+            'kimia-kelas-10': {
+                title: 'Kimia Kelas 10 SMA',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Berapa jumlah elektron maksimum pada kulit L?',
+                        options: ['2', '8', '18', '32'],
+                        correct: 1,
+                        explanation: 'Kulit L (n=2) maksimum 8 elektron'
+                    }
+                ]
+            },
+            // Kelas 11 IPA - MATEMATIKA
+            'mtk-kelas-11-ipa': {
+                title: 'Matematika Peminatan Kelas 11 IPA',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Turunan dari f(x) = sin x adalah?',
+                        options: ['cos x', '-cos x', 'sin x', '-sin x'],
+                        correct: 0,
+                        explanation: 'd/dx sin x = cos x'
+                    },
+                    {
+                        id: 2,
+                        question: 'Turunan dari f(x) = 3x² + 2x - 5 adalah?',
+                        options: ['6x + 2', '6x', '3x + 2', '3x² + 2'],
+                        correct: 0,
+                        explanation: 'f\'(x) = 2×3x¹ + 2 = 6x + 2'
+                    }
+                ]
+            },
+            // Kelas 11 IPA - FISIKA
+            'fisika-kelas-11-ipa': {
+                title: 'Fisika Kelas 11 IPA',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Hukum kekekalan energi mekanik berlaku pada kondisi?',
+                        options: ['Sistem tertutup tanpa gaya non-konservatif', 'Sistem terbuka', 'Dengan gaya gesek', 'Selalu berlaku'],
+                        correct: 0,
+                        explanation: 'Hukum kekekalan energi mekanik berlaku pada sistem tertutup tanpa gaya non-konservatif'
+                    }
+                ]
+            },
+            // Kelas 11 IPS - EKONOMI
+            'ekonomi-kelas-11-ips': {
+                title: 'Ekonomi Kelas 11 IPS',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Inflasi yang disebabkan oleh kenaikan biaya produksi disebut?',
+                        options: ['Cost-push inflation', 'Demand-pull inflation', 'Imported inflation', 'Structural inflation'],
+                        correct: 0,
+                        explanation: 'Cost-push inflation disebabkan kenaikan biaya produksi'
+                    },
+                    {
+                        id: 2,
+                        question: 'Hukum permintaan menyatakan bahwa...',
+                        options: ['Harga naik, permintaan turun', 'Harga naik, permintaan naik', 'Harga turun, permintaan turun', 'Tidak ada hubungan'],
+                        correct: 0,
+                        explanation: 'Semakin tinggi harga, semakin sedikit permintaan'
+                    }
+                ]
+            },
+            // Kelas 11 IPS - SOSIOLOGI
+            'sosiologi-kelas-11-ips': {
+                title: 'Sosiologi Kelas 11 IPS',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Proses belajar nilai dan norma disebut?',
+                        options: ['Sosialisasi', 'Akulturasi', 'Asimilasi', 'Enkulturasi'],
+                        correct: 0,
+                        explanation: 'Sosialisasi adalah proses belajar nilai dan norma'
+                    }
+                ]
+            },
+            // Kelas 12 - MATEMATIKA
+            'mtk-kelas-12': {
+                title: 'Matematika Kelas 12 SMA',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Integral dari 2x dx adalah?',
+                        options: ['x² + C', '2x² + C', 'x²', '2x'],
+                        correct: 0,
+                        explanation: '∫2x dx = x² + C'
+                    },
+                    {
+                        id: 2,
+                        question: 'Turunan dari e^x adalah?',
+                        options: ['e^x', 'ln(x)', '1/x', 'x·e^(x-1)'],
+                        correct: 0,
+                        explanation: 'd/dx e^x = e^x'
+                    }
+                ]
+            },
+            // UTBK 2024
+            'utbk-2024': {
+                title: 'UTBK 2024',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Tes Potensi Skolastik mengukur kemampuan?',
+                        options: ['Logika dan verbal', 'Hafalan', 'Keterampilan praktik', 'Pengetahuan umum'],
+                        correct: 0,
+                        explanation: 'TPS mengukur kemampuan logika, verbal, kuantitatif, dan pemahaman bacaan'
+                    },
+                    {
+                        id: 2,
+                        question: 'Jika 3x - 7 = 8, maka x = ?',
+                        options: ['5', '3', '7', '9'],
+                        correct: 0,
+                        explanation: '3x - 7 = 8 → 3x = 15 → x = 5'
+                    },
+                    {
+                        id: 3,
+                        question: 'Sinonim dari kata "kontemporer" adalah?',
+                        options: ['Modern', 'Kuno', 'Tradisional', 'Klasik'],
+                        correct: 0,
+                        explanation: 'Kontemporer artinya sesuatu yang terjadi pada masa sekarang atau modern'
+                    }
+                ]
+            },
+            // Ujian Sekolah
+            'us-sma': {
+                title: 'Ujian Sekolah SMA',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Ciri utama teks eksposisi adalah?',
+                        options: ['Memberikan informasi', 'Menceritakan kisah', 'Meyakinkan pembaca', 'Menggambarkan objek'],
+                        correct: 0,
+                        explanation: 'Teks eksposisi bertujuan memberikan informasi'
+                    },
+                    {
+                        id: 2,
+                        question: 'Ibukota Indonesia adalah?',
+                        options: ['Jakarta', 'Bandung', 'Surabaya', 'Medan'],
+                        correct: 0,
+                        explanation: 'Jakarta adalah ibukota Republik Indonesia'
+                    }
+                ]
+            },
+            // Kuis Harian
+            'harian-sma': {
+                title: 'Kuis Harian SMA',
+                questions: [
+                    {
+                        id: 1,
+                        question: 'Berapakah hasil dari √64?',
+                        options: ['8', '6', '4', '10'],
+                        correct: 0,
+                        explanation: '√64 = 8 karena 8 × 8 = 64'
+                    },
+                    {
+                        id: 2,
+                        question: 'Warna bendera Indonesia adalah?',
+                        options: ['Merah dan Putih', 'Merah dan Biru', 'Hijau dan Putih', 'Kuning dan Merah'],
+                        correct: 0,
+                        explanation: 'Bendera Indonesia berwarna merah di atas dan putih di bawah'
+                    }
+                ]
+            }
+        };
+
+        // ========== FUNGSI HELPER UNTUK YOUTUBE ==========
+
+        // Fungsi untuk extract YouTube ID dari URL
+        function extractYouTubeId(url) {
+            if (!url) return '';
+            
+            // Pattern untuk berbagai format URL YouTube
+            const patterns = [
+                /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/|youtube\.com\/watch\?.*v=)([^#\&\?]*)/,
+                /^([A-Za-z0-9_-]{11})$/
+            ];
+            
+            for (const pattern of patterns) {
+                const match = url.match(pattern);
+                if (match && match[1]) {
+                    return match[1];
+                }
+            }
+            
+            return '';
+        }
+
+        // Fungsi untuk mendapatkan thumbnail YouTube
+        function getYouTubeThumbnail(youtubeUrl) {
+            const videoId = extractYouTubeId(youtubeUrl);
+            if (!videoId) return 'https://via.placeholder.com/320x180/1a237e/ffffff?text=Video+SMA';
+            
+            return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        }
+
+        // Fungsi validasi URL YouTube
+        function isValidYouTubeUrl(url) {
+            const patterns = [
+                /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/,
+                /^https?:\/\/(?:www\.)?youtube\.com\/watch\?v=[\w-]{11}/,
+                /^https?:\/\/youtu\.be\/[\w-]{11}/
+            ];
+            
+            return patterns.some(pattern => pattern.test(url));
+        }
+
+        // ========== VIDEO DATABASE ==========
+
+        // Initialize video database from localStorage or use default
+        let videoDatabase = JSON.parse(localStorage.getItem(VIDEO_STORAGE_KEY)) || {
+            'kelas10': [],
+            'kelas11ipa': [],
+            'kelas11ips': [],
+            'kelas12': []
+        };
+
+        // Default videos dengan URL YouTube lengkap
+        const defaultVideos = {
+            'kelas10': [
+                {
+                    id: 1,
+                    title: 'Matematika Kelas 10: Trigonometri Dasar',
+                    description: 'Konsep dasar sinus, cosinus, tangen dan aplikasinya',
+                    youtubeUrl: 'https://youtu.be/u_ciJpBlFJs?si=zKdUGBQ3ZL1Q_l2O', // URL LENGKAP
+                    mapel: 'mtk',
+                    duration: '6:02',
+                    views: '195K',
+                    date: '4 Tahun lalu',
+                    tags: ['kelas10', 'mtk']
+                },
+                {
+                    id: 2,
+                    title: 'Fisika Kelas 10: Kinematika',
+                    description: 'Gerak lurus beraturan dan berubah beraturan',
+                    youtubeUrl: 'https://youtu.be/5ikiX0gv5w4?si=qPKWlc5IuB_gqDzQ', // URL LENGKAP
+                    mapel: 'fisika',
+                    duration: '34:35',
+                    views: '1,2Jt',
+                    date: '6 tahun lalu',
+                    tags: ['kelas10', 'fisika']
+                }
+            ],
+            'kelas11ipa': [
+                {
+                    id: 3,
+                    title: 'Kimia Kelas 11: Termokimia',
+                    description: 'Konsep entalpi, reaksi eksoterm dan endoterm',
+                    youtubeUrl: 'https://youtu.be/V5HZ5-j4cfg?si=LkRyBKwXDK7etCLk', // URL LENGKAP
+                    mapel: 'kimia',
+                    duration: '26:16',
+                    views: '109K',
+                    date: '3 tahun lalu',
+                    tags: ['kelas11ipa', 'kimia']
+                },
+                {
+                    id: 4,
+                    title: 'Biologi Kelas 11: Sistem Pencernaan',
+                    description: 'Organ pencernaan manusia dan fungsinya',
+                    youtubeUrl: 'https://youtu.be/N0PS9OpNgvo?si=xI2XYp4FszNLHOtI', // URL LENGKAP
+                    mapel: 'biologi',
+                    duration: '20:54',
+                    views: '587K',
+                    date: '4 tahun lalu',
+                    tags: ['kelas11ipa', 'biologi']
+                }
+            ],
+            'kelas11ips': [
+                {
+                    id: 5,
+                    title: 'Ekonomi Kelas 11: Permintaan & Penawaran',
+                    description: 'Kurva permintaan, penawaran, dan harga keseimbangan',
+                    youtubeUrl: 'https://youtu.be/VMiJ0fRytE8?si=b8t4TZm2wK4xaxQw', // URL LENGKAP
+                    mapel: 'ekonomi',
+                    duration: '29:55',
+                    views: '148K',
+                    date: '1 tahun lalu',
+                    tags: ['kelas11ips', 'ekonomi']
+                },
+                {
+                    id: 6,
+                    title: 'Sosiologi Kelas 11: Stratifikasi Sosial',
+                    description: 'Pengertian dan bentuk-bentuk stratifikasi sosial',
+                    youtubeUrl: 'https://youtu.be/Wdvy8e5ElEA?si=E9GJGPle-0sva8Ym', // URL LENGKAP
+                    mapel: 'sosiologi',
+                    duration: '6:58',
+                    views: '14K',
+                    date: '4 tahun lalu lalu',
+                    tags: ['kelas11ips', 'sosiologi']
+                }
+            ],
+            'kelas12': [
+                {
+                    id: 7,
+                    title: 'Matematika Kelas 12: Integral',
+                    description: 'Konsep integral tak tentu dan aplikasinya',
+                    youtubeUrl: 'https://youtu.be/HPg8OMnhGIM?si=TkTbSGQaCaNy7XBP', // URL LENGKAP
+                    mapel: 'mtk',
+                    duration: '13:28',
+                    views: '22K',
+                    date: '3 tahun lalu',
+                    tags: ['kelas12', 'mtk']
+                },
+                {
+                    id: 8,
+                    title: 'TPS UTBK: Penalaran Umum',
+                    description: 'Strategi mengerjakan soal penalaran umum UTBK',
+                    youtubeUrl: 'https://youtu.be/-jYbkayP-Pc?si=BbK3WK2t5Yw_7xxh', // URL LENGKAP
+                    mapel: 'mtk',
+                    duration: '18:09',
+                    views: '628K',
+                    date: '1 tahun lalu',
+                    tags: ['kelas12', 'utbk']
+                }
+            ]
+        };
+
+        // User scores
+        let userScores = JSON.parse(localStorage.getItem(SCORE_STORAGE_KEY)) || {
+            totalSoalDikerjakan: 420,
+            totalSoal: 600,
+            nilaiRataRata: 7.8,
+            progressBelajar: 68,
+            utbkProgress: 68
+        };
+
+        // ========== FUNGSI UTAMA ==========
+
+        // Fungsi untuk memulai quiz - DIPERBAIKI
+        function startQuiz(quizId, quizTitle) {
+            console.log('Memulai quiz:', quizId);
+            
+            // Validasi apakah quiz ada
+            if (!quizDatabase[quizId] || !quizDatabase[quizId].questions || quizDatabase[quizId].questions.length === 0) {
+                alert('Quiz tidak tersedia. Silakan tambahkan soal terlebih dahulu melalui panel admin.');
+                return;
+            }
+            
+            // Set variabel quiz
+            currentQuiz = quizId;
+            currentQuestion = 0;
+            userAnswers = new Array(quizDatabase[quizId].questions.length).fill(null);
+            score = 0;
+            timeLeft = 600; // 10 menit
+            startTime = new Date();
+            
+            // Tampilkan modal quiz
+            document.getElementById('quizTitle').textContent = quizTitle || quizDatabase[quizId].title;
+            document.getElementById('quizModal').style.display = 'block';
+            
+            // Mulai timer
+            startTimer();
+            
+            // Load soal pertama
+            loadQuestion();
+        }
+
+        // Fungsi untuk memuat soal - DIPERBAIKI
+        function loadQuestion() {
+            if (!currentQuiz || !quizDatabase[currentQuiz]) {
+                console.error('Quiz tidak ditemukan!');
+                return;
+            }
+            
+            const quiz = quizDatabase[currentQuiz];
+            const question = quiz.questions[currentQuestion];
+            
+            if (!question) {
+                console.error('Soal tidak ditemukan!');
+                return;
+            }
+            
+            // Update nomor soal
+            document.getElementById('questionNumber').textContent = `Soal ${currentQuestion + 1} dari ${quiz.questions.length}`;
+            
+            // Update teks soal
+            document.getElementById('questionText').textContent = question.question;
+            
+            // Update progress bar
+            const progressPercent = ((currentQuestion + 1) / quiz.questions.length) * 100;
+            document.getElementById('quizProgress').style.width = `${progressPercent}%`;
+            
+            // Hapus opsi sebelumnya
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            // Tambahkan opsi baru
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                
+                // Jika user sudah memilih opsi ini, tambahkan class selected
+                if (userAnswers[currentQuestion] === index) {
+                    optionDiv.classList.add('selected');
+                }
+                
+                optionDiv.onclick = () => selectOption(index);
+                
+                optionDiv.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div>${option}</div>
+                `;
+                
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            // Update tombol navigasi
+            document.getElementById('prevBtn').style.display = currentQuestion === 0 ? 'none' : 'inline-block';
+            document.getElementById('nextBtn').style.display = 
+                currentQuestion === quiz.questions.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('submitBtn').style.display = 
+                currentQuestion === quiz.questions.length - 1 ? 'inline-block' : 'none';
+        }
+
+        // Fungsi untuk memilih opsi
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            
+            // Update tampilan opsi
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                if (index === optionIndex) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+
+        // Fungsi timer - DIPERBAIKI
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('quizTimer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Fungsi navigasi soal
+        function nextQuestion() {
+            const quiz = quizDatabase[currentQuiz];
+            if (currentQuestion < quiz.questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        // Fungsi submit quiz - DIPERBAIKI (PENTING!)
+        function submitQuiz() {
+            console.log('Mengumpulkan quiz...');
+            
+            // Hentikan timer
+            clearInterval(timerInterval);
+            
+            // Validasi quiz
+            if (!currentQuiz || !quizDatabase[currentQuiz]) {
+                alert('Error: Quiz tidak ditemukan!');
+                return;
+            }
+            
+            const quiz = quizDatabase[currentQuiz];
+            const totalQuestions = quiz.questions.length;
+            let correctCount = 0;
+            let resultsDetails = [];
+            
+            // Hitung skor
+            quiz.questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) {
+                    correctCount++;
+                }
+                
+                // Simpan detail hasil
+                resultsDetails.push({
+                    question: question.question,
+                    userAnswer: question.options[userAnswer] || 'Tidak dijawab',
+                    correctAnswer: question.options[question.correct],
+                    explanation: question.explanation || '',
+                    isCorrect: isCorrect
+                });
+            });
+            
+            // Hitung nilai
+            score = Math.round((correctCount / totalQuestions) * 100);
+            
+            // Hitung waktu
+            const endTime = new Date();
+            const timeTaken = Math.round((endTime - startTime) / 1000);
+            
+            // Update statistik user
+            userScores.totalSoalDikerjakan += totalQuestions;
+            
+            // Simpan ke localStorage
+            saveToLocalStorage();
+            
+            // Tampilkan hasil - DIPERBAIKI
+            showResults(correctCount, totalQuestions, score, timeTaken, resultsDetails);
+            
+            // Tutup modal quiz
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        // Fungsi tampilkan hasil - DIPERBAIKI (PENTING!)
+        function showResults(correct, total, finalScore, timeTaken, resultsDetails) {
+            console.log('Menampilkan hasil:', {correct, total, finalScore});
+            
+            // Update statistik
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('incorrectCount').textContent = total - correct;
+            document.getElementById('totalQuestions').textContent = total;
+            document.getElementById('timeTaken').textContent = timeTaken;
+            document.getElementById('finalScore').textContent = finalScore;
+            
+            // Pesan berdasarkan skor
+            let message = '';
+            if (finalScore >= 90) {
+                message = 'Luar biasa! 🎉';
+            } else if (finalScore >= 80) {
+                message = 'Bagus sekali! 👍';
+            } else if (finalScore >= 70) {
+                message = 'Cukup baik! 💪';
+            } else if (finalScore >= 60) {
+                message = 'Perlu belajar lagi! 📚';
+            } else {
+                message = 'Jangan menyerah! 🚀';
+            }
+            document.getElementById('scoreMessage').textContent = message;
+            
+            // Tampilkan detail jawaban
+            const resultsDetailsContainer = document.getElementById('resultsDetails');
+            resultsDetailsContainer.innerHTML = '';
+            
+            resultsDetails.forEach((result, index) => {
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${result.isCorrect ? 'correct' : 'incorrect'}`;
+                
+                resultItem.innerHTML = `
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                            <strong>Soal ${index + 1}</strong>
+                            <span class="result-status ${result.isCorrect ? 'correct' : 'incorrect'}">
+                                ${result.isCorrect ? '✓ Benar' : '✗ Salah'}
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <strong>Pertanyaan:</strong> ${result.question}
+                        </div>
+                        <div style="font-size: 0.9rem;">
+                            <div style="margin-bottom: 4px;">
+                                <strong>Jawaban Anda:</strong> ${result.userAnswer}
+                            </div>
+                            <div style="margin-bottom: 4px;">
+                                <strong>Jawaban Benar:</strong> ${result.correctAnswer}
+                            </div>
+                            ${result.explanation ? `
+                                <div style="margin-top: 5px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 4px;">
+                                    <strong>Penjelasan:</strong> ${result.explanation}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                resultsDetailsContainer.appendChild(resultItem);
+            });
+            
+            // Tampilkan modal hasil
+            document.getElementById('resultsModal').style.display = 'block';
+        }
+
+        // Fungsi untuk menutup quiz
+        function closeQuiz() {
+            document.getElementById('quizModal').style.display = 'none';
+            clearInterval(timerInterval);
+        }
+
+        // Fungsi untuk menutup hasil
+        function closeResults() {
+            document.getElementById('resultsModal').style.display = 'none';
+        }
+
+        // Fungsi untuk mengulang quiz
+        function retakeQuiz() {
+            closeResults();
+            startQuiz(currentQuiz, document.getElementById('quizTitle').textContent);
+        }
+
+        // ========== FUNGSI BANTUAN ==========
+
+        // Simpan ke localStorage
+        function saveToLocalStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(quizDatabase));
+            localStorage.setItem(SCORE_STORAGE_KEY, JSON.stringify(userScores));
+            updateQuestionCounts();
+            updateProgressStats();
+        }
+
+        // Save videos to localStorage
+        function saveVideosToLocalStorage() {
+            localStorage.setItem(VIDEO_STORAGE_KEY, JSON.stringify(videoDatabase));
+            loadVideoList();
+            loadVideos(); // Reload video display
+        }
+
+        // Update statistik progress
+        function updateProgressStats() {
+            const statBoxes = document.querySelectorAll('.stat-box .stat-value');
+            if (statBoxes.length >= 3) {
+                statBoxes[0].textContent = userScores.utbkProgress + '%';
+                statBoxes[1].textContent = userScores.totalSoalDikerjakan + '/' + userScores.totalSoal;
+                statBoxes[2].textContent = userScores.nilaiRataRata;
+            }
+        }
+
+        // Generate quiz ID
+        function generateQuizId(mapel, kelas, jurusan = '') {
+            if (jurusan) {
+                return `${mapel}-kelas-${kelas}-${jurusan}`;
+            }
+            return `${mapel}-kelas-${kelas}`;
+        }
+
+        // Update jumlah soal di kartu
+        function updateQuestionCounts() {
+            const kelasMap = {
+                '10': ['mtk', 'fisika', 'kimia', 'biologi', 'bindo', 'bing', 'agama'],
+                '11ipa': ['mtk', 'fisika', 'kimia', 'biologi', 'informatika', 'bing', 'pkn'],
+                '11ips': ['ekonomi', 'sosiologi', 'sejarah', 'geografi', 'mtk', 'bindo', 'bing'],
+                '12': ['mtk', 'fisika', 'kimia', 'bindo', 'bing', 'pkn', 'sejarah']
+            };
+            
+            // Update counts for all classes
+            for (const [kelasKey, mapelList] of Object.entries(kelasMap)) {
+                let totalSoal = 0;
+                let totalVideo = 0;
+                
+                for (let mapel of mapelList) {
+                    let quizId;
+                    if (kelasKey.includes('11')) {
+                        const [kelasNum, jurusan] = kelasKey.split(/(?=\D)/);
+                        quizId = `${mapel}-kelas-${kelasNum}-${jurusan}`;
+                    } else {
+                        quizId = `${mapel}-kelas-${kelasKey}`;
+                    }
+                    
+                    const quiz = quizDatabase[quizId];
+                    const count = quiz ? quiz.questions.length : 0;
+                    totalSoal += count;
+                    
+                    // For video count, use placeholder logic
+                    if (mapel === 'mtk') totalVideo += 25;
+                    if (mapel === 'fisika') totalVideo += 20;
+                    if (mapel === 'kimia') totalVideo += 18;
+                    if (mapel === 'biologi') totalVideo += 15;
+                    if (mapel === 'ekonomi') totalVideo += 12;
+                    if (mapel === 'sosiologi') totalVideo += 10;
+                }
+                
+                // Update card stats
+                const kelasDisplay = kelasKey.replace('ipa', '').replace('ips', '');
+                document.getElementById(`mtk-kelas${kelasDisplay}-count`).textContent = totalVideo;
+                document.getElementById(`soal-kelas${kelasDisplay}-count`).textContent = totalSoal;
+                document.getElementById(`materi-kelas${kelasDisplay}-count`).textContent = Math.floor(totalSoal / 8);
+            }
+        }
+
+        // Fungsi untuk menampilkan semua mapel
+        function showAllMapelButtons(kelas, jurusan = '') {
+            let mapelData = {};
+            
+            if (kelas === 10) {
+                mapelData = {
+                    'mtk': { name: 'Matematika', icon: 'fa-calculator', color: '' },
+                    'fisika': { name: 'Fisika', icon: 'fa-atom', color: 'btn-info' },
+                    'kimia': { name: 'Kimia', icon: 'fa-flask', color: 'btn-warning' },
+                    'biologi': { name: 'Biologi', icon: 'fa-dna', color: 'btn-success' },
+                    'bindo': { name: 'Bahasa Indonesia', icon: 'fa-book', color: 'btn-secondary' },
+                    'bing': { name: 'Bahasa Inggris', icon: 'fa-language', color: 'btn-danger' },
+                    'agama': { name: 'Agama Kristen', icon: 'fa-church', color: 'btn-info' },
+                    'pkn': { name: 'PPKn', icon: 'fa-landmark', color: 'btn-warning' },
+                    'sejarah': { name: 'Sejarah', icon: 'fa-history', color: 'btn-success' }
+                };
+            } else if (kelas === 11 && jurusan === 'ipa') {
+                mapelData = {
+                    'mtk': { name: 'Matematika Peminatan', icon: 'fa-calculator', color: '' },
+                    'fisika': { name: 'Fisika', icon: 'fa-atom', color: 'btn-info' },
+                    'kimia': { name: 'Kimia', icon: 'fa-flask', color: 'btn-warning' },
+                    'biologi': { name: 'Biologi', icon: 'fa-dna', color: 'btn-success' },
+                    'informatika': { name: 'Informatika', icon: 'fa-laptop-code', color: 'btn-secondary' },
+                    'bing': { name: 'Bahasa Inggris', icon: 'fa-language', color: 'btn-danger' },
+                    'pkn': { name: 'PPKn', icon: 'fa-landmark', color: 'btn-warning' },
+                    'seni': { name: 'Seni Budaya', icon: 'fa-palette', color: 'btn-success' }
+                };
+            } else if (kelas === 11 && jurusan === 'ips') {
+                mapelData = {
+                    'ekonomi': { name: 'Ekonomi', icon: 'fa-chart-line', color: '' },
+                    'sosiologi': { name: 'Sosiologi', icon: 'fa-users', color: 'btn-info' },
+                    'sejarah': { name: 'Sejarah', icon: 'fa-history', color: 'btn-warning' },
+                    'geografi': { name: 'Geografi', icon: 'fa-globe-asia', color: 'btn-success' },
+                    'mtk': { name: 'Matematika', icon: 'fa-calculator', color: 'btn-secondary' },
+                    'bindo': { name: 'Bahasa Indonesia', icon: 'fa-book', color: 'btn-danger' },
+                    'bing': { name: 'Bahasa Inggris', icon: 'fa-language', color: 'btn-warning' },
+                    'pkn': { name: 'PPKn', icon: 'fa-landmark', color: 'btn-success' }
+                };
+            } else if (kelas === 12) {
+                mapelData = {
+                    'mtk': { name: 'Matematika', icon: 'fa-calculator', color: '' },
+                    'fisika': { name: 'Fisika', icon: 'fa-atom', color: 'btn-info' },
+                    'kimia': { name: 'Kimia', icon: 'fa-flask', color: 'btn-warning' },
+                    'bindo': { name: 'Bahasa Indonesia', icon: 'fa-book', color: 'btn-success' },
+                    'bing': { name: 'Bahasa Inggris', icon: 'fa-language', color: 'btn-secondary' },
+                    'pkn': { name: 'PPKn', icon: 'fa-landmark', color: 'btn-danger' },
+                    'sejarah': { name: 'Sejarah', icon: 'fa-history', color: 'btn-warning' },
+                    'agama': { name: 'Agama Kristen', icon: 'fa-church', color: 'btn-success' }
+                };
+            }
+
+            let modalContent = `
+                <h4>Pilih Mata Pelajaran - ${kelas === 11 ? `Kelas ${kelas} ${jurusan.toUpperCase()}` : `Kelas ${kelas}`}</h4>
+                <div class="mapel-grid" style="margin-top: 20px;">
+            `;
+
+            for (const [mapelKey, mapelInfo] of Object.entries(mapelData)) {
+                let quizId;
+                if (kelas === 11 && jurusan) {
+                    quizId = `${mapelKey}-kelas-${kelas}-${jurusan}`;
+                } else {
+                    quizId = `${mapelKey}-kelas-${kelas}`;
+                }
+                
+                const quiz = quizDatabase[quizId];
+                const questionCount = quiz ? quiz.questions.length : 0;
+                
+                modalContent += `
+                    <button class="btn ${mapelInfo.color || 'btn-primary'}" 
+                            onclick="startQuiz('${quizId}', '${mapelInfo.name} ${kelas === 11 ? `Kelas ${kelas} ${jurusan.toUpperCase()}` : `Kelas ${kelas}`}')"
+                            style="height: auto; padding: 15px; min-height: 100px;">
+                        <i class="fas ${mapelInfo.icon}" style="font-size: 1.5rem; margin-bottom: 8px;"></i><br>
+                        <span style="font-size: 0.9rem;">${mapelInfo.name}</span><br>
+                        <small style="font-size: 0.75rem;">${questionCount} soal</small>
+                    </button>
+                `;
+            }
+
+            modalContent += `
+                </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <p style="color: var(--gray); font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> Pilih mata pelajaran untuk memulai latihan soal
+                    </p>
+                </div>
+            `;
+
+            document.getElementById('mapelModalContent').innerHTML = modalContent;
+            document.getElementById('mapelModal').style.display = 'block';
+        }
+
+        function closeMapelModal() {
+            document.getElementById('mapelModal').style.display = 'none';
+        }
+
+        // Function to validate quiz before starting
+        function validateQuizBeforeStart(quizId) {
+            const quiz = quizDatabase[quizId];
+            
+            if (!quiz || !quiz.questions || quiz.questions.length === 0) {
+                if (confirm('Belum ada soal untuk latihan ini. Apakah Anda ingin menambahkan soal melalui panel admin?')) {
+                    // Open admin panel with pre-filled dropdowns
+                    const parts = quizId.split('-');
+                    let mapel, kelas, jurusan;
+                    
+                    if (parts.length === 4) {
+                        [mapel, _, kelas, jurusan] = parts;
+                        document.getElementById('kelasSelect').value = `${kelas}-${jurusan}`;
+                    } else {
+                        [mapel, _, kelas] = parts;
+                        document.getElementById('kelasSelect').value = kelas;
+                    }
+                    
+                    document.getElementById('mapelSelect').value = mapel;
+                    document.getElementById('tipeSoalSelect').value = 'pg';
+                    
+                    // Show admin panel
+                    toggleAdminPanel();
+                    
+                    // Scroll to admin panel
+                    document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Open add question modal
+                    setTimeout(() => openAddQuestionModal(), 300);
+                }
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Reset Quiz function
+        function resetQuiz() {
+            const quiz = quizDatabase[currentQuiz];
+            if (!quiz) return;
+            
+            userAnswers = new Array(quiz.questions.length).fill(null);
+            currentQuestion = 0;
+            score = 0;
+            timeLeft = 600;
+            startTime = new Date();
+        }
+
+        // Open Add Question Modal
+        function openAddQuestionModal() {
+            const kelas = document.getElementById('kelasSelect').value;
+            const mapel = document.getElementById('mapelSelect').value;
+            const tipe = document.getElementById('tipeSoalSelect').value;
+            
+            if (!kelas || !mapel || !tipe) {
+                alert('Harap pilih kelas, mata pelajaran, dan tipe soal terlebih dahulu!');
+                return;
+            }
+            
+            // Set form values
+            document.getElementById('formKelas').value = kelas;
+            document.getElementById('formMapel').value = mapel;
+            document.getElementById('formTipe').value = tipe;
+            
+            // Show/hide options based on question type
+            const optionsSection = document.getElementById('optionsSection');
+            if (tipe === 'pg') {
+                optionsSection.style.display = 'block';
+            } else {
+                optionsSection.style.display = 'none';
+            }
+            
+            document.getElementById('addQuestionModal').style.display = 'block';
+        }
+
+        // Close Add Question Modal
+        function closeAddQuestionModal() {
+            document.getElementById('addQuestionModal').style.display = 'none';
+            document.getElementById('questionForm').reset();
+            delete document.getElementById('questionForm').dataset.editing;
+        }
+
+        // Handle Form Submission
+        document.getElementById('questionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const isEditing = this.dataset.editing;
+            
+            if (isEditing) {
+                // Editing existing question
+                const [quizId, questionIndex] = isEditing.split(',');
+                const quiz = quizDatabase[quizId];
+                const questionIndexNum = parseInt(questionIndex);
+                
+                // Update question data
+                const kelas = document.getElementById('formKelas').value;
+                const mapel = document.getElementById('formMapel').value;
+                const tipe = document.getElementById('formTipe').value;
+                const questionText = document.getElementById('formQuestion').value;
+                const explanation = document.getElementById('formExplanation').value;
+                const difficulty = document.getElementById('formDifficulty').value;
+                
+                const updatedQuestion = {
+                    question: questionText,
+                    explanation: explanation,
+                    difficulty: difficulty,
+                    type: tipe
+                };
+                
+                // Update options for multiple choice
+                if (tipe === 'pg') {
+                    const options = [];
+                    let correct = 0;
+                    
+                    // Get all option inputs
+                    const optionInputs = document.querySelectorAll('.option-input');
+                    optionInputs.forEach((input, index) => {
+                        options.push(input.value);
+                    });
+                    
+                    // Get correct answer
+                    const correctOption = document.querySelector('input[name="correctOption"]:checked');
+                    if (correctOption) {
+                        correct = parseInt(correctOption.value);
+                    }
+                    
+                    updatedQuestion.options = options;
+                    updatedQuestion.correct = correct;
+                }
+                
+                // Update the question
+                quiz.questions[questionIndexNum] = updatedQuestion;
+                
+                // Save to localStorage
+                saveToLocalStorage();
+                
+                // Show success message
+                alert('Soal berhasil diperbarui!');
+                
+                // Reset editing state
+                delete this.dataset.editing;
+                document.querySelector('.add-question-header h3').textContent = 'Tambah Soal Baru';
+            } else {
+                // Adding new question
+                const kelas = document.getElementById('formKelas').value;
+                const mapel = document.getElementById('formMapel').value;
+                const tipe = document.getElementById('formTipe').value;
+                const questionText = document.getElementById('formQuestion').value;
+                const explanation = document.getElementById('formExplanation').value;
+                const difficulty = document.getElementById('formDifficulty').value;
+                
+                // Generate quiz ID
+                let quizId;
+                if (kelas.includes('ipa') || kelas.includes('ips')) {
+                    const [kelasNum, jurusan] = kelas.split('-');
+                    quizId = `${mapel}-kelas-${kelasNum}-${jurusan}`;
+                } else {
+                    quizId = `${mapel}-kelas-${kelas}`;
+                }
+                
+                // Initialize quiz if not exists
+                if (!quizDatabase[quizId]) {
+                    let title;
+                    if (kelas.includes('ipa') || kelas.includes('ips')) {
+                        const [kelasNum, jurusan] = kelas.split('-');
+                        title = `${mapelNames[mapel]} Kelas ${kelasNum} ${jurusan.toUpperCase()} SMA`;
+                    } else {
+                        title = `${mapelNames[mapel]} Kelas ${kelas} SMA`;
+                    }
+                    
+                    quizDatabase[quizId] = {
+                        title: title,
+                        questions: []
+                    };
+                }
+                
+                // Create question object
+                const question = {
+                    question: questionText,
+                    explanation: explanation,
+                    difficulty: difficulty,
+                    type: tipe
+                };
+                
+                // Add options for multiple choice
+                if (tipe === 'pg') {
+                    const options = [];
+                    let correct = 0;
+                    
+                    // Get all option inputs
+                    const optionInputs = document.querySelectorAll('.option-input');
+                    optionInputs.forEach((input, index) => {
+                        options.push(input.value);
+                    });
+                    
+                    // Get correct answer
+                    const correctOption = document.querySelector('input[name="correctOption"]:checked');
+                    if (correctOption) {
+                        correct = parseInt(correctOption.value);
+                    }
+                    
+                    question.options = options;
+                    question.correct = correct;
+                }
+                
+                // Add question to database
+                quizDatabase[quizId].questions.push(question);
+                
+                // Save to localStorage
+                saveToLocalStorage();
+                
+                // Update question counts
+                updateQuestionCounts();
+                
+                // Show success message
+                alert(`Soal berhasil ditambahkan ke ${quizDatabase[quizId].title}!`);
+            }
+            
+            // Close modal and reset form
+            closeAddQuestionModal();
+        });
+
+        // Load Question List for Admin
+        function loadQuestionList() {
+            const questionList = document.getElementById('questionList');
+            questionList.innerHTML = '';
+            
+            let questionCount = 0;
+            
+            // Loop through all quizzes
+            for (const [quizId, quiz] of Object.entries(quizDatabase)) {
+                const parts = quizId.split('-');
+                let mapel, kelas, jurusan;
+                
+                if (parts.length === 4) {
+                    [mapel, _, kelas, jurusan] = parts;
+                } else {
+                    [mapel, _, kelas] = parts;
+                    jurusan = '';
+                }
+                
+                // Quiz header
+                const quizHeader = document.createElement('div');
+                quizHeader.className = 'section-title';
+                quizHeader.style.marginTop = '30px';
+                quizHeader.innerHTML = `
+                    <i class="fas fa-book"></i> ${mapelNames[mapel] || mapel} ${jurusan ? `Kelas ${kelas} ${jurusan.toUpperCase()}` : `Kelas ${kelas}`}
+                    <span style="font-size: 0.9rem; color: var(--gray); margin-left: auto;">
+                        ${quiz.questions.length} soal
+                    </span>
+                `;
+                questionList.appendChild(quizHeader);
+                
+                // List questions
+                quiz.questions.forEach((q, index) => {
+                    questionCount++;
+                    
+                    const questionItem = document.createElement('div');
+                    questionItem.className = 'question-item';
+                    questionItem.dataset.quizId = quizId;
+                    questionItem.dataset.questionIndex = index;
+                    
+                    let previewHTML = '';
+                    if (q.type === 'pg') {
+                        previewHTML = `
+                            <div class="question-preview">
+                                <h5>${q.question}</h5>
+                                ${q.options.map((option, optIndex) => `
+                                    <div class="option-preview ${optIndex === q.correct ? 'correct' : ''}">
+                                        ${String.fromCharCode(65 + optIndex)}. ${option}
+                                        ${optIndex === q.correct ? ' ✓' : ''}
+                                    </div>
+                                `).join('')}
+                                ${q.explanation ? `<p style="margin-top: 10px; font-size: 0.9rem;"><em>${q.explanation}</em></p>` : ''}
+                            </div>
+                        `;
+                    } else {
+                        previewHTML = `
+                            <div class="question-preview">
+                                <h5>${q.question}</h5>
+                                <p><strong>Tipe:</strong> ${q.type === 'uraian' ? 'Uraian' : 'Essay'}</p>
+                                ${q.explanation ? `<p><strong>Penjelasan:</strong> ${q.explanation}</p>` : ''}
+                            </div>
+                        `;
+                    }
+                    
+                    questionItem.innerHTML = `
+                        <div class="question-item-header">
+                            <div>
+                                <strong>Soal #${index + 1}</strong>
+                                <div class="question-meta">
+                                    <span>Tipe: ${q.type === 'pg' ? 'Pilihan Ganda' : q.type === 'uraian' ? 'Uraian' : 'Essay'}</span>
+                                    <span>•</span>
+                                    <span>Kesulitan: ${q.difficulty}</span>
+                                </div>
+                            </div>
+                            <div class="question-actions">
+                                <button class="btn btn-small btn-warning" onclick="editQuestion('${quizId}', ${index})">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-small btn-danger" onclick="deleteQuestion('${quizId}', ${index})">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                        ${previewHTML}
+                    `;
+                    
+                    questionList.appendChild(questionItem);
+                });
+            }
+            
+            // If no questions
+            if (questionCount === 0) {
+                questionList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <h3>Belum ada soal</h3>
+                        <p>Mulai tambahkan soal dengan menekan tombol "Tambah Soal Baru"</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Edit Question
+        function editQuestion(quizId, questionIndex) {
+            const quiz = quizDatabase[quizId];
+            const question = quiz.questions[questionIndex];
+            
+            // Fill form with existing data
+            const parts = quizId.split('-');
+            let mapel, kelas, jurusan;
+            
+            if (parts.length === 4) {
+                [mapel, _, kelas, jurusan] = parts;
+                document.getElementById('formKelas').value = `${kelas}-${jurusan}`;
+            } else {
+                [mapel, _, kelas] = parts;
+                document.getElementById('formKelas').value = kelas;
+            }
+            
+            document.getElementById('formMapel').value = mapel;
+            document.getElementById('formTipe').value = question.type;
+            document.getElementById('formQuestion').value = question.question;
+            document.getElementById('formExplanation').value = question.explanation || '';
+            document.getElementById('formDifficulty').value = question.difficulty;
+            
+            // Handle options for multiple choice
+            if (question.type === 'pg') {
+                document.getElementById('optionsSection').style.display = 'block';
+                
+                // Fill options
+                question.options.forEach((option, index) => {
+                    const optionInput = document.querySelector(`.option-input[data-index="${index}"]`);
+                    if (optionInput) {
+                        optionInput.value = option;
+                    }
+                });
+                
+                // Set correct answer
+                const correctRadio = document.querySelector(`input[name="correctOption"][value="${question.correct}"]`);
+                if (correctRadio) {
+                    correctRadio.checked = true;
+                }
+            } else {
+                document.getElementById('optionsSection').style.display = 'none';
+            }
+            
+            // Store editing state
+            document.getElementById('questionForm').dataset.editing = `${quizId},${questionIndex}`;
+            
+            // Show modal
+            document.getElementById('addQuestionModal').style.display = 'block';
+            document.querySelector('.add-question-header h3').textContent = 'Edit Soal';
+        }
+
+        // Delete Question
+        function deleteQuestion(quizId, questionIndex) {
+            if (confirm('Apakah Anda yakin ingin menghapus soal ini?')) {
+                const quiz = quizDatabase[quizId];
+                quiz.questions.splice(questionIndex, 1);
+                
+                // If no questions left, remove the quiz
+                if (quiz.questions.length === 0) {
+                    delete quizDatabase[quizId];
+                }
+                
+                saveToLocalStorage();
+                alert('Soal berhasil dihapus!');
+            }
+        }
+
+        // ========== VIDEO MANAGEMENT FUNCTIONS ==========
+
+        // Open Add Video Modal
+        function openAddVideoModal() {
+            document.getElementById('addVideoModal').style.display = 'block';
+        }
+
+        // Close Add Video Modal
+        function closeAddVideoModal() {
+            document.getElementById('addVideoModal').style.display = 'none';
+            document.getElementById('videoForm').reset();
+            delete document.getElementById('videoForm').dataset.editing;
+        }
+
+        // Handle Video Form Submission
+        document.getElementById('videoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const isEditing = this.dataset.editing;
+            const youtubeUrl = document.getElementById('videoYoutubeUrl').value;
+            
+            // Validasi URL YouTube
+            if (!isValidYouTubeUrl(youtubeUrl)) {
+                alert('Harap masukkan URL YouTube yang valid! Contoh: https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+                return;
+            }
+            
+            if (isEditing) {
+                // Editing existing video
+                const [kelas, videoIndex] = isEditing.split(',');
+                const videoIndexNum = parseInt(videoIndex);
+                
+                // Update video data
+                const video = {
+                    id: Date.now(), // New ID
+                    title: document.getElementById('videoTitle').value,
+                    description: document.getElementById('videoDescription').value,
+                    youtubeUrl: youtubeUrl, // Simpan URL lengkap
+                    mapel: document.getElementById('videoMapel').value,
+                    duration: document.getElementById('videoDuration').value,
+                    views: document.getElementById('videoViews').value,
+                    date: document.getElementById('videoDate').value,
+                    tags: [`kelas${kelas}`, document.getElementById('videoMapel').value]
+                };
+                
+                // Update video in database
+                const kelasKey = `kelas${kelas}`;
+                videoDatabase[kelasKey][videoIndexNum] = video;
+                
+                // Save to localStorage
+                saveVideosToLocalStorage();
+                
+                // Show success message
+                alert('Video berhasil diperbarui!');
+                
+                // Reset editing state
+                delete this.dataset.editing;
+                document.querySelector('#addVideoModal .add-question-header h3').textContent = 'Tambah Video Pembelajaran Baru';
+            } else {
+                // Adding new video
+                const kelas = document.getElementById('videoKelas').value;
+                const mapel = document.getElementById('videoMapel').value;
+                
+                // Create video object
+                const video = {
+                    id: Date.now(),
+                    title: document.getElementById('videoTitle').value,
+                    description: document.getElementById('videoDescription').value,
+                    youtubeUrl: youtubeUrl, // Simpan URL lengkap
+                    mapel: mapel,
+                    duration: document.getElementById('videoDuration').value,
+                    views: document.getElementById('videoViews').value,
+                    date: document.getElementById('videoDate').value,
+                    tags: [`kelas${kelas}`, mapel]
+                };
+                
+                // Add video to database
+                const kelasKey = `kelas${kelas}`;
+                videoDatabase[kelasKey].push(video);
+                
+                // Save to localStorage
+                saveVideosToLocalStorage();
+                
+                // Show success message
+                alert(`Video berhasil ditambahkan ke ${kelas === '10' ? 'Kelas 10' : kelas === '11-ipa' ? 'Kelas 11 IPA' : kelas === '11-ips' ? 'Kelas 11 IPS' : 'Kelas 12'} - ${mapelNames[mapel] || mapel}!`);
+            }
+            
+            // Close modal and reset form
+            closeAddVideoModal();
+        });
+
+        // Load Video List for Admin
+        function loadVideoList() {
+            const videoList = document.getElementById('videoList');
+            videoList.innerHTML = '';
+            
+            const filterKelas = document.getElementById('filterVideoKelas').value;
+            const filterMapel = document.getElementById('filterVideoMapel').value;
+            
+            let videoCount = 0;
+            
+            // Loop through all classes
+            const kelasOptions = [
+                { key: '10', label: 'Kelas 10' },
+                { key: '11ipa', label: 'Kelas 11 IPA' },
+                { key: '11ips', label: 'Kelas 11 IPS' },
+                { key: '12', label: 'Kelas 12' }
+            ];
+            
+            for (let kelasOption of kelasOptions) {
+                const kelasKey = `kelas${kelasOption.key}`;
+                const videos = videoDatabase[kelasKey] || [];
+                
+                // Apply filters
+                let filteredVideos = videos;
+                if (filterKelas && filterKelas !== kelasOption.key) {
+                    continue;
+                }
+                if (filterMapel) {
+                    filteredVideos = filteredVideos.filter(video => video.mapel === filterMapel);
+                }
+                
+                if (filteredVideos.length === 0) {
+                    continue;
+                }
+                
+                // Class header
+                const classHeader = document.createElement('div');
+                classHeader.className = 'section-title';
+                classHeader.style.marginTop = '30px';
+                classHeader.innerHTML = `
+                    <i class="fas fa-graduation-cap"></i> ${kelasOption.label}
+                    <span style="font-size: 0.9rem; color: var(--gray); margin-left: auto;">
+                        ${filteredVideos.length} video
+                    </span>
+                `;
+                videoList.appendChild(classHeader);
+                
+                // List videos
+                filteredVideos.forEach((video, index) => {
+                    videoCount++;
+                    
+                    const videoItem = document.createElement('div');
+                    videoItem.className = 'question-item';
+                    
+                    // Extract YouTube ID untuk thumbnail
+                    const youtubeId = extractYouTubeId(video.youtubeUrl);
+                    const thumbnailUrl = getYouTubeThumbnail(video.youtubeUrl);
+                    
+                    videoItem.innerHTML = `
+                        <div class="question-item-header">
+                            <div>
+                                <strong>${video.title}</strong>
+                                <div class="question-meta">
+                                    <span>${mapelNames[video.mapel] || video.mapel}</span>
+                                    <span>•</span>
+                                    <span>Durasi: ${video.duration}</span>
+                                    <span>•</span>
+                                    <span>${video.views} views</span>
+                                    <span>•</span>
+                                    <span>${video.date}</span>
+                                </div>
+                            </div>
+                            <div class="question-actions">
+                                <button class="btn btn-small btn-info" onclick="playVideo('${video.youtubeUrl}', '${video.title}')">
+                                    <i class="fas fa-play"></i> Putar
+                                </button>
+                                <button class="btn btn-small btn-warning" onclick="editVideo('${kelasOption.key}', ${index})">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn btn-small btn-danger" onclick="deleteVideo('${kelasOption.key}', ${index})">
+                                    <i class="fas fa-trash"></i> Hapus
+                                </button>
+                            </div>
+                        </div>
+                        <div class="question-preview">
+                            <div style="display: flex; gap: 15px;">
+                                <div style="flex: 0 0 120px;">
+                                    <img src="${thumbnailUrl}" 
+                                         alt="${video.title}"
+                                         style="width: 100%; border-radius: 8px;"
+                                         onerror="this.src='https://via.placeholder.com/120x68/1a237e/ffffff?text=Video'">
+                                </div>
+                                <div style="flex: 1;">
+                                    <p><strong>Deskripsi:</strong> ${video.description}</p>
+                                    <p><strong>URL YouTube:</strong> <a href="${video.youtubeUrl}" target="_blank" style="color: var(--primary);">${video.youtubeUrl}</a></p>
+                                    <p><strong>ID Video:</strong> ${youtubeId}</p>
+                                    <p><strong>Tags:</strong> ${video.tags.join(', ')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    videoList.appendChild(videoItem);
+                });
+            }
+            
+            // If no videos
+            if (videoCount === 0) {
+                videoList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-video-slash" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <h3>Belum ada video</h3>
+                        <p>Mulai tambahkan video dengan menekan tombol "Tambah Video Baru"</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Edit Video
+        function editVideo(kelas, videoIndex) {
+            const videos = videoDatabase[`kelas${kelas}`];
+            const video = videos[videoIndex];
+            
+            // Fill form with existing data
+            document.getElementById('videoTitle').value = video.title;
+            document.getElementById('videoDescription').value = video.description;
+            document.getElementById('videoYoutubeUrl').value = video.youtubeUrl; // URL lengkap
+            document.getElementById('videoKelas').value = kelas;
+            document.getElementById('videoMapel').value = video.mapel;
+            document.getElementById('videoDuration').value = video.duration;
+            document.getElementById('videoDate').value = video.date;
+            document.getElementById('videoViews').value = video.views;
+            
+            // Store editing state
+            document.getElementById('videoForm').dataset.editing = `${kelas},${videoIndex}`;
+            
+            // Show modal
+            document.getElementById('addVideoModal').style.display = 'block';
+            document.querySelector('#addVideoModal .add-question-header h3').textContent = 'Edit Video';
+        }
+
+        // Delete Video
+        function deleteVideo(kelas, videoIndex) {
+            if (confirm('Apakah Anda yakin ingin menghapus video ini?')) {
+                videoDatabase[`kelas${kelas}`].splice(videoIndex, 1);
+                saveVideosToLocalStorage();
+                alert('Video berhasil dihapus!');
+            }
+        }
+
+        // Filter video list when dropdown changes
+        document.getElementById('filterVideoKelas').addEventListener('change', loadVideoList);
+        document.getElementById('filterVideoMapel').addEventListener('change', loadVideoList);
+
+        // ========== VIDEO DISPLAY FUNCTIONS ==========
+
+        // Load videos function
+        function loadVideos() {
+            // Combine stored videos with default videos
+            const combinedVideos = {};
+            for (let kelas of ['10', '11ipa', '11ips', '12']) {
+                const kelasKey = `kelas${kelas}`;
+                const storedVideos = videoDatabase[kelasKey] || [];
+                const defaultVids = defaultVideos[kelasKey] || [];
+                combinedVideos[kelasKey] = [...storedVideos, ...defaultVids];
+            }
+            
+            // Load all videos
+            loadVideoGrid('allVideosGrid', getAllVideos(combinedVideos));
+            
+            // Load videos by grade
+            loadVideoGrid('kelas10VideosGrid', combinedVideos['kelas10'] || []);
+            loadVideoGrid('kelas11ipaVideosGrid', combinedVideos['kelas11ipa'] || []);
+            loadVideoGrid('kelas11ipsVideosGrid', combinedVideos['kelas11ips'] || []);
+            loadVideoGrid('kelas12VideosGrid', combinedVideos['kelas12'] || []);
+        }
+
+        function getAllVideos(db = videoDatabase) {
+            let allVideos = [];
+            for (let kelas of ['10', '11ipa', '11ips', '12']) {
+                const kelasKey = `kelas${kelas}`;
+                const kelasVideos = db[kelasKey] || [];
+                allVideos = allVideos.concat(kelasVideos);
+            }
+            return allVideos;
+        }
+
+        function loadVideoGrid(gridId, videos) {
+            const grid = document.getElementById(gridId);
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            
+            if (videos.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-videos">
+                        <i class="fas fa-video-slash"></i>
+                        <h3>Belum ada video</h3>
+                        <p>Video pembelajaran untuk kelas ini akan segera ditambahkan</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort videos by ID (newest first)
+            videos.sort((a, b) => b.id - a.id).forEach(video => {
+                const videoCard = createVideoCard(video);
+                grid.appendChild(videoCard);
+            });
+        }
+
+        function createVideoCard(video) {
+            const videoCard = document.createElement('div');
+            videoCard.className = 'video-card';
+            videoCard.dataset.mapel = video.mapel;
+            
+            // Determine class label
+            let kelasLabel = '';
+            if (video.tags.find(tag => tag === 'kelas10')) {
+                kelasLabel = '10';
+            } else if (video.tags.find(tag => tag === 'kelas11ipa')) {
+                kelasLabel = '11 IPA';
+            } else if (video.tags.find(tag => tag === 'kelas11ips')) {
+                kelasLabel = '11 IPS';
+            } else if (video.tags.find(tag => tag === 'kelas12')) {
+                kelasLabel = '12';
+            } else {
+                kelasLabel = '10'; // default
+            }
+            
+            videoCard.dataset.kelas = kelasLabel;
+            
+            // Get mapel name
+            const mapelName = mapelNames[video.mapel] || video.mapel;
+            
+            // Extract YouTube ID dan buat thumbnail
+            const youtubeId = extractYouTubeId(video.youtubeUrl);
+            const thumbnailUrl = getYouTubeThumbnail(video.youtubeUrl);
+            
+            videoCard.innerHTML = `
+                <div class="video-thumbnail" onclick="playVideo('${video.youtubeUrl}', '${video.title}')">
+                    <img src="${thumbnailUrl}" 
+                         alt="${video.title}"
+                         onerror="this.src='https://via.placeholder.com/320x180/1a237e/ffffff?text=Video+SMA'">
+                    <div class="play-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="video-duration">${video.duration}</div>
+                </div>
+                <div class="video-info">
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                        <span class="video-tag kelas">Kelas ${kelasLabel}</span>
+                        <span class="video-tag ${video.mapel}">${mapelName}</span>
+                    </div>
+                    <h4>${video.title}</h4>
+                    <p style="font-size: 0.85rem; color: var(--gray); margin-bottom: 10px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
+                        ${video.description}
+                    </p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> ${video.views}</span>
+                        <span>${video.date}</span>
+                    </div>
+                </div>
+            `;
+            
+            return videoCard;
+        }
+
+        // Switch video tab
+        function switchVideoTab(tabName) {
+            // Remove active class from all tabs and buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            // Reset filter
+            document.getElementById('videoMapelFilter').value = '';
+            
+            // Show all videos in the active tab
+            const currentFilter = document.getElementById('videoMapelFilter').value;
+            filterVideosInTab(tabName, currentFilter);
+        }
+
+        // Filter videos by mapel
+        function filterVideosByMapel() {
+            const selectedMapel = document.getElementById('videoMapelFilter').value;
+            const activeTab = document.querySelector('.tab-content.active').id.replace('Tab', '');
+            
+            filterVideosInTab(activeTab, selectedMapel);
+        }
+
+        function filterVideosInTab(tabName, mapelFilter) {
+            let videos = [];
+            
+            if (tabName === 'semua') {
+                videos = getAllVideos();
+            } else {
+                let kelasKey;
+                if (tabName === 'kelas10') {
+                    kelasKey = 'kelas10';
+                } else if (tabName === 'kelas11ipa') {
+                    kelasKey = 'kelas11ipa';
+                } else if (tabName === 'kelas11ips') {
+                    kelasKey = 'kelas11ips';
+                } else if (tabName === 'kelas12') {
+                    kelasKey = 'kelas12';
+                }
+                
+                videos = videoDatabase[kelasKey] || [];
+                
+                // Add default videos
+                const defaultVids = defaultVideos[kelasKey] || [];
+                videos = [...videos, ...defaultVids];
+            }
+            
+            // Filter by mapel if selected
+            if (mapelFilter) {
+                videos = videos.filter(video => video.mapel === mapelFilter);
+            }
+            
+            // Sort by ID (newest first)
+            videos.sort((a, b) => b.id - a.id);
+            
+            // Load filtered videos
+            loadVideoGrid(`${tabName}VideosGrid`, videos);
+        }
+
+        // Play video function - Diperbarui untuk menerima URL YouTube
+        function playVideo(youtubeUrl, title) {
+            const videoModal = document.createElement('div');
+            videoModal.className = 'modal';
+            videoModal.id = 'videoModal';
+            videoModal.style.display = 'block';
+            
+            // Extract YouTube ID
+            const youtubeId = extractYouTubeId(youtubeUrl);
+            
+            videoModal.innerHTML = `
+                <div class="modal-content" style="max-width: 800px;">
+                    <div class="modal-header">
+                        <h3>${title}</h3>
+                        <button class="close-modal" onclick="closeVideoModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
+                            <iframe 
+                                src="https://www.youtube.com/embed/${youtubeId}?autoplay=1" 
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button class="btn btn-small" onclick="window.open('${youtubeUrl}', '_blank')">
+                                <i class="fab fa-youtube"></i> Buka di YouTube
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(videoModal);
+            
+            // Close modal when clicking outside
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    closeVideoModal();
+                }
+            });
+        }
+
+        function closeVideoModal() {
+            const videoModal = document.getElementById('videoModal');
+            if (videoModal) {
+                videoModal.remove();
+            }
+        }
+
+        // Flashcard functionality
+        let currentCardIndex = 1;
+        const totalCards = 10;
+        
+        function flipCard() {
+            const flashcard = document.getElementById('flashcard');
+            flashcard.classList.toggle('flipped');
+        }
+        
+        function nextCard() {
+            if (currentCardIndex < totalCards) {
+                currentCardIndex++;
+                updateCardCounter();
+                resetCard();
+            }
+        }
+        
+        function prevCard() {
+            if (currentCardIndex > 1) {
+                currentCardIndex--;
+                updateCardCounter();
+                resetCard();
+            }
+        }
+        
+        function updateCardCounter() {
+            document.getElementById('cardCounter').textContent = `Kartu ${currentCardIndex} dari ${totalCards}`;
+        }
+        
+        function resetCard() {
+            const flashcard = document.getElementById('flashcard');
+            flashcard.classList.remove('flipped');
+            
+            const frontContent = document.querySelector('.flashcard-front .flashcard-content');
+            const backContent = document.querySelector('.flashcard-back .flashcard-content');
+            
+            const cardData = getCardData(currentCardIndex);
+            
+            frontContent.innerHTML = `
+                <h3>${cardData.question}</h3>
+                <p>Klik kartu untuk melihat jawaban</p>
+                <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.8;">
+                    <i class="fas fa-lightbulb"></i> Tips: ${cardData.tip}
+                </div>
+            `;
+            
+            backContent.innerHTML = `
+                <h3>Jawaban:</h3>
+                <p><strong>${cardData.answer}</strong></p>
+                <p style="margin-top: 20px; font-size: 1rem;">${cardData.explanation}</p>
+            `;
+        }
+        
+        function getCardData(index) {
+            const cards = [
+                {
+                    question: "Apa hukum Newton pertama?",
+                    answer: "Hukum Inersia",
+                    explanation: "\"Setiap benda akan tetap diam atau bergerak lurus beraturan kecuali ada gaya yang bekerja padanya.\"",
+                    tip: "Hafalkan dengan contoh aplikasi sehari-hari"
+                },
+                {
+                    question: "Rumus kimia asam sulfat adalah?",
+                    answer: "H₂SO₄",
+                    explanation: "Asam sulfat terdiri dari 2 atom hidrogen, 1 atom sulfur, dan 4 atom oksigen.",
+                    tip: "Buat catatan dengan warna berbeda"
+                },
+                {
+                    question: "Apa fungsi mitokondria dalam sel?",
+                    answer: "Penghasil energi (ATP)",
+                    explanation: "Mitokondria adalah organel sel yang berfungsi sebagai penghasil energi melalui respirasi seluler.",
+                    tip: "Hubungkan dengan proses respirasi"
+                },
+                {
+                    question: "Apa itu permintaan elastis?",
+                    answer: "Perubahan harga berpengaruh besar terhadap jumlah permintaan",
+                    explanation: "Permintaan elastis terjadi ketika persentase perubahan jumlah permintaan > persentase perubahan harga.",
+                    tip: "Gambar kurva permintaan"
+                },
+                {
+                    question: "Siapa bapak sosiologi Indonesia?",
+                    answer: "Soerjono Soekanto",
+                    explanation: "Soerjono Soekanto dianggap sebagai bapak sosiologi Indonesia karena kontribusinya dalam pengembangan sosiologi di Indonesia.",
+                    tip: "Hubungkan dengan tokoh sejarah"
+                },
+                {
+                    question: "Turunan dari f(x) = 3x² + 2x - 5 adalah?",
+                    answer: "f'(x) = 6x + 2",
+                    explanation: "Menggunakan aturan turunan: d/dx(xⁿ) = nxⁿ⁻¹",
+                    tip: "Latihan soal rutin setiap hari"
+                },
+                {
+                    question: "Perang Dunia II berlangsung tahun?",
+                    answer: "1939-1945",
+                    explanation: "Perang Dunia II berlangsung dari 1 September 1939 hingga 2 September 1945.",
+                    tip: "Buat timeline peristiwa"
+                },
+                {
+                    question: "Apa ibukota provinsi Papua Barat?",
+                    answer: "Manokwari",
+                    explanation: "Manokwari adalah ibukota provinsi Papua Barat.",
+                    tip: "Gunakan peta untuk visualisasi"
+                },
+                {
+                    question: "Ciri-ciri teks eksposisi adalah?",
+                    answer: "Faktual, logis, dan informatif",
+                    explanation: "Teks eksposisi bersifat faktual (berdasarkan fakta), logis (sistematis), dan informatif (memberi informasi).",
+                    tip: "Baca contoh teks eksposisi"
+                },
+                {
+                    question: "Present Perfect Tense digunakan untuk?",
+                    answer: "Aksi yang dimulai di masa lalu dan masih berlanjut",
+                    explanation: "Present Perfect Tense digunakan untuk menyatakan aksi yang dimulai di masa lalu dan masih berlanjut atau berpengaruh hingga sekarang.",
+                    tip: "Buat kalimat contoh"
+                }
+            ];
+            
+            return cards[index - 1] || cards[0];
+        }
+        
+        // Modal functionality
+        function openMateriModal(kelas) {
+            alert(`Materi untuk ${kelas} SMA sedang dalam pengembangan.`);
+        }
+        
+        function switchTab(tabName) {
+            // Remove active class from all tabs and buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+        
+        // Admin panel functionality
+        function toggleAdminPanel() {
+            const adminPanel = document.getElementById('adminPanel');
+            adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
+            if (adminPanel.style.display === 'block') {
+                loadQuestionList();
+                loadVideoList();
+            }
+        }
+
+        // ========== INISIALISASI ==========
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Aplikasi dimuat...');
+            
+            // Inisialisasi komponen
+            updateCardCounter();
+            updateQuestionCounts();
+            updateProgressStats();
+            loadVideos();
+            
+            // Setup event listeners untuk modal
+            setupModalListeners();
+            
+            // Setup mobile menu
+            setupMobileMenu();
+            
+            // Animate progress bars
+            setTimeout(() => {
+                document.querySelectorAll('.progress-fill').forEach(fill => {
+                    const width = fill.style.width;
+                    fill.style.width = '0';
+                    setTimeout(() => {
+                        fill.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+            
+            console.log('Aplikasi siap digunakan!');
+            console.log('Quiz yang tersedia:', Object.keys(quizDatabase));
+        });
+
+        // Setup modal listeners
+        function setupModalListeners() {
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                // Quiz modal
+                const quizModal = document.getElementById('quizModal');
+                if (e.target === quizModal) {
+                    closeQuiz();
+                }
+                
+                // Results modal
+                const resultsModal = document.getElementById('resultsModal');
+                if (e.target === resultsModal) {
+                    closeResults();
+                }
+                
+                // Add question modal
+                const addQuestionModal = document.getElementById('addQuestionModal');
+                if (e.target === addQuestionModal) {
+                    document.getElementById('addQuestionModal').style.display = 'none';
+                }
+                
+                // Add video modal
+                const addVideoModal = document.getElementById('addVideoModal');
+                if (e.target === addVideoModal) {
+                    document.getElementById('addVideoModal').style.display = 'none';
+                }
+                
+                // Mapel modal
+                const mapelModal = document.getElementById('mapelModal');
+                if (e.target === mapelModal) {
+                    document.getElementById('mapelModal').style.display = 'none';
+                }
+            });
+            
+            // Close buttons
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal, .quiz-modal, .results-modal, .add-question-modal');
+                    if (modal) modal.style.display = 'none';
+                });
+            });
+        }
+
+        // Setup mobile menu
+        function setupMobileMenu() {
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.matches('.dropdown a')) {
+                    const dropdowns = document.querySelectorAll('.dropdown-menu');
+                    dropdowns.forEach(dropdown => {
+                        dropdown.style.display = 'none';
+                    });
+                }
+            });
+            
+            // Show dropdown on hover
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('mouseenter', function() {
+                    const menu = this.querySelector('.dropdown-menu');
+                    if (menu) menu.style.display = 'block';
+                });
+                
+                dropdown.addEventListener('mouseleave', function() {
+                    const menu = this.querySelector('.dropdown-menu');
+                    if (menu) menu.style.display = 'none';
+                });
+            });
+        }
+
+        // ========== FUNGSI TAMBAHAN UNTUK TESTING ==========
+
+        // Fungsi untuk test cepat
+        function testQuiz() {
+            console.log('=== TEST QUIZ SYSTEM ===');
+            console.log('1. Database quiz:', quizDatabase);
+            console.log('2. Quiz tersedia:');
+            Object.keys(quizDatabase).forEach(key => {
+                console.log(`   - ${key}: ${quizDatabase[key].questions.length} soal`);
+            });
+            console.log('3. Memulai test quiz...');
+            
+            // Test dengan quiz yang pasti ada
+            startQuiz('mtk-kelas-10', 'Test Matematika Kelas 10');
+        }
+
+        // Ekspos fungsi untuk testing di console
+        window.testQuiz = testQuiz;
+        window.showAllQuizzes = function() {
+            console.log('Daftar semua quiz:');
+            Object.keys(quizDatabase).forEach(key => {
+                const quiz = quizDatabase[key];
+                console.log(`"${key}": "${quiz.title}" - ${quiz.questions.length} soal`);
+            });
+        };
+
+    </script>
+</body>
+</html>

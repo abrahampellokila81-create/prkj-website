@@ -1,0 +1,1899 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Belajar - Portal Edukasi PRK JAKARTA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tambahan CSS untuk game dan materi */
+        .game-container, .materials-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 40px;
+            display: none;
+        }
+        
+        .game-header, .materials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #777;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #1a4d8f;
+        }
+        
+        .game-content {
+            margin-bottom: 30px;
+        }
+        
+        .score-container {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .score-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+        
+        .question-container {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .question-number {
+            color: #1a4d8f;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .option-btn {
+            padding: 15px;
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+        }
+        
+        .option-btn:hover {
+            background-color: #f0f7ff;
+            border-color: #a0c8ff;
+        }
+        
+        .option-btn.selected {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+        }
+        
+        .option-btn.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .option-btn.wrong {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .game-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .prev-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .next-btn {
+            background-color: #1a4d8f;
+            color: white;
+        }
+        
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .game-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .game-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .results-title {
+            color: #1a4d8f;
+            margin-bottom: 20px;
+        }
+        
+        .final-score {
+            font-size: 3rem;
+            color: #28a745;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .restart-btn {
+            background-color: #ffc107;
+            color: black;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .restart-btn:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .material-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .material-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .material-header {
+            background-color: #f8f9fa;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .material-title {
+            font-weight: 600;
+            color: #1a4d8f;
+            margin: 0;
+        }
+        
+        .material-format {
+            background-color: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .material-preview {
+            padding: 20px;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .material-actions {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .view-btn, .download-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .view-btn {
+            background-color: #1a4d8f;
+            color: white;
+            flex-grow: 1;
+        }
+        
+        .download-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .upload-section {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .upload-title {
+            color: #1a4d8f;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .upload-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .upload-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .upload-btn {
+            background-color: #ffc107;
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .file-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .material-content {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .material-content h3 {
+            color: #1a4d8f;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .material-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .material-content ul, .material-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .material-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .material-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .game-active {
+            display: block;
+        }
+        
+        .materials-active {
+            display: block;
+        }
+        
+        .active-game-btn {
+            background-color: #28a745 !important;
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                </div>
+                <div class="logo-text">
+                    <h1>PRKJ</h1>
+                    <p>Persekutuan Rohani Kristen Jakarta</p>
+                </div>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li class="dropdown">
+                        <a href="profil.html"><i class="fas fa-church"></i> Profil & Sejarah <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="visi.html"><i class="fas fa-eye"></i> Visi</a></li>
+                            <li><a href="misi.html"><i class="fas fa-bullseye"></i> Misi</a></li>
+                            <li><a href="sejarah.html"><i class="fas fa-history"></i> Sejarah & Pendiri</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="live-streaming.html"><i class="fas fa-video"></i> Kegiatan & Pelayanan</a></li>
+                    <li class="dropdown">
+                        <a href="ruang-belajar.html"><i class="fas fa-book"></i> Ruang Belajar <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sd.html"><i class="fas fa-book"></i> SD</a></li>
+                            <li><a href="smp.html"><i class="fas fa-book"></i> SMP</a></li>
+                            <li><a href="sma.html"><i class="fas fa-book"></i> SMA</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="toko.html"><i class="fas fa-store"></i> Toko</a></li>
+                    <li class="dropdown">
+                        <a href="dokumentasi.html"><i class="fas fa-images"></i> Dokumentasi & Informasi <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="dokumentasi-paskah.html"><i class="fas fa-cross"></i> Paskah</a></li>
+                            <li><a href="dokumentasi-natal.html"><i class="fas fa-star"></i> Natal</a></li>
+                            <li><a href="dokumentasi-seminar.html"><i class="fas fa-chalkboard-teacher"></i> Seminar</a></li>
+                            <li><a href="dokumentasi-retret.html"><i class="fas fa-pray"></i> Retret</a></li>
+                            <li><a href="kontak.html"><i class="fas fa-address-book"></i> Kontak & Lokasi</a></li>
+                            <li><a href="keuangan.html"><i class="fas fa-donate"></i> Informasi Keuangan</a></li>  
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header" style="background: linear-gradient(rgba(26, 77, 143, 0.8), rgba(26, 77, 143, 0.9)), url('https://via.placeholder.com/1920x500/1a4d8f/ffffff?text=Ruang+Belajar+PRKJ'); background-size: cover; background-position: center; padding: 100px 0; text-align: center; color: white;">
+        <div class="container">
+            <h1 style="font-size: 3rem; margin-bottom: 20px;">Ruang Belajar PRK JAKARTA</h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Portal edukasi dengan materi SD, SMP, SMA, video pembelajaran, dan game interaktif</p>
+        </div>
+    </section>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb" style="background-color: var(--light-gray); padding: 15px 0;">
+        <div class="container">
+            <span style="color: var(--gray);">
+                <a href="index.html" style="color: var(--primary);">Beranda</a> 
+                <i class="fas fa-chevron-right" style="margin: 0 10px; font-size: 0.8rem;"></i> 
+                Ruang Belajar
+            </span>
+        </div>
+    </div>
+
+    <!-- RUANG BELAJAR CONTENT -->
+    <section class="ruang-belajar-content" style="padding: 80px 0;">
+        <div class="container">
+            <!-- Menu Utama -->
+            <div class="learning-menu" style="margin-bottom: 50px;">
+                <div class="menu-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                    
+                    <a href="#" class="menu-card start-game-btn" data-game="math" style="display: block; background-color: white; border-radius: 15px; padding: 30px; text-align: center; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer;">
+                        <div class="menu-icon" style="width: 80px; height: 80px; border-radius: 50%; background-color: rgba(40, 167, 69, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <i class="fas fa-gamepad" style="font-size: 2.5rem; color: #28a745;"></i>
+                        </div>
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">Game Edukasi</h3>
+                        <p style="color: var(--gray);">Game interaktif belajar sambil bermain</p>
+                    </a>
+                    
+                    <a href="#" class="menu-card show-materials-btn" style="display: block; background-color: white; border-radius: 15px; padding: 30px; text-align: center; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer;">
+                        <div class="menu-icon" style="width: 80px; height: 80px; border-radius: 50%; background-color: rgba(255, 193, 7, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                            <i class="fas fa-bible" style="font-size: 2.5rem; color: #ffc107;"></i>
+                        </div>
+                        <h3 style="color: var(--primary); margin-bottom: 10px;">Materi Rohani</h3>
+                        <p style="color: var(--gray);">Materi pembelajaran teologi & Alkitab</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Game Edukasi Section -->
+            <div id="game-edukasi" style="margin-bottom: 80px;">
+                <h2 style="color: var(--primary); margin-bottom: 30px; text-align: center; border-bottom: 3px solid #28a745; padding-bottom: 15px;">
+                    <i class="fas fa-gamepad"></i> Game Edukasi Interaktif
+                </h2>
+                
+                <div class="games-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                    <div class="game-card" style="background-color: white; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow);">
+                        <div class="game-image" style="height: 180px; overflow: hidden;">
+                            <img src="images/math.jpg" alt="Game Matematika" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="game-info" style="padding: 25px;">
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Math Adventure</h4>
+                            <p style="color: var(--gray); margin-bottom: 20px; font-size: 0.95rem;">Game petualangan matematika dengan tantangan penjumlahan, pengurangan, dan perkalian.</p>
+                            <a href="#" class="btn start-game-btn" data-game="math" style="background-color: #28a745; width: 100%; text-align: center;">
+                                <i class="fas fa-play-circle"></i> Mainkan Game
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card" style="background-color: white; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow);">
+                        <div class="game-image" style="height: 180px; overflow: hidden;">
+                            <img src="images/bible.jpg" alt="Kuis Alkitab" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="game-info" style="padding: 25px;">
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Bible Quiz Challenge</h4>
+                            <p style="color: var(--gray); margin-bottom: 20px; font-size: 0.95rem;">Kuis pengetahuan Alkitab dengan berbagai level kesulitan untuk semua usia.</p>
+                            <a href="#" class="btn start-game-btn" data-game="bible" style="background-color: #17a2b8; width: 100%; text-align: center;">
+                                <i class="fas fa-play-circle"></i> Mainkan Game
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card" style="background-color: white; border-radius: 15px; overflow: hidden; box-shadow: var(--shadow);">
+                        <div class="game-image" style="height: 180px; overflow: hidden;">
+                            <img src="images/word.jpg" alt="Game Vocabulary" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="game-info" style="padding: 25px;">
+                            <h4 style="color: var(--primary); margin-bottom: 10px;">Word Master</h4>
+                            <p style="color: var(--gray); margin-bottom: 20px; font-size: 0.95rem;">Game memperkaya kosakata bahasa Indonesia dan Inggris untuk anak-anak.</p>
+                            <a href="#" class="btn start-game-btn" data-game="vocabulary" style="background-color: #ffc107; color: black; width: 100%; text-align: center;">
+                                <i class="fas fa-play-circle"></i> Mainkan Game
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container untuk Game yang Aktif -->
+            <div id="game-math" class="game-container">
+                <div class="game-header">
+                    <h3 style="color: var(--primary); margin: 0;"><i class="fas fa-calculator"></i> Math Adventure</h3>
+                    <button class="close-btn close-game-btn"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="score-container">
+                    <div>
+                        <h4 style="margin: 0; color: var(--primary);">Skor Anda</h4>
+                        <p style="margin: 5px 0 0 0; color: var(--gray); font-size: 0.9rem;">Jawab benar untuk mendapatkan poin</p>
+                    </div>
+                    <div class="score-value" id="math-score">0</div>
+                </div>
+                
+                <div class="game-content">
+                    <div id="math-question-container">
+                        <!-- Soal akan dimuat di sini via JavaScript -->
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button class="game-btn prev-btn" id="math-prev-btn" disabled><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                        <div>
+                            <button class="game-btn next-btn" id="math-next-btn">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                            <button class="game-btn submit-btn" id="math-submit-btn" style="display: none;">Kirim Jawaban</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="math-results" class="results-container" style="display: none;">
+                    <h3 class="results-title">Hasil Math Adventure</h3>
+                    <p>Anda telah menyelesaikan semua soal matematika!</p>
+                    <div class="final-score" id="math-final-score">0</div>
+                    <p id="math-result-message">Pesan hasil akan muncul di sini</p>
+                    <button class="restart-btn" id="math-restart-btn"><i class="fas fa-redo"></i> Main Lagi</button>
+                </div>
+            </div>
+            
+            <div id="game-bible" class="game-container">
+                <div class="game-header">
+                    <h3 style="color: var(--primary); margin: 0;"><i class="fas fa-bible"></i> Bible Quiz Challenge</h3>
+                    <button class="close-btn close-game-btn"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="score-container">
+                    <div>
+                        <h4 style="margin: 0; color: var(--primary);">Skor Anda</h4>
+                        <p style="margin: 5px 0 0 0; color: var(--gray); font-size: 0.9rem;">Jawab benar untuk mendapatkan poin</p>
+                    </div>
+                    <div class="score-value" id="bible-score">0</div>
+                </div>
+                
+                <div class="game-content">
+                    <div id="bible-question-container">
+                        <!-- Soal akan dimuat di sini via JavaScript -->
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button class="game-btn prev-btn" id="bible-prev-btn" disabled><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                        <div>
+                            <button class="game-btn next-btn" id="bible-next-btn">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                            <button class="game-btn submit-btn" id="bible-submit-btn" style="display: none;">Kirim Jawaban</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="bible-results" class="results-container" style="display: none;">
+                    <h3 class="results-title">Hasil Bible Quiz Challenge</h3>
+                    <p>Anda telah menyelesaikan semua soal Alkitab!</p>
+                    <div class="final-score" id="bible-final-score">0</div>
+                    <p id="bible-result-message">Pesan hasil akan muncul di sini</p>
+                    <button class="restart-btn" id="bible-restart-btn"><i class="fas fa-redo"></i> Main Lagi</button>
+                </div>
+            </div>
+            
+            <div id="game-vocabulary" class="game-container">
+                <div class="game-header">
+                    <h3 style="color: var(--primary); margin: 0;"><i class="fas fa-language"></i> Word Master</h3>
+                    <button class="close-btn close-game-btn"><i class="fas fa-times"></i></button>
+                </div>
+                
+                <div class="score-container">
+                    <div>
+                        <h4 style="margin: 0; color: var(--primary);">Skor Anda</h4>
+                        <p style="margin: 5px 0 0 0; color: var(--gray); font-size: 0.9rem;">Jawab benar untuk mendapatkan poin</p>
+                    </div>
+                    <div class="score-value" id="vocabulary-score">0</div>
+                </div>
+                
+                <div class="game-content">
+                    <div id="vocabulary-question-container">
+                        <!-- Soal akan dimuat di sini via JavaScript -->
+                    </div>
+                    
+                    <div class="game-controls">
+                        <button class="game-btn prev-btn" id="vocabulary-prev-btn" disabled><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                        <div>
+                            <button class="game-btn next-btn" id="vocabulary-next-btn">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                            <button class="game-btn submit-btn" id="vocabulary-submit-btn" style="display: none;">Kirim Jawaban</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="vocabulary-results" class="results-container" style="display: none;">
+                    <h3 class="results-title">Hasil Word Master</h3>
+                    <p>Anda telah menyelesaikan semua soal kosakata!</p>
+                    <div class="final-score" id="vocabulary-final-score">0</div>
+                    <p id="vocabulary-result-message">Pesan hasil akan muncul di sini</p>
+                    <button class="restart-btn" id="vocabulary-restart-btn"><i class="fas fa-redo"></i> Main Lagi</button>
+                </div>
+            </div>
+
+            <!-- Materi Rohani Section -->
+            <div id="materi-rohani">
+                <h2 style="color: var(--primary); margin-bottom: 30px; text-align: center; border-bottom: 3px solid #ffc107; padding-bottom: 15px;">
+                    <i class="fas fa-bible"></i> Materi Pembelajaran Rohani
+                </h2>
+                
+                <!-- Container untuk Materi Rohani -->
+                <div id="materials-container" class="materials-container">
+                    <div class="materials-header">
+                        <h3 style="color: var(--primary); margin: 0;"><i class="fas fa-book"></i> Materi Rohani PRK JAKARTA</h3>
+                        <button class="close-btn close-materials-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                    
+                    <div class="materials-grid" id="materials-list">
+                        <!-- Materi akan dimuat di sini via JavaScript -->
+                    </div>
+                    
+                    <!-- Form untuk menambahkan materi baru -->
+                    <div class="upload-section">
+                        <h4 class="upload-title"><i class="fas fa-upload"></i> Tambah Materi Baru</h4>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Anda dapat menambahkan materi rohani baru ke dalam koleksi ini.</p>
+                        
+                        <div class="upload-form">
+                            <input type="text" class="upload-input" id="material-title" placeholder="Judul Materi">
+                            <select class="upload-input" id="material-format" style="flex-grow: 0; width: 150px;">
+                                <option value="PDF">Format: PDF</option>
+                                <option value="PPT">PPT</option>
+                                <option value="DOC">DOC</option>
+                                <option value="Teks">Teks</option>
+                            </select>
+                            <input type="text" class="upload-input" id="material-description" placeholder="Deskripsi singkat">
+                        </div>
+                        
+                        <div class="file-input" id="file-drop-area">
+                            <p><i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #ccc; margin-bottom: 10px;"></i></p>
+                            <p>Seret file ke sini atau <span style="color: #1a4d8f; cursor: pointer;" onclick="document.getElementById('file-input').click()">klik untuk mengunggah</span></p>
+                            <p style="font-size: 0.9rem; color: #777;">Maksimal 10MB (PDF, PPT, DOC, atau teks)</p>
+                            <input type="file" id="file-input" style="display: none;" accept=".pdf,.ppt,.pptx,.doc,.docx,.txt">
+                            <div id="file-name" style="margin-top: 10px; font-weight: 600;"></div>
+                        </div>
+                        
+                        <button class="upload-btn" id="upload-material-btn"><i class="fas fa-plus"></i> Tambah Materi</button>
+                    </div>
+                </div>
+                
+                <!-- Tampilan konten materi -->
+                <div id="material-content-container" class="materials-container" style="display: none;">
+                    <div class="materials-header">
+                        <h3 style="color: var(--primary); margin: 0;" id="material-content-title">Judul Materi</h3>
+                        <button class="close-btn" id="close-material-content-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                    
+                    <div class="material-content" id="material-content">
+                        <!-- Konten materi akan dimuat di sini -->
+                    </div>
+                    
+                    <div class="material-footer">
+                        <button class="view-btn" id="back-to-materials-btn"><i class="fas fa-arrow-left"></i> Kembali ke Daftar Materi</button>
+                    </div>
+                </div>
+                
+                <!-- Daftar materi asli (hanya untuk tampilan awal) -->
+                <div class="religious-materials" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div class="material-card" style="background-color: white; border-radius: 15px; padding: 30px; box-shadow: var(--shadow);">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                            <div style="width: 60px; height: 60px; border-radius: 50%; background-color: rgba(255, 193, 7, 0.1); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-cross" style="font-size: 1.5rem; color: #ffc107;"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 5px;">Pengajaran Dasar Iman Kristen</h4>
+                                <p style="color: var(--gray); font-size: 0.9rem;">Untuk anak-anak & remaja</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Materi pembelajaran dasar iman Kristen sesuai pengajaran Reformed yang alkitabiah.</p>
+                        <a href="#" class="btn open-materials-btn" style="background-color: #ffc107; color: black; width: 100%; text-align: center;">
+                            <i class="fas fa-book-open"></i> Buka Materi
+                        </a>
+                    </div>
+                    
+                    <div class="material-card" style="background-color: white; border-radius: 15px; padding: 30px; box-shadow: var(--shadow);">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                            <div style="width: 60px; height: 60px; border-radius: 50%; background-color: rgba(108, 117, 125, 0.1); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-pray" style="font-size: 1.5rem; color: #6c757d;"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 5px;">Renungan Harian Anak</h4>
+                                <p style="color: var(--gray); font-size: 0.9rem;">Untuk keluarga</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Renungan harian dengan bahasa yang mudah dipahami oleh anak-anak dan keluarga.</p>
+                        <a href="#" class="btn open-materials-btn" style="background-color: #6c757d; width: 100%; text-align: center;">
+                            <i class="fas fa-book-open"></i> Buka Materi
+                        </a>
+                    </div>
+                    
+                    <div class="material-card" style="background-color: white; border-radius: 15px; padding: 30px; box-shadow: var(--shadow);">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                            <div style="width: 60px; height: 60px; border-radius: 50%; background-color: rgba(26, 77, 143, 0.1); display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-users" style="font-size: 1.5rem; color: var(--primary);"></i>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 5px;">Modul Sekolah Minggu</h4>
+                                <p style="color: var(--gray); font-size: 0.9rem;">Untuk guru sekolah minggu</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--gray); margin-bottom: 20px;">Modul pembelajaran sekolah minggu dengan aktivitas interaktif untuk berbagai usia.</p>
+                        <a href="#" class="btn open-materials-btn" style="width: 100%; text-align: center;">
+                            <i class="fas fa-book-open"></i> Buka Materi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                        <h3>PRKJ</h3>
+                        <p>Persekutuan Rohani Kristen Jakarta</p>
+                    </div>
+                    <p class="footer-description">
+                        Persekutuan Rohani Kristen Jakarta (PRKJ) berkomitmen untuk memberitakan Injil dan mengajarkan pengajaran yang alkitabiah.
+                    </p>
+                    <div class="social-icons">
+                        <a href="https://www.youtube.com/@prkjakarta" 
+                           target="_blank"
+                           class="social-icon youtube"> 
+                           <i class="fab fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/prkjakarta_/" 
+                           target="_blank"
+                           class="social-icon instagram">
+                           <i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@prk_jakarta?_t=ZS-8ykxIkLQEXR&_r=1"
+                           target="_blank"
+                           class="social-icon tiktok">
+                           <i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.facebook.com/share/1GanxxhL1K/"   
+                           target="_blank"
+                           class="social-icon facebook">
+                           <i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Kontak Kami</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Jl Percetakan Negara II, Jakarta Pusat</li>
+                        <li><i class="fas fa-phone"></i> (62) 812-1558-3683</li>
+                        <li><i class="fas fa-envelope"></i> info@prk-website.com</li>
+                        <li><i class="fas fa-clock"></i> Kantor: Senin-Jumat, 07:00-23:59 WIB</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Tautan Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="live-streaming.html"><i class="fas fa-chevron-right"></i> Kegiatan & Pelayanan</a></li>
+                        <li><a href="ruang-belajar.html"><i class="fas fa-chevron-right"></i> Ruang Belajar</a></li>
+                        <li><a href="toko.html"><i class="fas fa-chevron-right"></i> Toko PRK JAKARTA</a></li>
+                        <li><a href="dokumentasi.html"><i class="fas fa-chevron-right"></i> Dokumentasi</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 PRK JAKARTA - Persekutuan Rohani Kristen Jakarta. Semua hak dilindungi.</p>
+                </div>
+                <div class="footer-menu">
+                    <a href="profil.html">Tentang Kami</a>
+                    <a href="kontak.html">Kontak</a>
+                    <a href="#">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- JavaScript untuk Game dan Materi Rohani -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data soal untuk game matematika (25 soal)
+            const mathQuestions = [
+                {
+                    question: "Berapakah hasil dari 25 + 37?",
+                    options: ["52", "62", "72", "82"],
+                    correct: 0,
+                    points: 10
+                },
+                {
+                    question: "Jika 8 × 7 = 56, maka 56 ÷ 8 = ...",
+                    options: ["6", "7", "8", "9"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Berapakah 15% dari 200?",
+                    options: ["15", "20", "25", "30"],
+                    correct: 3,
+                    points: 15
+                },
+                {
+                    question: "Hasil dari 3/4 + 1/2 adalah ...",
+                    options: ["1", "1 1/4", "1 1/2", "5/4"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Keliling persegi dengan sisi 12 cm adalah ...",
+                    options: ["24 cm", "36 cm", "48 cm", "60 cm"],
+                    correct: 2,
+                    points: 10
+                },
+                {
+                    question: "Bilangan prima antara 20 dan 30 adalah ...",
+                    options: ["21, 23", "23, 27", "23, 29", "29, 31"],
+                    correct: 2,
+                    points: 15
+                },
+                {
+                    question: "Hasil dari 5² + 3³ adalah ...",
+                    options: ["32", "34", "36", "38"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Jika a = 5 dan b = 3, maka nilai dari 2a + 3b adalah ...",
+                    options: ["16", "19", "21", "24"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "FPB dari 24 dan 36 adalah ...",
+                    options: ["6", "8", "12", "18"],
+                    correct: 2,
+                    points: 15
+                },
+                {
+                    question: "KPK dari 8 dan 12 adalah ...",
+                    options: ["24", "36", "48", "60"],
+                    correct: 0,
+                    points: 15
+                },
+                {
+                    question: "Hasil dari 0,75 × 0,4 adalah ...",
+                    options: ["0,3", "0,03", "3,0", "30"],
+                    correct: 0,
+                    points: 10
+                },
+                {
+                    question: "Bentuk sederhana dari 15/20 adalah ...",
+                    options: ["1/2", "2/3", "3/4", "4/5"],
+                    correct: 2,
+                    points: 5
+                },
+                {
+                    question: "Hasil dari √144 adalah ...",
+                    options: ["11", "12", "13", "14"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Jika sebuah segitiga memiliki alas 10 cm dan tinggi 8 cm, maka luasnya adalah ...",
+                    options: ["30 cm²", "40 cm²", "50 cm²", "60 cm²"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Hasil dari 7/8 - 3/4 adalah ...",
+                    options: ["1/8", "1/4", "3/8", "1/2"],
+                    correct: 0,
+                    points: 15
+                },
+                {
+                    question: "Nilai dari 3/5 sebagai persentase adalah ...",
+                    options: ["30%", "50%", "60%", "75%"],
+                    correct: 2,
+                    points: 10
+                },
+                {
+                    question: "Jika 2x + 5 = 15, maka nilai x adalah ...",
+                    options: ["3", "5", "7", "10"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Hasil dari 0,6 + 0,25 adalah ...",
+                    options: ["0,85", "0,9", "0,95", "1,0"],
+                    correct: 0,
+                    points: 5
+                },
+                {
+                    question: "Volume kubus dengan rusuk 5 cm adalah ...",
+                    options: ["25 cm³", "100 cm³", "125 cm³", "150 cm³"],
+                    correct: 2,
+                    points: 10
+                },
+                {
+                    question: "Hasil dari 4! (4 faktorial) adalah ...",
+                    options: ["16", "20", "24", "30"],
+                    correct: 2,
+                    points: 15
+                },
+                {
+                    question: "Suku ke-10 dari pola bilangan 2, 5, 8, 11, ... adalah ...",
+                    options: ["26", "29", "32", "35"],
+                    correct: 1,
+                    points: 20
+                },
+                {
+                    question: "Hasil dari 3,14 × 10² adalah ...",
+                    options: ["31,4", "314", "3.140", "31.400"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Bilangan romawi untuk 49 adalah ...",
+                    options: ["IL", "XLIX", "XLVIIII", "VL"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Hasil dari 2/3 × 0,9 adalah ...",
+                    options: ["0,3", "0,6", "0,9", "1,2"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Rata-rata dari 5, 7, 9, 11, 13 adalah ...",
+                    options: ["8", "9", "10", "11"],
+                    correct: 1,
+                    points: 10
+                }
+            ];
+
+            // Data soal untuk game Alkitab (25 soal)
+            const bibleQuestions = [
+                {
+                    question: "Siapakah penulis pertama kitab Kejadian?",
+                    options: ["Musa", "Abraham", "Daud", "Salomo"],
+                    correct: 0,
+                    points: 10
+                },
+                {
+                    question: "Berapa hari yang dibutuhkan Allah untuk menciptakan dunia?",
+                    options: ["5 hari", "6 hari", "7 hari", "8 hari"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Siapakah yang membangun bahtera untuk menyelamatkan keluarganya dari air bah?",
+                    options: ["Abraham", "Nuh", "Musa", "Yusuf"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Apa nama taman tempat Adam dan Hawa pertama kali ditempatkan?",
+                    options: ["Taman Eden", "Taman Getsemani", "Taman Babel", "Taman Firdaus"],
+                    correct: 0,
+                    points: 10
+                },
+                {
+                    question: "Berapa jumlah tulah yang ditimpakan Allah kepada Mesir?",
+                    options: ["7", "10", "12", "40"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Siapakah raja pertama Israel?",
+                    options: ["Daud", "Saul", "Salomo", "Yerobeam"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Di manakah Yesus dilahirkan?",
+                    options: ["Yerusalem", "Bethlehem", "Nazaret", "Mesir"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Berapa jumlah murid Yesus?",
+                    options: ["10", "12", "15", "70"],
+                    correct: 1,
+                    points: 5
+                },
+                {
+                    question: "Siapakah yang menyangkal Yesus tiga kali?",
+                    options: ["Yudas", "Petrus", "Yohanes", "Tomas"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Berapa jumlah kitab dalam Perjanjian Baru?",
+                    options: ["27", "39", "66", "73"],
+                    correct: 0,
+                    points: 15
+                },
+                {
+                    question: "Siapakah yang menulis sebagian besar surat-surat dalam Perjanjian Baru?",
+                    options: ["Petrus", "Yohanes", "Paulus", "Yakobus"],
+                    correct: 2,
+                    points: 10
+                },
+                {
+                    question: "Apa mukjizat pertama yang dilakukan Yesus?",
+                    options: ["Menyembuhkan orang buta", "Membangkitkan Lazarus", "Mengubah air menjadi anggur", "Berjalan di atas air"],
+                    correct: 2,
+                    points: 15
+                },
+                {
+                    question: "Berapa hari Yesus berada di dalam kubur sebelum bangkit?",
+                    options: ["1", "2", "3", "7"],
+                    correct: 2,
+                    points: 10
+                },
+                {
+                    question: "Siapakah saudara kembar Yakub?",
+                    options: ["Ishak", "Esau", "Laban", "Yusuf"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Di gunung manakah Musa menerima Sepuluh Perintah Allah?",
+                    options: ["Gunung Sinai", "Gunung Sion", "Gunung Karmel", "Gunung Tabor"],
+                    correct: 0,
+                    points: 10
+                },
+                {
+                    question: "Siapakah yang dibuang ke sumur oleh saudara-saudaranya?",
+                    options: ["Musa", "Yusuf", "Daud", "Daniel"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Apa nama wanita yang mengalahkan tentara Sisera dengan pasak tenda?",
+                    options: ["Debora", "Yael", "Rut", "Ester"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Berapa hari Yunus berada di dalam perut ikan?",
+                    options: ["1 hari 1 malam", "3 hari 3 malam", "7 hari 7 malam", "40 hari 40 malam"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Siapakah raja yang memerintahkan untuk membunuh semua bayi laki-laki di Betlehem?",
+                    options: ["Firaun", "Herodes", "Pilatus", "Nebukadnezar"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Apa karunia Roh Kudus yang diterima para rasul pada hari Pentakosta?",
+                    options: ["Kesembuhan", "Nubuat", "Berkata-kata dalam bahasa roh", "Hikmat"],
+                    correct: 2,
+                    points: 15
+                },
+                {
+                    question: "Siapakah yang menulis kitab Wahyu?",
+                    options: ["Paulus", "Petrus", "Yohanes", "Yakobus"],
+                    correct: 2,
+                    points: 10
+                },
+                {
+                    question: "Berapa jumlah Mazmur dalam Alkitab?",
+                    options: ["100", "120", "150", "200"],
+                    correct: 2,
+                    points: 10
+                },
+                {
+                    question: "Apa arti nama 'Yesus'?",
+                    options: ["Raja Damai", "Allah menyelamatkan", "Anak Allah", "Mesias"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Siapakah yang membaptis Yesus?",
+                    options: ["Yohanes Pembaptis", "Petrus", "Andreas", "Yudas"],
+                    correct: 0,
+                    points: 10
+                },
+                {
+                    question: "Di kota manakah Saulus bertobat dan menjadi Paulus?",
+                    options: ["Yerusalem", "Damsyik", "Roma", "Antiokhia"],
+                    correct: 1,
+                    points: 15
+                }
+            ];
+
+            // Data soal untuk game kosakata (25 soal)
+            const vocabularyQuestions = [
+                {
+                    question: "Apa arti kata 'diligent' dalam bahasa Indonesia?",
+                    options: ["Malas", "Rajin", "Cerdas", "Bodoh"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Sinonim dari kata 'besar' adalah ...",
+                    options: ["Kecil", "Luas", "Besar", "Tinggi"],
+                    correct: 2,
+                    points: 5
+                },
+                {
+                    question: "Antonim dari kata 'panas' adalah ...",
+                    options: ["Hangat", "Sejuk", "Dingin", "Lembab"],
+                    correct: 2,
+                    points: 5
+                },
+                {
+                    question: "Apa arti kata 'curiosity'?",
+                    options: ["Kebahagiaan", "Rasa ingin tahu", "Kesedihan", "Ketakutan"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Kata 'ekosistem' berasal dari bahasa ...",
+                    options: ["Yunani", "Latin", "Inggris", "Sanskerta"],
+                    correct: 0,
+                    points: 15
+                },
+                {
+                    question: "Apa arti kata 'philanthropist'?",
+                    options: ["Ilmuwan", "Dermawan", "Seniman", "Politikus"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Sinonim dari 'cantik' adalah ...",
+                    options: ["Buruk", "Indah", "Jelek", "Sederhana"],
+                    correct: 1,
+                    points: 5
+                },
+                {
+                    question: "Antonim dari 'muda' adalah ...",
+                    options: ["Dewasa", "Tua", "Anak-anak", "Remaja"],
+                    correct: 1,
+                    points: 5
+                },
+                {
+                    question: "Apa arti kata 'benevolent'?",
+                    options: ["Jahat", "Baik hati", "Cerdas", "Kuat"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Kata 'demokrasi' berasal dari bahasa ...",
+                    options: ["Yunani", "Latin", "Inggris", "Prancis"],
+                    correct: 0,
+                    points: 15
+                },
+                {
+                    question: "Apa arti kata 'ephemeral'?",
+                    options: ["Abadi", "Sementara", "Kuat", "Lemah"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Sinonim dari 'pintar' adalah ...",
+                    options: ["Bodoh", "Cerdas", "Malas", "Rajin"],
+                    correct: 1,
+                    points: 5
+                },
+                {
+                    question: "Antonim dari 'kaya' adalah ...",
+                    options: ["Miskin", "Kaya", "Boros", "Hemat"],
+                    correct: 0,
+                    points: 5
+                },
+                {
+                    question: "Apa arti kata 'meticulous'?",
+                    options: ["Ceroboh", "Teliti", "Cepat", "Lambat"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Kata 'fotografi' berasal dari bahasa ...",
+                    options: ["Yunani", "Latin", "Inggris", "Jerman"],
+                    correct: 0,
+                    points: 15
+                },
+                {
+                    question: "Apa arti kata 'altruistic'?",
+                    options: ["Egois", "Mementingkan orang lain", "Kikir", "Pemarah"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Sinonim dari 'cepat' adalah ...",
+                    options: ["Lambat", "Cepat", "Pelan", "Santai"],
+                    correct: 1,
+                    points: 5
+                },
+                {
+                    question: "Antonim dari 'tinggi' adalah ...",
+                    options: ["Rendah", "Tinggi", "Panjang", "Pendek"],
+                    correct: 0,
+                    points: 5
+                },
+                {
+                    question: "Apa arti kata 'prolific'?",
+                    options: ["Malas", "Produktif", "Boros", "Hemat"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Kata 'telepon' berasal dari bahasa ...",
+                    options: ["Yunani", "Latin", "Inggris", "Prancis"],
+                    correct: 0,
+                    points: 15
+                },
+                {
+                    question: "Apa arti kata 'resilient'?",
+                    options: ["Lemah", "Tangguh", "Pecundang", "Penakut"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Sinonim dari 'bahagia' adalah ...",
+                    options: ["Sedih", "Senang", "Marah", "Kecewa"],
+                    correct: 1,
+                    points: 5
+                },
+                {
+                    question: "Antonim dari 'mahal' adalah ...",
+                    options: ["Murah", "Mahal", "Bagus", "Jelek"],
+                    correct: 1,
+                    points: 15
+                },
+                            
+                {
+                    question: "Apa arti kata 'verbose'?",
+                    options: ["Pendiam", "Banyak bicara", "Cerdas", "Bodoh"],
+                    correct: 1,
+                    points: 10
+                },
+                {
+                    question: "Kata 'geografi' berasal dari bahasa ...",
+                    options: ["Yunani", "Latin", "Inggris", "Arab"],
+                    correct: 1,
+                    points: 15
+                },
+                {
+                    question: "Apa arti kata 'ubiquitous'?",
+                    options: ["Jarang", "Ada di mana-mana", "Tersembunyi", "Terlihat"],
+                    correct: 1,
+                    points: 15
+                }
+            ];
+
+            // Data materi rohani default
+            const defaultMaterials = [
+                {
+                    id: 1,
+                    title: "Pengajaran Dasar Iman Kristen",
+                    format: "PDF",
+                    description: "Materi pembelajaran dasar iman Kristen sesuai pengajaran yang alkitabiah.",
+                    content: `
+                        <h3>Pengajaran Dasar Iman Kristen</h3>
+                        <p>Materi ini dirancang untuk memberikan pemahaman dasar tentang iman Kristen menurut pengajaran yang alkitabiah.</p>
+                        
+                        <h4>1. Doktrin Allah</h4>
+                        <p>Allah adalah Pencipta langit dan bumi. Ia adalah Allah yang esa yang menyatakan diri-Nya dalam tiga pribadi: Bapa, Anak, dan Roh Kudus (Trinitas).</p>
+                        
+                        <h4>2. Doktrin Manusia</h4>
+                        <p>Manusia diciptakan menurut gambar dan rupa Allah, tetapi telah jatuh ke dalam dosa. Dosa telah merusak hubungan manusia dengan Allah.</p>
+                        
+                        <h4>3. Doktrin Keselamatan</h4>
+                        <p>Keselamatan hanya oleh anugerah melalui iman di dalam Yesus Kristus. Yesus mati di kayu salib untuk menebus dosa manusia dan bangkit pada hari ketiga.</p>
+                        
+                        <h4>4. Hidup Kristen</h4>
+                        <p>Orang percaya dipanggil untuk hidup kudus, berbuah dalam pelayanan, dan memuliakan Allah dalam segala aspek kehidupan.</p>
+                    `,
+                    addedBy: "Admin PRKJ",
+                    date: "2025-01-15"
+                },
+                {
+                    id: 2,
+                    title: "Renungan Harian Anak",
+                    format: "Teks",
+                    description: "Renungan harian dengan bahasa yang mudah dipahami oleh anak-anak dan keluarga.",
+                    content: `
+                        <h3>Renungan Harian untuk Anak-Anak</h3>
+                        <p><strong>Bacaan: Mazmur 23:1-3</strong></p>
+                        <p>"TUHAN adalah gembalaku, takkan kekurangan aku."</p>
+                        
+                        <h4>Pesan untuk Hari Ini:</h4>
+                        <p>Seperti gembala yang baik merawat domba-dombanya, Tuhan Yesus juga merawat kita. Dia memberikan semua yang kita butuhkan.</p>
+                        
+                        <h4>Aktivitas:</h4>
+                        <ul>
+                            <li>Gambarlah seorang gembala dengan domba-dombanya</li>
+                            <li>Buatlah daftar 3 hal yang Tuhan telah berikan kepadamu hari ini</li>
+                            <li>Doa: "Terima kasih Tuhan Yesus karena Engkau adalah gembalaku yang baik. Tolong aku untuk selalu mengikut-Mu."</li>
+                        </ul>
+                        
+                        <h4>Ayat Hafalan:</h4>
+                        <p>"TUHAN adalah gembalaku, takkan kekurangan aku." (Mazmur 23:1)</p>
+                    `,
+                    addedBy: "Tim Sekolah Minggu",
+                    date: "2025-01-10"
+                },
+                {
+                    id: 3,
+                    title: "Modul Sekolah Minggu",
+                    format: "DOC",
+                    description: "Modul pembelajaran sekolah minggu dengan aktivitas interaktif untuk berbagai usia.",
+                    content: `
+                        <h3>Modul Sekolah Minggu - Kelas 4-6 SD</h3>
+                        <p><strong>Tema: Kasih Tuhan yang Tak Berkesudahan</strong></p>
+                        <p><strong>Bacaan Alkitab: Yohanes 3:16</strong></p>
+                        
+                        <h4>Rencana Pembelajaran:</h4>
+                        <ol>
+                            <li><strong>Pembukaan (10 menit):</strong> Ice breaker dan lagu pujian</li>
+                            <li><strong>Cerita Alkitab (15 menit):</strong> Kisah pengorbanan Yesus</li>
+                            <li><strong>Diskusi Kelompok (10 menit):</strong> Bagaimana kita menanggapi kasih Tuhan?</li>
+                            <li><strong>Aktivitas Kreatif (20 menit):</strong> Membuat kartu ucapan syukur</li>
+                            <li><strong>Penutup (5 menit):</strong> Doa dan pengumuman</li>
+                        </ol>
+                        
+                        <h4>Bahan yang Dibutuhkan:</h4>
+                        <ul>
+                            <li>Alat tulis dan kertas</li>
+                            <li>Karton warna-warni</li>
+                            <li>Lem dan gunting</li>
+                            <li>Foto atau gambar terkait tema</li>
+                        </ul>
+                        
+                        <h4>Tujuan Pembelajaran:</h4>
+                        <p>Anak-anak dapat memahami kasih Tuhan yang besar melalui pengorbanan Yesus dan belajar mengungkapkan rasa syukur atas kasih tersebut.</p>
+                        
+                        <h4>Evaluasi:</h4>
+                        <p>Anak-anak dapat menceritakan kembali kisah Yohanes 3:16 dengan kata-kata mereka sendiri.</p>
+                    `,
+                    addedBy: "Guru Sekolah Minggu",
+                    date: "2025-01-05"
+                }
+            ];
+
+            // Variable untuk menyimpan materi yang diunggah
+            let userMaterials = [...defaultMaterials];
+            let materialIdCounter = 4;
+
+            // Variable untuk menyimpan state game
+            let currentGame = null;
+            let currentQuestionIndex = 0;
+            let userAnswers = [];
+            let scores = { math: 0, bible: 0, vocabulary: 0 };
+
+            // Fungsi untuk memulai game
+            function startGame(gameType) {
+                // Sembunyikan semua game container
+                document.querySelectorAll('.game-container').forEach(container => {
+                    container.style.display = 'none';
+                    container.classList.remove('game-active');
+                });
+                
+                // Sembunyikan materi container
+                document.getElementById('materials-container').style.display = 'none';
+                document.getElementById('material-content-container').style.display = 'none';
+                
+                // Tampilkan game yang dipilih
+                const gameContainer = document.getElementById(`game-${gameType}`);
+                gameContainer.style.display = 'block';
+                gameContainer.classList.add('game-active');
+                
+                // Reset game state
+                currentGame = gameType;
+                currentQuestionIndex = 0;
+                userAnswers = new Array(getQuestions(gameType).length).fill(null);
+                scores[gameType] = 0;
+                
+                // Update score display
+                document.getElementById(`${gameType}-score`).textContent = '0';
+                
+                // Sembunyikan hasil
+                document.getElementById(`${gameType}-results`).style.display = 'none';
+                
+                // Tampilkan konten game
+                document.querySelector(`#game-${gameType} .game-content`).style.display = 'block';
+                
+                // Load soal pertama
+                loadQuestion(gameType, 0);
+                
+                // Update tombol
+                updateGameButtons(gameType);
+                
+                // Scroll ke game
+                gameContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Update status tombol game
+                updateActiveGameButton(gameType);
+            }
+
+            // Fungsi untuk mendapatkan soal berdasarkan game type
+            function getQuestions(gameType) {
+                switch(gameType) {
+                    case 'math': return mathQuestions;
+                    case 'bible': return bibleQuestions;
+                    case 'vocabulary': return vocabularyQuestions;
+                    default: return [];
+                }
+            }
+
+            // Fungsi untuk memuat soal
+            function loadQuestion(gameType, index) {
+                const questions = getQuestions(gameType);
+                const question = questions[index];
+                const questionContainer = document.getElementById(`${gameType}-question-container`);
+                
+                // Buat HTML untuk soal
+                let optionsHtml = '';
+                question.options.forEach((option, i) => {
+                    const isSelected = userAnswers[index] === i;
+                    const selectedClass = isSelected ? 'selected' : '';
+                    optionsHtml += `
+                        <button class="option-btn ${selectedClass}" data-index="${i}">
+                            ${String.fromCharCode(65 + i)}. ${option}
+                        </button>
+                    `;
+                });
+                
+                questionContainer.innerHTML = `
+                    <div class="question-container">
+                        <div class="question-number">Soal ${index + 1} dari ${questions.length}</div>
+                        <div class="question-text">${question.question}</div>
+                        <div class="options-container">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+                
+                // Tambahkan event listener untuk pilihan
+                questionContainer.querySelectorAll('.option-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const selectedIndex = parseInt(this.getAttribute('data-index'));
+                        
+                        // Hapus selected class dari semua pilihan
+                        questionContainer.querySelectorAll('.option-btn').forEach(option => {
+                            option.classList.remove('selected');
+                        });
+                        
+                        // Tambahkan selected class ke pilihan yang dipilih
+                        this.classList.add('selected');
+                        
+                        // Simpan jawaban
+                        userAnswers[index] = selectedIndex;
+                    });
+                });
+                
+                // Update nomor soal di halaman
+                document.getElementById(`${gameType}-score`).textContent = scores[gameType];
+            }
+
+            // Fungsi untuk update tombol game
+            function updateGameButtons(gameType) {
+                const questions = getQuestions(gameType);
+                const isLastQuestion = currentQuestionIndex === questions.length - 1;
+                
+                // Update tombol prev
+                const prevBtn = document.getElementById(`${gameType}-prev-btn`);
+                prevBtn.disabled = currentQuestionIndex === 0;
+                
+                // Update tombol next/submit
+                const nextBtn = document.getElementById(`${gameType}-next-btn`);
+                const submitBtn = document.getElementById(`${gameType}-submit-btn`);
+                
+                if (isLastQuestion) {
+                    nextBtn.style.display = 'none';
+                    submitBtn.style.display = 'inline-block';
+                } else {
+                    nextBtn.style.display = 'inline-block';
+                    submitBtn.style.display = 'none';
+                }
+            }
+
+            // Fungsi untuk berpindah ke soal berikutnya
+            function nextQuestion(gameType) {
+                const questions = getQuestions(gameType);
+                
+                // Cek jika sudah menjawab soal saat ini
+                if (userAnswers[currentQuestionIndex] !== null) {
+                    // Hitung skor untuk soal ini jika belum dihitung
+                    const question = questions[currentQuestionIndex];
+                    if (userAnswers[currentQuestionIndex] === question.correct) {
+                        scores[gameType] += question.points;
+                        document.getElementById(`${gameType}-score`).textContent = scores[gameType];
+                    }
+                }
+                
+                // Pindah ke soal berikutnya
+                if (currentQuestionIndex < questions.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuestion(gameType, currentQuestionIndex);
+                    updateGameButtons(gameType);
+                }
+            }
+
+            // Fungsi untuk kembali ke soal sebelumnya
+            function prevQuestion(gameType) {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    loadQuestion(gameType, currentQuestionIndex);
+                    updateGameButtons(gameType);
+                }
+            }
+
+            // Fungsi untuk mengirim jawaban
+            function submitAnswers(gameType) {
+                const questions = getQuestions(gameType);
+                
+                // Hitung skor akhir
+                let finalScore = 0;
+                let correctAnswers = 0;
+                
+                questions.forEach((question, index) => {
+                    if (userAnswers[index] === question.correct) {
+                        finalScore += question.points;
+                        correctAnswers++;
+                    }
+                });
+                
+                // Update skor akhir
+                scores[gameType] = finalScore;
+                
+                // Tampilkan hasil
+                const resultsContainer = document.getElementById(`${gameType}-results`);
+                const gameContent = document.querySelector(`#game-${gameType} .game-content`);
+                
+                gameContent.style.display = 'none';
+                resultsContainer.style.display = 'block';
+                
+                // Update tampilan hasil
+                document.getElementById(`${gameType}-final-score`).textContent = finalScore;
+                
+                // Tampilkan pesan hasil
+                const percentage = Math.round((correctAnswers / questions.length) * 100);
+                let message = '';
+                
+                if (percentage >= 90) {
+                    message = 'Luar biasa! Kamu benar-benar menguasai materi ini.';
+                } else if (percentage >= 70) {
+                    message = 'Bagus! Kamu sudah memahami materi dengan baik.';
+                } else if (percentage >= 50) {
+                    message = 'Cukup baik. Pelajari lagi bagian yang masih sulit.';
+                } else {
+                    message = 'Perlu belajar lebih giat lagi. Jangan menyerah!';
+                }
+                
+                document.getElementById(`${gameType}-result-message`).textContent = 
+                    `Kamu menjawab ${correctAnswers} dari ${questions.length} soal dengan benar (${percentage}%). ${message}`;
+                
+                // Scroll ke hasil
+                resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Fungsi untuk restart game
+            function restartGame(gameType) {
+                startGame(gameType);
+            }
+
+            // Fungsi untuk menampilkan materi rohani
+            function showMaterials() {
+                // Sembunyikan semua game
+                document.querySelectorAll('.game-container').forEach(container => {
+                    container.style.display = 'none';
+                    container.classList.remove('game-active');
+                });
+                
+                // Tampilkan materi container
+                document.getElementById('materials-container').style.display = 'block';
+                document.getElementById('materials-container').classList.add('materials-active');
+                document.getElementById('material-content-container').style.display = 'none';
+                
+                // Render daftar materi
+                renderMaterialsList();
+                
+                // Scroll ke materi
+                document.getElementById('materials-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Update status tombol
+                updateActiveMaterialsButton();
+            }
+
+            // Fungsi untuk merender daftar materi
+            function renderMaterialsList() {
+                const materialsList = document.getElementById('materials-list');
+                materialsList.innerHTML = '';
+                
+                userMaterials.forEach(material => {
+                    const materialElement = document.createElement('div');
+                    materialElement.className = 'material-item';
+                    materialElement.innerHTML = `
+                        <div class="material-header">
+                            <h4 class="material-title">${material.title}</h4>
+                            <span class="material-format">${material.format}</span>
+                        </div>
+                        <div class="material-preview">
+                            <p style="margin: 0 0 10px 0; color: #555;">${material.description}</p>
+                            <p style="margin: 0; font-size: 0.9rem; color: #777;">
+                                <i class="far fa-user"></i> ${material.addedBy} | 
+                                <i class="far fa-calendar"></i> ${material.date}
+                            </p>
+                        </div>
+                        <div class="material-actions">
+                            <button class="view-btn view-material-btn" data-id="${material.id}">
+                                <i class="fas fa-eye"></i> Buka Materi
+                            </button>
+                        </div>
+                    `;
+                    materialsList.appendChild(materialElement);
+                });
+                
+                // Tambahkan event listener untuk tombol buka materi
+                document.querySelectorAll('.view-material-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const materialId = parseInt(this.getAttribute('data-id'));
+                        viewMaterial(materialId);
+                    });
+                });
+            }
+
+            // Fungsi untuk melihat materi
+            function viewMaterial(materialId) {
+                const material = userMaterials.find(m => m.id === materialId);
+                if (!material) return;
+                
+                // Sembunyikan daftar materi
+                document.getElementById('materials-container').style.display = 'none';
+                
+                // Tampilkan konten materi
+                document.getElementById('material-content-container').style.display = 'block';
+                
+                // Isi konten materi
+                document.getElementById('material-content-title').textContent = material.title;
+                document.getElementById('material-content').innerHTML = material.content;
+                
+                // Scroll ke konten materi
+                document.getElementById('material-content-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Fungsi untuk menambahkan materi baru
+            function addNewMaterial(title, format, description) {
+                const newMaterial = {
+                    id: materialIdCounter++,
+                    title: title || `Materi Baru ${materialIdCounter - 4}`,
+                    format: format || 'Teks',
+                    description: description || 'Deskripsi materi rohani.',
+                    content: `
+                        <h3>${title || `Materi Baru ${materialIdCounter - 4}`}</h3>
+                        <p>Ini adalah materi rohani yang baru ditambahkan. Anda dapat mengedit konten ini sesuai kebutuhan.</p>
+                        <h4>Bagian 1: Pengantar</h4>
+                        <p>Isi materi rohani dapat berupa pengajaran Alkitab, renungan, atau modul pembelajaran.</p>
+                        <h4>Bagian 2: Isi Materi</h4>
+                        <p>Tambahkan isi materi rohani di sini sesuai dengan tema yang Anda inginkan.</p>
+                        <h4>Bagian 3: Aplikasi Praktis</h4>
+                        <p>Bagaimana materi ini dapat diaplikasikan dalam kehidupan sehari-hari.</p>
+                    `,
+                    addedBy: "Pengguna",
+                    date: new Date().toISOString().split('T')[0]
+                };
+                
+                userMaterials.unshift(newMaterial);
+                renderMaterialsList();
+                
+                // Reset form
+                document.getElementById('material-title').value = '';
+                document.getElementById('material-description').value = '';
+                document.getElementById('file-name').textContent = '';
+                
+                alert('Materi baru berhasil ditambahkan!');
+            }
+
+            // Fungsi untuk update status tombol game aktif
+            function updateActiveGameButton(gameType) {
+                // Reset semua tombol game
+                document.querySelectorAll('.start-game-btn').forEach(btn => {
+                    btn.classList.remove('active-game-btn');
+                    if (btn.style.backgroundColor === '#28a745') {
+                        btn.style.backgroundColor = '#28a745';
+                    } else if (btn.style.backgroundColor === '#17a2b8') {
+                        btn.style.backgroundColor = '#17a2b8';
+                    } else if (btn.style.backgroundColor === '#ffc107') {
+                        btn.style.backgroundColor = '#ffc107';
+                    }
+                });
+                
+                // Set tombol game aktif
+                const activeButtons = document.querySelectorAll(`.start-game-btn[data-game="${gameType}"]`);
+                activeButtons.forEach(btn => {
+                    btn.classList.add('active-game-btn');
+                    btn.style.backgroundColor = '#1a4d8f';
+                });
+            }
+
+            // Fungsi untuk update status tombol materi aktif
+            function updateActiveMaterialsButton() {
+                // Reset semua tombol
+                document.querySelectorAll('.menu-card').forEach(card => {
+                    card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                });
+                
+                // Set tombol materi aktif
+                document.querySelector('.show-materials-btn').style.boxShadow = '0 5px 20px rgba(255, 193, 7, 0.5)';
+            }
+
+            // Event Listeners
+            // Tombol mulai game
+            document.querySelectorAll('.start-game-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const gameType = this.getAttribute('data-game');
+                    startGame(gameType);
+                });
+            });
+
+            // Tombol show materials
+            document.querySelectorAll('.show-materials-btn, .open-materials-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showMaterials();
+                });
+            });
+
+            // Tombol close game
+            document.querySelectorAll('.close-game-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const gameContainer = this.closest('.game-container');
+                    gameContainer.style.display = 'none';
+                    gameContainer.classList.remove('game-active');
+                    
+                    // Reset tombol game aktif
+                    document.querySelectorAll('.start-game-btn').forEach(btn => {
+                        btn.classList.remove('active-game-btn');
+                    });
+                });
+            });
+
+            // Tombol close materials
+            document.querySelectorAll('.close-materials-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.getElementById('materials-container').style.display = 'none';
+                    document.getElementById('materials-container').classList.remove('materials-active');
+                    
+                    // Reset tombol materi aktif
+                    document.querySelectorAll('.menu-card').forEach(card => {
+                        card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                    });
+                });
+            });
+
+            // Tombol close material content
+            document.getElementById('close-material-content-btn').addEventListener('click', function() {
+                document.getElementById('material-content-container').style.display = 'none';
+                document.getElementById('materials-container').style.display = 'block';
+            });
+
+            // Tombol back to materials
+            document.getElementById('back-to-materials-btn').addEventListener('click', function() {
+                document.getElementById('material-content-container').style.display = 'none';
+                document.getElementById('materials-container').style.display = 'block';
+            });
+
+            // Tombol navigasi game (prev, next, submit)
+            // Math game
+            document.getElementById('math-prev-btn').addEventListener('click', () => prevQuestion('math'));
+            document.getElementById('math-next-btn').addEventListener('click', () => nextQuestion('math'));
+            document.getElementById('math-submit-btn').addEventListener('click', () => submitAnswers('math'));
+            document.getElementById('math-restart-btn').addEventListener('click', () => restartGame('math'));
+
+            // Bible game
+            document.getElementById('bible-prev-btn').addEventListener('click', () => prevQuestion('bible'));
+            document.getElementById('bible-next-btn').addEventListener('click', () => nextQuestion('bible'));
+            document.getElementById('bible-submit-btn').addEventListener('click', () => submitAnswers('bible'));
+            document.getElementById('bible-restart-btn').addEventListener('click', () => restartGame('bible'));
+
+            // Vocabulary game
+            document.getElementById('vocabulary-prev-btn').addEventListener('click', () => prevQuestion('vocabulary'));
+            document.getElementById('vocabulary-next-btn').addEventListener('click', () => nextQuestion('vocabulary'));
+            document.getElementById('vocabulary-submit-btn').addEventListener('click', () => submitAnswers('vocabulary'));
+            document.getElementById('vocabulary-restart-btn').addEventListener('click', () => restartGame('vocabulary'));
+
+            // Upload materi baru
+            document.getElementById('upload-material-btn').addEventListener('click', function() {
+                const title = document.getElementById('material-title').value;
+                const format = document.getElementById('material-format').value;
+                const description = document.getElementById('material-description').value;
+                
+                if (!title.trim()) {
+                    alert('Harap isi judul materi');
+                    return;
+                }
+                
+                addNewMaterial(title, format, description);
+            });
+
+            // Drag and drop file
+            const fileDropArea = document.getElementById('file-drop-area');
+            const fileInput = document.getElementById('file-input');
+            const fileName = document.getElementById('file-name');
+
+            fileDropArea.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const file = this.files[0];
+                    fileName.textContent = `File: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+                }
+            });
+
+            fileDropArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                fileDropArea.style.borderColor = '#1a4d8f';
+                fileDropArea.style.backgroundColor = '#f0f7ff';
+            });
+
+            fileDropArea.addEventListener('dragleave', () => {
+                fileDropArea.style.borderColor = '#ccc';
+                fileDropArea.style.backgroundColor = 'transparent';
+            });
+
+            fileDropArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileDropArea.style.borderColor = '#ccc';
+                fileDropArea.style.backgroundColor = 'transparent';
+                
+                if (e.dataTransfer.files.length > 0) {
+                    const file = e.dataTransfer.files[0];
+                    fileInput.files = e.dataTransfer.files;
+                    fileName.textContent = `File: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+                }
+            });
+
+            // Smooth scroll untuk menu cards
+            const menuLinks = document.querySelectorAll('.menu-card');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.classList.contains('start-game-btn') || this.classList.contains('show-materials-btn')) {
+                        return; // Jangan lakukan scroll untuk tombol game/materi
+                    }
+                    
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Initialize dengan merender daftar materi
+            renderMaterialsList();
+        });
+    </script>
+</body>
+</html>    

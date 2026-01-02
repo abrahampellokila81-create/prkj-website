@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Natal - PRK Jakarta </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                </div>
+                <div class="logo-text">
+                    <h1>PRKJ</h1>
+                    <p>Persekutuan Rohani Kristen Jakarta</p>
+                </div>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li class="dropdown">
+                        <a href="profil.html"><i class="fas fa-church"></i> Profil & Sejarah <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="visi.html"><i class="fas fa-eye"></i> Visi</a></li>
+                            <li><a href="misi.html"><i class="fas fa-bullseye"></i> Misi</a></li>
+                            <li><a href="sejarah.html"><i class="fas fa-history"></i> Sejarah & Pendiri</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="live-streaming.html"><i class="fas fa-video"></i> Kegiatan & Pelayanan </a></li>
+                    <li class="dropdown">
+                        <a href="ruang-belajar.html"><i class="fas fa-book"></i> Ruang Belajar <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sd.html"><i class="fas fa-book"></i> SD</a></li>
+                            <li><a href="smp.html"><i class="fas fa-book"></i> SMP</a></li>
+                            <li><a href="sma.html"><i class="fas fa-book"></i> SMA</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="toko.html"><i class="fas fa-store"></i> Toko</a></li>
+                    <li class="dropdown">
+                        <a href="dokumentasi.html"><i class="fas fa-images"></i> Dokumentasi & Informasi <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="dokumentasi-paskah.html"><i class="fas fa-cross"></i> Paskah</a></li>
+                            <li><a href="dokumentasi-natal.html"><i class="fas fa-star"></i> Natal</a></li>
+                            <li><a href="dokumentasi-seminar.html"><i class="fas fa-chalkboard-teacher"></i> Seminar</a></li>
+                            <li><a href="dokumentasi-retret.html"><i class="fas fa-pray"></i> Retret</a></li>
+                            <li><a href="kontak.html"><i class="fas fa-address-book"></i> Kontak & Lokasi</a></li>
+                            <li><a href="keuangan.html"><i class="fas fa-donate"></i> Informasi Keuangan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- PAGE HEADER -->
+    <section class="page-header" style="background: linear-gradient(rgba(220, 53, 69, 0.8), rgba(220, 53, 69, 0.9)), url('https://via.placeholder.com/1920x500/dc3545/ffffff?text=Dokumentasi+Natal+GRII'); background-size: cover; background-position: center; padding: 100px 0; text-align: center; color: white;">
+        <div class="container">
+            <h1 style="font-size: 3rem; margin-bottom: 20px;">Dokumentasi Natal</h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">Momen-momen spesial perayaan kelahiran Tuhan Yesus Kristus</p>
+        </div>
+    </section>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb" style="background-color: var(--light-gray); padding: 15px 0;">
+        <div class="container">
+            <span style="color: var(--gray);">
+                <a href="index.html" style="color: var(--primary);">Beranda</a> 
+                <i class="fas fa-chevron-right" style="margin: 0 10px; font-size: 0.8rem;"></i> 
+                <a href="dokumentasi.html" style="color: var(--primary);">Dokumentasi</a>
+                <i class="fas fa-chevron-right" style="margin: 0 10px; font-size: 0.8rem;"></i> 
+                Natal
+            </span>
+        </div>
+    </div>
+
+    <!-- NATAL DOCUMENTATION CONTENT -->
+    <section class="natal-dokumentasi" style="padding: 80px 0;">
+        <div class="container">
+            <!-- Gallery Controls -->
+            <div class="gallery-controls" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;">
+                <div>
+                    <h2 style="color: var(--primary);">Album Natal</h2>
+                    <p style="color: var(--gray);">52 foto - Desember </p>
+                </div>
+                <div class="filter-buttons">
+                    <a href="dokumentasi.html" class="btn" style="background-color: transparent; border: 2px solid var(--primary); color: var(--primary); margin-right: 10px;">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Dokumentasi
+                    </a>
+                    <button class="btn filter-btn active" data-filter="all">Semua</button>
+                    <button class="btn filter-btn" data-filter="ibadah">Ibadah</button>
+                    <button class="btn filter-btn" data-filter="dekorasi">Dekorasi</button>
+                    <button class="btn filter-btn" data-filter="keluarga">Keluarga</button>
+                    <button class="btn filter-btn" data-filter="aktivitas">Aktivitas</button>
+                </div>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
+                <!-- Contoh gambar-gambar dokumentasi -->
+                <div class="gallery-item" data-category="ibadah">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-1.jpeg" alt="Ibadah Natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+                
+                <div class="gallery-item" data-category="ibadah">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-2.jpeg" alt="Khotbah Paskah" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+                
+                <div class="gallery-item" data-category="komunitas">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-3.jpeg" alt="Komunitas Pemuda" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+                
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-4.jpeg" alt="Persiapan " style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="ibadah">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-5.jpeg" alt="Paduan Suara" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+                
+                <div class="gallery-item" data-category="komunitas">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-6.jpeg" alt="Perayaan Keluarga" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+                
+                <div class="gallery-item" data-category="ibadah">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-7.jpeg" alt="Sesi Doa" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-9.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-10.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-11.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-12.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-13.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-14.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-15.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-16.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-17.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-18.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+
+                <div class="gallery-item" data-category="persiapan">
+                    <div class="gallery-img" style="height: 250px; overflow: hidden; border-radius: var(--border-radius); margin-bottom: 15px;">
+                        <img src="images/natal-19.jpeg" alt="natal" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 5px;"></h3>
+                </div>
+            </div>
+            
+            <!-- Lightbox Modal -->
+            <div id="imageModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); z-index: 1000; justify-content: center; align-items: center;">
+                <div class="modal-content" style="max-width: 90%; max-height: 90%; position: relative;">
+                    <span class="close-modal" style="position: absolute; top: -40px; right: 0; color: white; font-size: 2rem; cursor: pointer;">&times;</span>
+                    <img id="modalImage" src="" alt="" style="width: 100%; height: auto; max-height: 80vh; object-fit: contain;">
+                    <div id="modalCaption" style="color: white; text-align: center; padding: 15px; font-size: 1.1rem;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            <!-- Other Natal Albums -->
+            <section class="other-albums" style="background-color: var(--light); padding: 60px 0;">
+        <div class="container">
+            <h2 class="section-title">Album Dokumentasi Lainnya</h2>
+            <div class="albums-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;">
+                <a href="dokumentasi-paskah.html" class="album-card" style="display: block; background-color: white; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+                    <div class="album-img" style="height: 180px; overflow: hidden;">
+                        <img src="images/paskah-6.jpeg" alt="paskah" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="album-info" style="padding: 20px;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary);">Paskah</h3>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Perayaan Paskah PRK JAKARTA </p>
+                    </div>
+                </a>
+                
+                <a href="dokumentasi-seminar.html" class="album-card" style="display: block; background-color: white; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+                    <div class="album-img" style="height: 180px; overflow: hidden;">
+                        <img src="images/seminar-1.jpeg" alt="Seminar Teologi" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="album-info" style="padding: 20px;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary);">Seminar PRK JAKARTA </h3>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Seminar PRK JAKARTA </p>
+                    </div>
+                </a>
+                
+                <a href="dokumentasi-retret.html" class="album-card" style="display: block; background-color: white; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+                    <div class="album-img" style="height: 180px; overflow: hidden;">
+                        <img src="images/ret (3).jpeg" alt="Retret Pemuda" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="album-info" style="padding: 20px;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary);">Retret Pemuda</h3>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Retret pemuda PRK JAKARTA </p>
+                    </div>
+                </a>
+                
+                <a href="dokumentasi.html" class="album-card" style="display: block; background-color: white; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); transition: var(--transition);">
+                    <div class="album-img" style="height: 180px; overflow: hidden; background-color: var(--primary); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-images" style="font-size: 3rem; color: white;"></i>
+                    </div>
+                    <div class="album-info" style="padding: 20px;">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--primary);">Semua Album</h3>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Lihat semua dokumentasi PRK JAKARTA </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                        <h3>PRKJ</h3>
+                        <p>Persekutuan Rohani Kristen Jakarta </p>
+                    </div>
+                    <p class="footer-description">
+                        Persekutuan Rohani Kristen Jakarta (PRKJ) berkomitmen untuk memberitakan Injil dan mengajarkan pengajaran yang alkitabiah.
+                    </p>
+                    <div class="social-icons">
+                <a href="https://www.youtube.com/@prkjakarta" 
+                   target="_blank"
+                   class="social-icon youtube"> 
+                   <i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/prkjakarta_/" 
+                   target="_blank"
+                   class="social-icon instagram">
+                   <i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@prk_jakarta?_t=ZS-8ykxIkLQEXR&_r=1"
+                   target="_blank"
+                   class="social-icon tiktok">
+                   <i class="fab fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/share/1GanxxhL1K/"   
+                   target="_blank"
+                   class="social-icon facebook">
+                   <i class="fab fa-facebook"></i></a>
+            </div>
+                </div>
+                
+                 <div class="footer-col">
+                    <h4>Kontak Kami</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Jl Percetakan Negara II, Jakarta Pusat</li>
+                        <li><i class="fas fa-phone"></i> (62) 812-1558-3683</li>
+                        <li><i class="fas fa-envelope"></i> info@prk-website.com</li>
+                        <li><i class="fas fa-clock"></i> Kantor: Senin-Jumat, 07:00-23:59 WIB</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Tautan Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="live-streaming.html"><i class="fas fa-chevron-right"></i> Kegiatan & Pelayanan </a></li>
+                        <li><a href="ruang-belajar.html"><i class="fas fa-chevron-right"></i> Ruang Belajar</a></li>
+                        <li><a href="toko.html"><i class="fas fa-chevron-right"></i> Toko PRK JAKARTA </a></li>
+                        <li><a href="dokumentasi.html"><i class="fas fa-chevron-right"></i> Dokumentasi</a></li>
+                    </ul>
+                </div>
+                
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2024 PRK JAKARTA - Persekutuan Rohani Kristen Jakarta. Semua hak dilindungi.</p>
+                </div>
+                <div class="footer-menu">
+                    <a href="profil.html">Tentang Kami</a>
+                    <a href="kontak.html">Kontak</a>
+                    <a href="#">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- JavaScript untuk Gallery Natal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gallery Filtering
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Image Modal
+            const galleryImages = document.querySelectorAll('.gallery-img');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeModal = document.querySelector('.close-modal');
+            
+            galleryImages.forEach(imgContainer => {
+                imgContainer.addEventListener('click', function() {
+                    const img = this.querySelector('img');
+                    const caption = this.nextElementSibling.textContent;
+                    
+                    modal.style.display = 'flex';
+                    modalImage.src = img.src;
+                    modalCaption.textContent = caption;
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Hover effects for gallery images
+            galleryImages.forEach(imgContainer => {
+                const img = imgContainer.querySelector('img');
+                const overlay = imgContainer.querySelector('.img-overlay');
+                
+                imgContainer.addEventListener('mouseenter', function() {
+                    img.style.transform = 'scale(1.05)';
+                    overlay.style.opacity = '1';
+                });
+                
+                imgContainer.addEventListener('mouseleave', function() {
+                    img.style.transform = 'scale(1)';
+                    overlay.style.opacity = '0';
+                });
+            });
+            
+            // Close modal with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRKJ - Persekutuan Rohani Kristen Jakarta</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Sistem Follow Instagram Style di atas slider */
+        .slider-follow-section {
+            position: relative;
+            width: 100%;
+        }
+        
+        .slider-follow-overlay {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 25;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+        }
+        
+        /* Info followers Instagram style */
+        .followers-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            font-size: 14px;
+            color: #262626;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(219, 219, 219, 0.5);
+        }
+        
+        .follow-counts {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .count-item {
+            text-align: center;
+            min-width: 80px;
+        }
+        
+        .count-number {
+            font-weight: 700;
+            font-size: 18px;
+            color: #262626;
+            font-family: 'Noto Serif', serif;
+        }
+        
+        .count-label {
+            font-size: 13px;
+            color: #8e8e8e;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Tombol-tombol aksi Instagram style */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .follow-action-btn {
+            background: #0095f6;
+            color: white;
+            border: none;
+            padding: 9px 26px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.25s ease;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(0, 149, 246, 0.3);
+        }
+        
+        .follow-action-btn i {
+            font-size: 12px;
+        }
+        
+        .follow-action-btn.following {
+            background: transparent;
+            color: #262626;
+            border: 1px solid #dbdbdb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .follow-action-btn:hover {
+            background: #007acc;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 149, 246, 0.4);
+        }
+        
+        .follow-action-btn.following:hover {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: #a8a8a8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-btn {
+            background: transparent;
+            color: #262626;
+            border: 1px solid #dbdbdb;
+            padding: 9px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .message-btn i {
+            font-size: 12px;
+        }
+        
+        .message-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: #a8a8a8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Chat Modal (Message Functionality) */
+        .chat-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .chat-modal.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .chat-container {
+            width: 90%;
+            max-width: 400px;
+            height: 80%;
+            max-height: 600px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #dbdbdb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fafafa;
+        }
+        
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .chat-header-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #0095f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .chat-header-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #262626;
+            margin: 0;
+        }
+        
+        .chat-header-text p {
+            font-size: 12px;
+            color: #8e8e8e;
+            margin: 2px 0 0 0;
+        }
+        
+        .chat-close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #262626;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        
+        .chat-close-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #f8f9fa;
+        }
+        
+        .message {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .message.incoming {
+            background: white;
+            align-self: flex-start;
+            border: 1px solid #efefef;
+            color: #262626;
+        }
+        
+        .message.outgoing {
+            background: #0095f6;
+            align-self: flex-end;
+            color: white;
+        }
+        
+        .message-time {
+            font-size: 11px;
+            color: #8e8e8e;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .chat-input-area {
+            padding: 15px 20px;
+            border-top: 1px solid #dbdbdb;
+            display: flex;
+            gap: 10px;
+            background: white;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #dbdbdb;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.2s ease;
+        }
+        
+        .chat-input:focus {
+            border-color: #0095f6;
+        }
+        
+        .chat-send-btn {
+            background: #0095f6;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        
+        .chat-send-btn:hover {
+            background: #007acc;
+        }
+        
+        /* Notifikasi */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            border-left: 4px solid #0095f6;
+            max-width: 300px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .notification-icon {
+            color: #0095f6;
+            font-size: 20px;
+        }
+        
+        .notification-text {
+            font-size: 14px;
+            color: #262626;
+            font-weight: 500;
+        }
+        
+        /* Responsive untuk follow section */
+        @media (max-width: 768px) {
+            .slider-follow-overlay {
+                top: 20px;
+                right: 20px;
+                left: 20px;
+                align-items: center;
+            }
+            
+            .followers-info {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 18px;
+            }
+            
+            .follow-counts {
+                width: 100%;
+                justify-content: space-around;
+                gap: 15px;
+            }
+            
+            .count-item {
+                min-width: 70px;
+            }
+            
+            .action-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .chat-container {
+                width: 95%;
+                height: 90%;
+                max-height: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slider-follow-overlay {
+                top: 15px;
+                right: 15px;
+                left: 15px;
+            }
+            
+            .followers-info {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+            
+            .follow-counts {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .count-item {
+                min-width: 60px;
+            }
+            
+            .count-number {
+                font-size: 16px;
+            }
+            
+            .count-label {
+                font-size: 11px;
+            }
+            
+            .action-buttons {
+                flex-wrap: wrap;
+            }
+            
+            .follow-action-btn, .message-btn {
+                flex: 1;
+                min-width: auto;
+            }
+            
+            .chat-container {
+                width: 100%;
+                height: 100%;
+                max-height: none;
+                border-radius: 0;
+            }
+        }
+        
+        /* Tombol Follow SEDERHANA (backup) */
+        .follow-btn-container {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 20;
+        }
+        
+        .follow-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .follow-count {
+            margin-left: 5px;
+            background: white;
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                </div>
+                <div class="logo-text">
+                    <h1>PRKJ</h1>
+                    <p>Persekutuan Rohani Kristen Jakarta</p>
+                </div>
+            </div>
+            
+            <nav class="navbar">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li class="dropdown">
+                        <a href="profil.html"><i class="fas fa-church"></i> Profil & Sejarah <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="visi.html"><i class="fas fa-eye"></i> Visi</a></li>
+                            <li><a href="misi.html"><i class="fas fa-bullseye"></i> Misi</a></li>
+                            <li><a href="sejarah.html"><i class="fas fa-history"></i> Sejarah & Pendiri</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="live-streaming.html"><i class="fas fa-video"></i> Kegiatan & Pelayanan </a></li>
+                    <li class="dropdown">
+                        <a href="ruang-belajar.html"><i class="fas fa-book"></i> Ruang Belajar <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="sd.html"><i class="fas fa-book"></i> SD</a></li>
+                            <li><a href="smp.html"><i class="fas fa-book"></i> SMP</a></li>
+                            <li><a href="sma.html"><i class="fas fa-book"></i> SMA</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="toko.html"><i class="fas fa-store"></i> Toko</a></li>
+                    <li class="dropdown">
+                        <a href="dokumentasi.html"><i class="fas fa-images"></i> Dokumentasi & Informasi <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="dokumentasi-paskah.html"><i class="fas fa-cross"></i> Paskah</a></li>
+                            <li><a href="dokumentasi-natal.html"><i class="fas fa-star"></i> Natal</a></li>
+                            <li><a href="dokumentasi-seminar.html"><i class="fas fa-chalkboard-teacher"></i> Seminar</a></li>
+                            <li><a href="dokumentasi-retret.html"><i class="fas fa-pray"></i> Retret</a></li>
+                            <li><a href="kontak.html"><i class="fas fa-address-book"></i> Kontak & Lokasi</a></li>
+                            <li><a href="keuangan.html"><i class="fas fa-donate"></i> Informasi Keuangan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Slider dengan Sistem Follow Instagram Style -->
+    <section class="slider-follow-section">
+        <!-- Chat Modal (Message Functionality) -->
+        <div class="chat-modal" id="chatModal">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-header-info">
+                        <div class="chat-header-avatar">
+                            PRK
+                        </div>
+                        <div class="chat-header-text">
+                            <h3>PRK Jakarta</h3>
+                            <p>Aktif - biasanya membalas dalam beberapa jam</p>
+                        </div>
+                    </div>
+                    <button class="chat-close-btn" onclick="closeChat()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Pesan akan ditambahkan di sini oleh JavaScript -->
+                </div>
+                
+                <div class="chat-input-area">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Ketik pesan..." onkeypress="handleKeyPress(event)">
+                    <button class="chat-send-btn" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notifikasi -->
+        <div class="notification" id="notification">
+            <div class="notification-content">
+                <div class="notification-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="notification-text" id="notificationText">
+                    Anda sekarang mengikuti PRK Jakarta!
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sistem Follow Instagram Style di atas slider -->
+        <div class="slider-follow-overlay">
+            <div class="followers-info">
+                <div class="follow-counts">
+                    <div class="count-item">
+                        <div class="count-number" id="followerCount">0</div>
+                        <div class="count-label">followers</div>
+                    </div>
+                    <div class="count-item">
+                        <div class="count-number" id="followingCount">59</div>
+                        <div class="count-label">following</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="follow-action-btn" id="followButton" onclick="toggleFollow()">
+                    <i class="fas fa-user-plus"></i> Follow
+                </button>
+                <button class="message-btn" onclick="openChat()">
+                    <i class="fas fa-envelope"></i> Message
+                </button>
+            </div>
+        </div>
+        
+        <!-- Hero Slider -->
+        <div class="hero-slider">
+            <div class="slides">
+                <div class="slide active">
+                    <img src="images/prk-3.jpg" alt="Kegiatan PRK 1">
+                    <div class="slide-content">
+                        <h2>Selamat Datang di PRKJ</h2>
+                        <p>Persekutuan Rohani Kristen Jakarta</p>
+                        <a href="profil.html" class="btn">Pelajari Lebih Lanjut</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="images/prk-6.jpg" alt="Kegiatan PRK 2">
+                </div>
+                <div class="slide">
+                    <img src="images/prk-7.jpg" alt="Kegiatan PRK 3">
+                </div>
+                <div class="slide">
+                    <img src="images/prk-2.jpg" alt="Kegiatan PRK 4">
+                </div>
+                <div class="slide">
+                    <img src="images/prk-5.jpg" alt="Kegiatan PRK 5">
+                </div>
+            </div>
+            
+            <div class="slider-controls">
+                <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                <div class="slide-indicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                    <span class="indicator" data-slide="3"></span>
+                    <span class="indicator" data-slide="4"></span>
+                </div>
+                <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links">
+        <div class="container">
+            <h2 class="section-title">Akses Cepat</h2>
+            <div class="links-grid">
+                <a href="jadwal.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Jadwal Ibadah</h3>
+                    <p>Lihat jadwal ibadah dan aktivitas gereja</p>
+                </a>
+                
+                <a href="live-streaming.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Kegiatan & Pelayanan </h3>
+                    <p>Saksikan ibadah secara langsung online</p>
+                </a>
+                
+                <a href="ruang-belajar.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Ruang Belajar</h3>
+                    <p>Materi belajar dan latihan soal</p>
+                </a>
+                
+                <a href="toko.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Toko PRK Jakarta </h3>
+                    <p>Beli produk rohani dan merchandise</p>
+                </a>
+                
+                <a href="dokumentasi.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Dokumentasi</h3>
+                    <p>Foto-foto kegiatan kami</p>
+                </a>
+                
+                <a href="kontak.html" class="link-card">
+                    <div class="link-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Lokasi</h3>
+                    <p>Peta dan informasi kontak</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="images/logo-prkj.jpg" alt="Logo PRK Jakarta">
+                        <h3>PRKJ</h3>
+                        <p>Persekutuan Rohani Kristen Jakarta </p>
+                    </div>
+                    <p class="footer-description">
+                        Persekutuan Rohani Kristen Jakarta (PRKJ) berkomitmen untuk memberitakan Injil dan mengajarkan pengajaran Reformed yang alkitabiah.
+                    </p>
+                    <div class="social-icons">
+                        <a href="https://www.youtube.com/@prkjakarta" 
+                           target="_blank"
+                           class="social-icon youtube"> 
+                           <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.instagram.com/prkjakarta_/" 
+                           target="_blank"
+                           class="social-icon instagram">
+                           <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@prk_jakarta?_t=ZS-8ykxIkLQEXR&_r=1"
+                           target="_blank"
+                           class="social-icon tiktok">
+                           <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/1GanxxhL1K/"   
+                           target="_blank"
+                           class="social-icon facebook">
+                           <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Kontak Kami</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Jl Percetakan Negara II, Jakarta Pusat</li>
+                        <li><i class="fas fa-phone"></i> (62) 812-1558-3683</li>
+                        <li><i class="fas fa-envelope"></i> info@prk-website.com</li>
+                        <li><i class="fas fa-clock"></i> Kantor: Senin-Jumat, 07:00-23:59 WIB</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Tautan Cepat</h4>
+                    <ul class="footer-links">
+                        <li><a href="live-streaming.html"><i class="fas fa-chevron-right"></i> Kegiatan & Pelayanan </a></li>
+                        <li><a href="ruang-belajar.html"><i class="fas fa-chevron-right"></i> Ruang Belajar</a></li>
+                        <li><a href="toko.html"><i class="fas fa-chevron-right"></i> Toko PRK JAKARTA </a></li>
+                        <li><a href="dokumentasi.html"><i class="fas fa-chevron-right"></i> Dokumentasi</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2024 PRK JAKARTA - Persekutuan Rohani Kristen Jakarta. Semua hak dilindungi.</p>
+                </div>
+                <div class="footer-menu">
+                    <a href="profil.html">Tentang Kami</a>
+                    <a href="kontak.html">Kontak</a>
+                    <a href="#">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    // ============================================
+    // DATABASE SIMULASI - Follow System
+    // ============================================
+    class FollowSystem {
+        constructor() {
+            this.STORAGE_KEY = 'prkj_follow_system';
+            this.initDatabase();
+        }
+        
+        initDatabase() {
+            let data = localStorage.getItem(this.STORAGE_KEY);
+            
+            if (!data) {
+                const initialData = {
+                    totalFollowers: 0,
+                    followingCount: 59,
+                    followers: []
+                };
+                
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(initialData));
+                return initialData;
+            }
+            
+            return JSON.parse(data);
+        }
+        
+        getData() {
+            const data = localStorage.getItem(this.STORAGE_KEY);
+            return data ? JSON.parse(data) : this.initDatabase();
+        }
+        
+        saveData(data) {
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+        }
+        
+        getUserId() {
+            let userId = localStorage.getItem('prkj_user_id');
+            
+            if (!userId) {
+                userId = 'user_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('prkj_user_id', userId);
+            }
+            
+            return userId;
+        }
+        
+        hasUserFollowed() {
+            const userId = this.getUserId();
+            const data = this.getData();
+            return data.followers.includes(userId);
+        }
+        
+        follow() {
+            const userId = this.getUserId();
+            const data = this.getData();
+            
+            if (!data.followers.includes(userId)) {
+                data.followers.push(userId);
+                data.totalFollowers = data.followers.length;
+                this.saveData(data);
+                return true;
+            }
+            
+            return false;
+        }
+        
+        unfollow() {
+            const userId = this.getUserId();
+            const data = this.getData();
+            
+            const index = data.followers.indexOf(userId);
+            if (index !== -1) {
+                data.followers.splice(index, 1);
+                data.totalFollowers = data.followers.length;
+                this.saveData(data);
+                return true;
+            }
+            
+            return false;
+        }
+        
+        getTotalFollowers() {
+            const data = this.getData();
+            return data.totalFollowers;
+        }
+        
+        getFollowingCount() {
+            const data = this.getData();
+            return data.followingCount;
+        }
+    }
+    
+    // ============================================
+    // CHAT SYSTEM - Message Functionality
+    // ============================================
+    class ChatSystem {
+        constructor() {
+            this.STORAGE_KEY = 'prkj_chat_messages';
+            this.initChat();
+        }
+        
+        initChat() {
+            let data = localStorage.getItem(this.STORAGE_KEY);
+            
+            if (!data) {
+                // Pesan default dari PRK Jakarta
+                const initialMessages = [
+                    {
+                        id: 1,
+                        text: "Halo! Selamat datang di PRK Jakarta. Ada yang bisa kami bantu?",
+                        sender: 'prkj',
+                        time: '10:00',
+                        date: new Date().toISOString()
+                    },
+                    {
+                        id: 2,
+                        text: "Kami siap melayani Anda dengan informasi tentang kegiatan ibadah, ruang belajar, atau lainnya.",
+                        sender: 'prkj',
+                        time: '10:01',
+                        date: new Date().toISOString()
+                    }
+                ];
+                
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(initialMessages));
+                return initialMessages;
+            }
+            
+            return JSON.parse(data);
+        }
+        
+        getMessages() {
+            const data = localStorage.getItem(this.STORAGE_KEY);
+            return data ? JSON.parse(data) : this.initChat();
+        }
+        
+        saveMessages(messages) {
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify(messages));
+        }
+        
+        addMessage(text, sender = 'user') {
+            const messages = this.getMessages();
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            
+            const newMessage = {
+                id: messages.length + 1,
+                text: text,
+                sender: sender,
+                time: timeString,
+                date: now.toISOString()
+            };
+            
+            messages.push(newMessage);
+            this.saveMessages(messages);
+            return newMessage;
+        }
+        
+        getAutoReply(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Auto-reply berdasarkan kata kunci
+            if (lowerMessage.includes('jadwal') || lowerMessage.includes('ibadah')) {
+                return "Jadwal ibadah kami setiap Minggu pukul 09:00 WIB. Untuk info lengkap, kunjungi halaman Jadwal Ibadah.";
+            } else if (lowerMessage.includes('lokasi') || lowerMessage.includes('alamat')) {
+                return "PRK Jakarta berlokasi di Jl Percetakan Negara II, Jakarta Pusat. Lihat peta di halaman Kontak & Lokasi.";
+            } else if (lowerMessage.includes('donasi') || lowerMessage.includes('keuangan')) {
+                return "Informasi keuangan dan donasi dapat dilihat di halaman Informasi Keuangan.";
+            } else if (lowerMessage.includes('belajar') || lowerMessage.includes('materi')) {
+                return "Materi belajar tersedia di Ruang Belajar untuk SD, SMP, dan SMA.";
+            } else if (lowerMessage.includes('toko') || lowerMessage.includes('produk')) {
+                return "Produk rohani dan merchandise tersedia di Toko PRK Jakarta.";
+            } else if (lowerMessage.includes('terima kasih') || lowerMessage.includes('thanks')) {
+                return "Sama-sama! Tuhan Yesus memberkati Anda 🙏";
+            } else if (lowerMessage.includes('halo') || lowerMessage.includes('hai') || lowerMessage.includes('hi')) {
+                return "Halo! Selamat datang di PRK Jakarta. Ada yang bisa kami bantu hari ini?";
+            } else {
+                // Random reply untuk pesan umum
+                const replies = [
+                    "Terima kasih atas pesan Anda. Tim kami akan membalas segera.",
+                    "Pesan Anda telah diterima. Kami akan menghubungi Anda kembali.",
+                    "Terima kasih sudah menghubungi PRK Jakarta. Ada hal lain yang bisa kami bantu?",
+                    "Untuk informasi lebih lengkap, silakan kunjungi website kami atau hubungi kami di (62) 812-1558-3683."
+                ];
+                return replies[Math.floor(Math.random() * replies.length)];
+            }
+        }
+    }
+    
+    // Inisialisasi sistem
+    const followSystem = new FollowSystem();
+    const chatSystem = new ChatSystem();
+    
+    // ============================================
+    // FOLLOW SYSTEM FUNCTIONS
+    // ============================================
+    function updateFollowUI() {
+        const totalFollowers = followSystem.getTotalFollowers();
+        const followingCount = followSystem.getFollowingCount();
+        const hasFollowed = followSystem.hasUserFollowed();
+        
+        document.getElementById('followerCount').textContent = totalFollowers;
+        document.getElementById('followingCount').textContent = followingCount;
+        
+        const followButton = document.getElementById('followButton');
+        if (hasFollowed) {
+            followButton.innerHTML = '<i class="fas fa-user-check"></i> Following';
+            followButton.classList.add('following');
+        } else {
+            followButton.innerHTML = '<i class="fas fa-user-plus"></i> Follow';
+            followButton.classList.remove('following');
+        }
+    }
+    
+    function toggleFollow() {
+        const hasFollowed = followSystem.hasUserFollowed();
+        
+        if (hasFollowed) {
+            followSystem.unfollow();
+            showNotification('Anda berhenti mengikuti PRK Jakarta');
+        } else {
+            followSystem.follow();
+            showNotification('Anda sekarang mengikuti PRK Jakarta!');
+        }
+        
+        updateFollowUI();
+    }
+    
+    // ============================================
+    // CHAT SYSTEM FUNCTIONS
+    // ============================================
+    function openChat() {
+        const chatModal = document.getElementById('chatModal');
+        chatModal.classList.add('active');
+        
+        // Load messages
+        loadChatMessages();
+        
+        // Auto-focus ke input
+        setTimeout(() => {
+            document.getElementById('chatInput').focus();
+        }, 300);
+    }
+    
+    function closeChat() {
+        const chatModal = document.getElementById('chatModal');
+        chatModal.classList.remove('active');
+    }
+    
+    function loadChatMessages() {
+        const messages = chatSystem.getMessages();
+        const chatMessages = document.getElementById('chatMessages');
+        
+        chatMessages.innerHTML = '';
+        
+        messages.forEach(message => {
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${message.sender === 'user' ? 'outgoing' : 'incoming'}`;
+            
+            messageElement.innerHTML = `
+                <div>${message.text}</div>
+                <div class="message-time">${message.time}</div>
+            `;
+            
+            chatMessages.appendChild(messageElement);
+        });
+        
+        // Scroll ke bawah
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    function sendMessage() {
+        const chatInput = document.getElementById('chatInput');
+        const messageText = chatInput.value.trim();
+        
+        if (messageText === '') return;
+        
+        // Add user message
+        chatSystem.addMessage(messageText, 'user');
+        loadChatMessages();
+        
+        // Clear input
+        chatInput.value = '';
+        
+        // Auto-reply setelah 1-2 detik
+        setTimeout(() => {
+            const autoReply = chatSystem.getAutoReply(messageText);
+            chatSystem.addMessage(autoReply, 'prkj');
+            loadChatMessages();
+        }, 1000 + Math.random() * 1000);
+    }
+    
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    }
+    
+    // ============================================
+    // NOTIFICATION FUNCTION
+    // ============================================
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        
+        notificationText.textContent = message;
+        notification.classList.add('show');
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000);
+    }
+    
+    // ============================================
+    // INITIALIZE ON LOAD
+    // ============================================
+    window.onload = function() {
+        updateFollowUI();
+        
+        // Tutup modal chat jika klik di luar
+        document.getElementById('chatModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeChat();
+            }
+        });
+    };
+    </script>
+</body>
+</html>
